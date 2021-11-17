@@ -72,7 +72,7 @@
         </div><!--id_passwd-->
 
         <div class="login">
-            <button class="login_button">LOGIN</button>
+        	<input type="button" class="login_button" value="LOGIN" id="login_button">
             <input type="button" class="join_button" value="JOIN" id="join_button">
         </div>
 
