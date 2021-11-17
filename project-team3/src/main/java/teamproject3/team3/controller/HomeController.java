@@ -1,4 +1,4 @@
-package teamproject3.team3.mrp;
+package teamproject3.team3.controller;
 
 import java.text.DateFormat;
 import java.util.Date;

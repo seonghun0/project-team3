@@ -29,13 +29,13 @@
                     <li><a href="javascript:void(0);" class="js-search" data-close="true"><i class="material-icons">search</i></a></li>
                     <!-- #END# Call Search -->
                     <li>
-                        <a href="/mrp/account/login">
+                        <a href="/mrp/member/login">
                             <span>login</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/mrp/account/register">
-                            <span>register</span>
+                        <a href="/mrp/member/join">
+                            <span>join</span>
                         </a>
                     </li>
                 </ul>
