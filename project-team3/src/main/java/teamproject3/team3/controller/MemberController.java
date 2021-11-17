@@ -14,8 +14,8 @@ public class MemberController {
 	}
 	
 	@GetMapping(path = { "/join" })
-	public String showRegisterForm() {
-		return"member/join";
+	public String showjoinForm() {
+		return "member/join";
 	}
 	
 	
