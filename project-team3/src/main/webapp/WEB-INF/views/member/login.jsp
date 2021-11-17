@@ -57,7 +57,7 @@
 </head>
 
 <body>
-    <img class="img" src="/mrp/resources/images/ourmovie_03.gif">
+    <a href='/mrp' ><img class="img" src="/mrp/resources/images/ourmovie_03.gif"></a>
     
 
     <div class="member">
@@ -73,11 +73,18 @@
 
         <div class="login">
             <button class="login_button">LOGIN</button>
-            <button class="join_button">JOIN</button>
+            <input type="button" class="join_button" value="JOIN" id="join_button">
         </div>
 
     </div><!--member-->
-
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js">
     
+	<script type="text/javascript">
+	
+		$('#join_button').click(function(){
+			location.href = '/mrp/member/join';
+		});
+		
+	</script>
 </body>
 </html>
