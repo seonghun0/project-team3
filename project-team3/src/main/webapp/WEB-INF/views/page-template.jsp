@@ -45,11 +45,9 @@
     </div>
     <!-- #END# Search Bar -->
     <jsp:include page="/WEB-INF/views/module/topbar.jsp"></jsp:include>
-    <section>
-    	<jsp:include page="/WEB-INF/views/module/left-sidebar.jsp"></jsp:include>    
+    <section>    
         
     </section>
-		<jsp:include page="/WEB-INF/views/module/right-sidebar.jsp"></jsp:include>
     <section class="content">
         <div class="container-fluid">
             <div class="block-header">
