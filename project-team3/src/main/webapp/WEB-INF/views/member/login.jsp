@@ -72,8 +72,8 @@
         </div><!--id_passwd-->
 
         <div class="login">
-        	<input type="button" class="login_button" value="LOGIN" id="login_button">
-            <input type="button" class="join_button" value="JOIN" id="join_button">
+        	<button class="login_button" id="login_button" >LOGIN</button>
+        	<button class="join_button" id="join_button" >JOIN</button>
         </div>
 
     </div><!--member-->
