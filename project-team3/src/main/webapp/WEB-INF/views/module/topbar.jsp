@@ -1,8 +1,8 @@
 	<!-- Top Bar -->
-    <nav class="navbar">
+    <nav class="navbar" style="background-color: #000">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/mrp">ADMINBSB - MATERIAL DESIGN</a>
+                <a class="navbar-brand" href="/mrp"><img src="/mrp/resources/images/logo_01.gif"></a>
             </div>
             <div class="menu">
             	<ul class="nav navbar-nav" >
