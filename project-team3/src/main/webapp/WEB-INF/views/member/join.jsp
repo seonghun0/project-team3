@@ -6,19 +6,25 @@
 <head>
     <title>join</title>
     <style>
-       body{background-color: #000; color: #fff; font-size: 20px;}
+       body{background-color: #000; color: #fff; }
        
        .img{
            display: block;
            margin: 100px auto 50px;
        }
        section{
-           width: 400px;
+           width: 600px;
            margin: 0 auto;
+       }
+       .input{
+       	   width: 440px
        }
        input{
            height: 25px;
            margin-top: 10px;
+           font-size : 15px;
+           color: #fff;
+           background-color: #000;
        }
        .join_button{
            width: 100px;
@@ -34,19 +40,17 @@
 </head>
 
 <body>
-    <img class="img" src="/mrp/resources/images/ourmovie_03.gif">
+    <a href="/mrp"><img class="img" src="/mrp/resources/images/ourmovie_03.gif"></a>
    
-      <section>
-        <form name="login" action="index.html" method="post">
-        <table style="font-size: 17px">
+        <form id="join" action="join" method="post">
+        <table style="font-size: 17px; width: 600px; margin: 0 auto">
 	        <tr>
-	        	<th>
+	        	<th style=" width: 130px">
 	        		<span> 아이디</span>
 	        	</th>
 	        	<td></td>
 	        	<td>
-	        		<input type="text" name="user_ID" placeholder="아이디 입력" >
-	          		<input type="button" name="user_IDcheck" value="아이디 확인">
+	        		<input type="text" name="user_ID" placeholder="아이디 입력" class="input">
 	        	</td>
 	        </tr>
 	        <tr>
@@ -55,7 +59,7 @@
 	        	</th>
 	        	<td></td>
 	        	<td>
-	        		<input type="password" name="user_PW1" value="123456">
+	        		<input type="password" name="user_PW1" value="123456" class="input">
 	        	</td>
 	        </tr>
 	        <tr>
@@ -64,8 +68,7 @@
 	        	</th>
 	        	<td></td>
 	        	<td>
-	        		<input type="password" name="user_PW2" value="123456">
-	          		<input type="button" name="user_PWcheck" value="비밀번호 확인">
+	        		<input type="password" name="user_PW2" value="123456" class="input">
 	        	</td>
 	        </tr>
 	        <tr>
@@ -112,10 +115,23 @@
 	        	</th>
 	        	<td></td>
 	        	<td>
-					액션<input type="checkbox" name="check" value="hobby1">
-	          		SF<input type="checkbox" name="check" value="hobby2">
-	          		드라마<input type="checkbox" name="check" value="hobby3">
-					로맨스<input type="checkbox" name="check" value="hobby4">
+					<input type="checkbox" name="check" value="hobby1">액션
+	          		<input type="checkbox" name="check" value="hobby2">뮤지컬
+	          		<input type="checkbox" name="check" value="hobby3">드라마
+					<input type="checkbox" name="check" value="hobby4">로맨스
+					<input type="checkbox" name="check" value="hobby4">판타지
+					<input type="checkbox" name="check" value="hobby4">공포
+					<input type="checkbox" name="check" value="hobby4">모험
+					<input type="checkbox" name="check" value="hobby4">스릴러
+					<input type="checkbox" name="check" value="hobby4">느와르
+					<input type="checkbox" name="check" value="hobby4">코미디
+					<input type="checkbox" name="check" value="hobby4">가족
+					<input type="checkbox" name="check" value="hobby4">미스터리
+					<input type="checkbox" name="check" value="hobby4">전쟁
+					<input type="checkbox" name="check" value="hobby4">범죄
+					<input type="checkbox" name="check" value="hobby4">SF
+					<input type="checkbox" name="check" value="hobby4">다큐멘터리
+					<input type="checkbox" name="check" value="hobby4">애니메이션
 	        	</td>
 	        </tr>
 	        <tr>
@@ -124,17 +140,25 @@
 	        	</th>
 	        	<td></td>
 	        	<td>
-	        		<input type="text" name="user_name" value="">
+	        		<input type="text" name="user_name" value="" placeholder="입력해주세요" class="input">
 	        	</td>
 	        </tr>
 		</table>
         </form>
-
-        <button class="join_button">JOIN</button>
-      </section>
-      
-      
+       	<section>
+        	<button class="join_button" id="join_button">가입하기</button>
+        	<a href="/mrp/member/login" style="font-size: 15px; color: white; padding: 0 0 0 10px">이미 있다면 로그인하기!</a>
+		</section>
+		
+		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     
-
+	<script type="text/javascript">
+		
+		$('#join_button').click(function(){
+			/* ${'#join'}.submit() */
+			location.href = '/mrp/member/login';
+		});
+		
+	</script>
 </body>
 </html>

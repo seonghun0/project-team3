@@ -7,8 +7,6 @@
     <title>Login</title>
     <style>
        body{background-color: #000; color: #fff;}
-       
-
 
        .img{
            display: block;
@@ -21,18 +19,10 @@
            margin: 20px auto;
            text-align: center;
        }
-       input{
-           background-color: #000;
-           width: 200px;
-           height: 30px;
-           float: right;
-           color: #fff;
-           font-size: 25px;
-           font-weight: bold;
-       }
        .login{
-           width: 350px;
-           margin: 40px auto;
+           width: 300px;
+           margin: auto;
+           padding : 0 0 0 130px
        }
        .login_button{
            width: 100px;
@@ -41,7 +31,7 @@
            font-size: 20px;
            text-align: center;
            color: #fff;
-           margin-left: 60px;
+           margin: auto;
        }
        .join_button{
            width: 100px;
@@ -49,9 +39,17 @@
            font-size: 20px;
            text-align: center;
            color: #fff;
-           float: right;
-           margin-right: 50px;
            background-color: green;
+           margin: auto;
+       }
+       .input{
+       		font-size : 15px;
+       		float: right;
+       		color: #fff;
+       		background-color: #000;
+       		width: 200px;
+           	height: 30px;
+           	font-weight: bold;
        }
     </style>
 </head>
@@ -61,25 +59,29 @@
     
 
     <div class="member">
-
-        <div class="id_passwd">
-            ID
-            <input type="text">
-        </div><!--id_passwd-->
-        <div class="id_passwd">
-            PASSWD
-            <input type="password">
-        </div><!--id_passwd-->
-
-        <div class="login">
-        	<button class="login_button" id="login_button" >LOGIN</button>
-        	<button class="join_button" id="join_button" >JOIN</button>
-        </div>
-
+		<form action="login" method="post" id ="loginform">
+	        <div class="id_passwd">
+	            ID
+	            <input type="text" name="memberId" placeholder="아이디를 입력해 주세요" class="input">
+	        </div><!--id_passwd-->
+	        <div class="id_passwd">
+	            PASSWD
+	            <input type="password" name="passwd" placeholder="비밀번호를 입력해 주세요" class="input">
+	        </div><!--id_passwd-->
+	        <div class="login">
+	        	<input type="button" class="login_button" id="login_button" value="로그인">
+	        	<input type="button" class="join_button" id="join_button" value="회원가입"> 
+	        </div>
+		</form>
     </div><!--member-->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     
 	<script type="text/javascript">
+		
+		$('#login_button').click(function(){
+			/* ${'#loginform'}.submit() */
+			location.href = '/mrp';
+		});
 	
 		$('#join_button').click(function(){
 			location.href = '/mrp/member/join';
