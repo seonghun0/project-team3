@@ -117,7 +117,7 @@
     </style>
 </head>
 
-<body class="theme-red">
+<body class="theme-red" style="background-color: #000">
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
@@ -200,7 +200,7 @@
                     </div>
                 </div>
     <!-- list1 -->
-    <div class="container content2" role="listbox">
+    <div class="container content2" role="listbox" style="padding-top: 100px">
     	<div class="body">
     	<h4>MESSAGE</h4>
     		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -234,7 +234,7 @@
 	<!-- end-list1 -->
 	
 	<!-- list2 -->
-    <div class="container content2" role="listbox">
+    <div class="container content2" role="listbox" style="padding-top: 100px">
     	<div class="body ">
     	<h4>MESSAGE2</h4>
     		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">

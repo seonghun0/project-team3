@@ -10,7 +10,7 @@
                 <a class="navbar-brand" href="/mrp"><img src="/mrp/resources/images/logo_01.gif"></a>
             </div>
             <div class="menu">
-            	<ul class="nav navbar-nav" >
+            	<ul class="nav navbar-nav" style="margin-top:15px">
             		 <li>
                         <a href="/mrp">
                             <span>홈</span>
