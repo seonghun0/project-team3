@@ -6,9 +6,11 @@
 <head>
     <title>join</title>
     <style>
+    
+    	
        body{background-color: #000; color: #fff; }
        
-       .img{
+       .logoimg{
            display: block;
            margin: 100px auto 50px;
        }
@@ -40,7 +42,7 @@
 </head>
 
 <body>
-    <a href="/mrp"><img class="img" src="/mrp/resources/images/ourmovie_03.gif"></a>
+    <a href="/mrp"><img class="logoimg" src="/mrp/resources/images/ourmovie_03.gif"></a>
    
         <form id="join" action="join" method="post">
         <table style="font-size: 17px; width: 600px; margin: 0 auto">

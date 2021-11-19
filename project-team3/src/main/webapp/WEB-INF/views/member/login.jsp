@@ -5,24 +5,27 @@
 <!DOCTYPE html>
 <head>
     <title>Login</title>
+  
     <style>
+    
        body{background-color: #000; color: #fff;}
 
-       .img{
+       .logoimg{
            display: block;
-           margin: 100px auto;
+           margin: 100px auto 130px;
+           
        }
        .id_passwd{
            font-size: 30px;
            font-weight: bold;
            width: 350px;
-           margin: 20px auto;
+           margin: 30px auto;
            text-align: center;
        }
        .login{
            width: 300px;
            margin: auto;
-           padding : 0 0 0 130px
+           padding : 0 0 0 130px;
        }
        .login_button{
            width: 100px;
@@ -51,11 +54,14 @@
            	height: 30px;
            	font-weight: bold;
        }
+       
+       
+
     </style>
 </head>
 
 <body>
-    <a href='/mrp' ><img class="img" src="/mrp/resources/images/ourmovie_03.gif"></a>
+    <a href='/mrp' ><img class="logoimg" src="/mrp/resources/images/ourmovie_03.gif"></a>
     
 
     <div class="member">
