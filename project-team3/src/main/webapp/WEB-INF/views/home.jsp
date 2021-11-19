@@ -113,6 +113,29 @@
 		left: 1278px;
 	}
 	
+	footer{
+		height: 100px;
+		margin-top: 400px;
+	}
+	
+	.footer{
+		width: 300px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	
+	.fimg{
+		width: 180px;
+		margin-left: auto;
+		margin-right: auto;
+		padding-bottom: 30px;
+	}
+	
+	.ftext{
+		text-align: center;
+		color: #6f6f6f;
+	}
+    
     
     </style>
 </head>
@@ -266,6 +289,8 @@
 		</div>
 	</div>
 	<!-- end-list2 -->
+	
+	<jsp:include page="/WEB-INF/views/module/footer.jsp"></jsp:include>
 	
     <jsp:include page="/WEB-INF/views/module/js.jsp"></jsp:include>
     
