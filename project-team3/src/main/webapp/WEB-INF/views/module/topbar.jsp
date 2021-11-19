@@ -26,6 +26,11 @@
                             <span>랭킹보기</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="/mrp/board/boardmain">
+                            <span>게시판</span>
+                        </a>
+                    </li>
             	</ul>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
