@@ -1,5 +1,4 @@
-<%@ page language="java"
-		 contentType="text/html; charset=UTF-8"
+<%@ page contentType="text/html; charset=UTF-8"
    		 pageEncoding="UTF-8"%>
    		 
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
@@ -14,17 +13,17 @@
             	<ul class="nav navbar-nav" >
             		 <li>
                         <a href="/mrp">
-                            <span>Home</span>
+                            <span>홈</span>
                         </a>
                     </li>
                     <li>
                         <a href="/mrp/movieinfo/info">
-                            <span>Typography</span>
+                            <span>탐색하기</span>
                         </a>
                     </li>
                     <li>
                         <a href="/mrp/ranking/rankmain">
-                            <span>Helper Classes</span>
+                            <span>랭킹보기</span>
                         </a>
                     </li>
             	</ul>
@@ -38,12 +37,12 @@
                    <c:when test="${ empty loginuser }">
                     <li>
                         <a href="/mrp/member/login">
-                            <span>login</span>
+                            <span>로그인</span>
                         </a>
                     </li>
                     <li>
                         <a href="/mrp/member/join">
-                            <span>join</span>
+                            <span>회원가입</span>
                         </a>
                     </li>
                     </c:when>
@@ -55,7 +54,7 @@
                     </li>
                     <li>
                         <a href="/mrp/member/join">
-                            <span>login</span>
+                            <span>빈칸 </span>
                         </a>
                     </li>
                     </c:otherwise>
