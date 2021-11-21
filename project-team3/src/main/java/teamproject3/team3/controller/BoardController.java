@@ -12,5 +12,10 @@ public class BoardController {
 	public String boardmain() {
 		return "board/boardmain";
 	}
+	
+	@GetMapping(path = {"/write"})
+	public String write() {
+		return "board/write";
+	}
 
 }
