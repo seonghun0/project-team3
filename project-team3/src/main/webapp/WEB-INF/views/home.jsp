@@ -9,111 +9,48 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>team3</title>
-    
+    <title>Welcome To | Bootstrap Based Admin Template - Material Design</title>
     <jsp:include page="/WEB-INF/views/module/css.jsp"></jsp:include>
     
+    <link rel="stylesheet" href="/mrp/resources/plugins/owl-carousel/assets/owl.carousel.css" />
+    <link rel="stylesheet" href="/mrp/resources/plugins/owl-carousel/assets/owl.theme.default.css" />
+    <!-- https://www.positronx.io/owl-carousel-2-create-custom-navigation-next-and-previous-arrows/  -->
     <style type="text/css">
-    .content{
-    	margin: 100px 10px 0 75px;
+    section.content{
+    	margin: 100px 10px 0 10px;
     }
-    .content2{
-    	margin: 50px 10px 0 100px;
-    }
-    .container{
-    	display: flex;
-    	width: 1500px;
-    	height: 200px;
-    }
-    .ul{
-    	list-style-type: none;
-    	margin: 0 auto;
-    	padding-inline-start: 0;
-    }
-    .li{
-    	float:left;
-    	margin: 0 auto;
-    }
-    .img{
-    	width: 203px;
-    	height: 150px;
-    }
-    .main-img{
+     .main-img{
    		display: block;
    		margin: 0px auto;
     }
-    .item{
-    	width: 1300px;
-    	text-align: center;
+    .nav-button {
+      height: 155px;
+      width: 25px;
+      position: absolute;
+      top: 0px !important;
+      outline: 0;
+      border: 0;
+      opacity: 0.8;
+      vertical-align: middle;
     }
-    .carousel-control{
-    	opacity: 0.2;
-    	width: 120px;
+    .owl-nav {
+      overflow: hidden;
+      height: 0px;
     }
-    .carousel{
-    	width: 1500px;
-    	height: 640px;
+    .owl-prev {
+      left: -35px;
     }
-    .carousel-inner{
-    	width: 1300px;
-    	height: 640px;
-    	margin: 0 auto;
+    .owl-next {
+      right: -35px;
     }
-    .carousel-example-generic{
-    	margin: 0 10px;
-    }
-    .prev-btn{
-    	height: 150px;
-    	opacity: 0.5;
-    	border: 0;
-    	outline: 0;
-    }
-    .next-btn{
-    	height: 150px;
-    	opacity: 0.8;
-    	border: 0;
-    	outline: 0;
-    }
-    .body {
-		width: 1550px;
+    .owl-carousel div h2{
+	   position:absolute;
+	   color:#FFF;
+	   font-size:17px;
+	   display:block;
+	   top:120px;
+	   left: 10px;
 	}
-	.caption{
-		position: absolute;
-		top: 150px;
-		left: 60px;
-	}
-	.caption2{
-		position: absolute;
-		top: 150px;
-		left: 263px;
-	}
-	.caption3{
-		position: absolute;
-		top: 150px;
-		left: 466px;
-	}
-	.caption4{
-		position: absolute;
-		top: 150px;
-		left: 669px;
-	}
-	.caption5{
-		position: absolute;
-		top: 150px;
-		left: 872px;
-	}
-	.caption6{
-		position: absolute;
-		top: 150px;
-		left: 1075px;
-	}
-	.caption7{
-		position: absolute;
-		top: 150px;
-		left: 1278px;
-	}
-	
-    
     </style>
 </head>
 
@@ -149,11 +86,17 @@
         </div>
     </div>
     <!-- #END# Search Bar -->
-    <jsp:include page="/WEB-INF/views/module/topbar.jsp"></jsp:include>
-    
-     <!-- With Captions -->
-     	<div class="content">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+	<jsp:include page="/WEB-INF/views/module/topbar.jsp"></jsp:include>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="block-header">
+                <h2>DASHBOARD</h2>
+            </div>
+
+            <!-- CPU Usage -->
+            <div class="row clearfix">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="card">
                         <div class="body">
                             <div id="carousel-example-generic_2" class="carousel slide" data-ride="carousel">
                                 <!-- Indicators -->
@@ -161,6 +104,7 @@
                                     <li data-target="#carousel-example-generic_2" data-slide-to="0" class="active"></li>
                                     <li data-target="#carousel-example-generic_2" data-slide-to="1"></li>
                                     <li data-target="#carousel-example-generic_2" data-slide-to="2"></li>
+                                    <li data-target="#carousel-example-generic_2" data-slide-to="3"></li>
                                 </ol>
                                 <!-- Wrapper for slides -->
                                 <div class="carousel-inner" role="listbox">
@@ -185,6 +129,13 @@
                                             <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
                                         </div>
                                     </div>
+                                    <div class="item">
+                                        <img src="resources/images/image-gallery/19.jpg" class="main-img" />
+                                        <div class="carousel-caption">
+                                            <h3>Third slide label</h3>
+                                            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!-- Controls -->
                                 <a class="left carousel-control" href="#carousel-example-generic_2" role="button" data-slide="prev">
@@ -199,224 +150,67 @@
                         </div>
                     </div>
                 </div>
-    <!-- list1 -->
-    <div class="container content2" role="listbox">
-    	<div class="body">
-    	<h4>MESSAGE</h4>
-    		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-			    <ul class="ul">
-		    		<li class="li">
-		    			<button id="prev-btn" class="prev-btn" ><</button>
-		    			<img src="resources/images/image-gallery/1.jpg" class ="img img1" id="img1">
-		    			<div class="caption">
-                        	<span class="text1" id="text1">1</span>
-                        </div>
-		    		</li>
-			    	<c:forEach var="i" begin="2" end="6">
-			    		<li class="li">
-			    			<img src="resources/images/image-gallery/${ i }.jpg" class ="img img${ i }" id="img${ i }">
-			    			<div class="caption${ i }">
-                            	<span class="text${ i }" id="text${ i }">${ i }</span>
-                       		</div>
-			    		</li>
-			    	</c:forEach>
-			    	<li class="li">
-		    			<img src="resources/images/image-gallery/7.jpg" class ="img img7" id="img7">
-		    			<div class="caption7">
-                        	<span class="text7" id="text7">7</span>
-                        </div>
-		    			<button id="next-btn" class="next-btn">></button>
-		    		</li>
-			    </ul>
-		    </div>
-		</div>
-	</div>
-	<!-- end-list1 -->
-	
-	<!-- list2 -->
-    <div class="container content2" role="listbox">
-    	<div class="body ">
-    	<h4>MESSAGE2</h4>
-    		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-			    <ul class="ul">
-		    		<li class="li">
-		    			<button id="prev-btn2" class="prev-btn" ><</button>
-		    			<img src="resources/images/image-gallery/1.jpg" class ="img img1" id="img8">
-		    			<div class="caption">
-                        	<span class="text1" id="text8">1</span>
-                        </div>
-		    		</li>
-			    	<c:forEach var="i" begin="2" end="6">
-			    		<li class="li">
-			    			<img src="resources/images/image-gallery/${ i }.jpg" class ="img img${ i }" id="img${ i+7 }">
-			    			<div class="caption${ i }">
-                            	<span class="text${ i }" id="text${ i+7 }">${ i }</span>
-                       		</div>
-			    		</li>
-			    	</c:forEach>
-			    	<li class="li">
-		    			<img src="resources/images/image-gallery/7.jpg" class ="img img7" id="img14">
-		    			<div class="caption7">
-                        	<span class="text7" id="text14">7</span>
-                        </div>
-		    			<button id="next-btn2" class="next-btn">></button>
-		    		</li>
-			    </ul>
-		    </div>
-		</div>
-	</div>
-	<!-- end-list2 -->
-	
+            </div>
+            <!-- #END# CPU Usage -->
+            <div class="block-header">
+                <h2>DASHBOARD</h2>
+            </div>
+            <!-- Widgets -->
+            <div class="row clearfix">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			        <div class="owl-carousel owl-theme">
+			            <c:forEach var="i" begin="1" end="20">
+			            <div class="item">
+			            	<div class="textoverlay">
+			            	<h2>text${ i }</h2>
+			                <img src="/mrp/resources/images/image-gallery/${ i }.jpg">
+			                </div>
+			            </div>
+			            </c:forEach>
+			        </div>
+				</div>
+            </div>
+            <!-- #END# Widgets -->
+            <div class="block-header">
+                <h2>DASHBOARD</h2>
+            </div>
+            <!-- Widgets -->
+            <div class="row clearfix">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			        <div class="owl-carousel owl-theme">
+			            <c:forEach var="i" begin="1" end="20">
+			            <div class="item">
+			                <img src="/mrp/resources/images/image-gallery/${ i }.jpg">
+			            </div>
+			            </c:forEach>
+			        </div>
+				</div>
+            </div>
+            <!-- #END# Widgets -->
+			</div>
+            
+    </section>
+
     <jsp:include page="/WEB-INF/views/module/js.jsp"></jsp:include>
     
-    <script type="text/javascript">
-    	
-	    var currentIndex = 0;
-			imageFiles = [];
-			textnum = [];
-	  	for (var i = 1; i < 21; i++){
-	  		imageFiles.push(i+'.jpg');
-	  	}
-	  	for (var j = 1; j < 21; j++){
-	  		textnum.push(j);
-	  	}
-	  	
-	  	var img1 = document.querySelector('#img1');
-	  	var img2 = document.querySelector('#img2');
-	  	var img3 = document.querySelector('#img3');
-	  	var img4 = document.querySelector('#img4');
-	  	var img5 = document.querySelector('#img5');
-	  	var img6 = document.querySelector('#img6');
-	  	var img7 = document.querySelector('#img7');
-	  	
-	  	var text1 = document.querySelector('#text1');
-	  	var text2 = document.querySelector('#text2');
-	  	var text3 = document.querySelector('#text3');
-	  	var text4 = document.querySelector('#text4');
-	  	var text5 = document.querySelector('#text5');
-	  	var text6 = document.querySelector('#text6');
-	  	var text7 = document.querySelector('#text7');
-	  	
-	  	var prevButtons = document.querySelectorAll('#prev-btn');
-	    for(var k = 0; k < prevButtons.length; k++){
-	        prevButtons[k].addEventListener('click', function(event){
-	            currentIndex--;
-	            if(currentIndex < 0){
-	                currentIndex = imageFiles.length -1;
-	            }
-	
-	            changeImage2();
-	        });
-	    }	
-	  	var nextButtons = document.querySelectorAll('#next-btn');
-	    for (var i = 0; i < nextButtons.length; i++) {
-	        nextButtons[i].addEventListener('click',(event) => {
-	            currentIndex++;
-	            if(currentIndex >= imageFiles.length){
-	                currentIndex = 0;
-	            }
-	            
-	            changeImage2();
-	        })
-	    }
-		function changeImage2(){
-	
-	        var nextIndex = currentIndex + 1 == imageFiles.length ? 0 : currentIndex +1;
-	        var nextIndex2 = nextIndex +1 == imageFiles.length ? 0 : nextIndex +1;
-	        var nextIndex3 = nextIndex2 +1 == imageFiles.length ? 0 : nextIndex2 +1;
-	        var lastIndex = nextIndex3 + 1 == imageFiles.length ? 0 : nextIndex3 +1;
-	        var lastIndex2 = lastIndex + 1 == imageFiles.length ? 0 : lastIndex +1;
-	        var lastIndex3 = lastIndex2 + 1 == imageFiles.length ? 0 : lastIndex2 +1;
-	        
-	        if(nextIndex== imageFiles.length){
-	            nextIndex = 0;
-	        }
-	        img1.src = 'resources/images/image-gallery/' + imageFiles[currentIndex];
-	        img2.src = 'resources/images/image-gallery/' + imageFiles[nextIndex];
-	        img3.src = 'resources/images/image-gallery/' + imageFiles[nextIndex2];
-	        img4.src = 'resources/images/image-gallery/' + imageFiles[nextIndex3];
-	        img5.src = 'resources/images/image-gallery/' + imageFiles[lastIndex];
-	        img6.src = 'resources/images/image-gallery/' + imageFiles[lastIndex2];
-	        img7.src = 'resources/images/image-gallery/' + imageFiles[lastIndex3];
-	        
-	        text1.innerText= textnum[currentIndex];
-	        text2.innerText= textnum[nextIndex];
-	        text3.innerText= textnum[nextIndex2];
-	        text4.innerText= textnum[nextIndex3];
-	        text5.innerText= textnum[lastIndex];
-	        text6.innerText= textnum[lastIndex2];
-	        text7.innerText= textnum[lastIndex3];
-	        
-	   	}
-		
-		var img8 = document.querySelector('#img8');
-	  	var img9 = document.querySelector('#img9');
-	  	var img10 = document.querySelector('#img10');
-	  	var img11 = document.querySelector('#img11');
-	  	var img12 = document.querySelector('#img12');
-	  	var img13 = document.querySelector('#img13');
-	  	var img14 = document.querySelector('#img14');
-	  	
-	  	var text8 = document.querySelector('#text8');
-	  	var text9 = document.querySelector('#text9');
-	  	var text10 = document.querySelector('#text10');
-	  	var text11 = document.querySelector('#text11');
-	  	var text12 = document.querySelector('#text12');
-	  	var text13 = document.querySelector('#text13');
-	  	var text14 = document.querySelector('#text14');
-	  	
-	  	var prevButtons = document.querySelectorAll('#prev-btn2');
-	    for(var k = 0; k < prevButtons.length; k++){
-	        prevButtons[k].addEventListener('click', function(event){
-	            currentIndex--;
-	            if(currentIndex < 0){
-	                currentIndex = imageFiles.length -1;
-	            }
-	
-	            changeImage3();
-	        });
-	    }	
-	  	var nextButtons = document.querySelectorAll('#next-btn2');
-	    for (var i = 0; i < nextButtons.length; i++) {
-	        nextButtons[i].addEventListener('click',(event) => {
-	            currentIndex++;
-	            if(currentIndex >= imageFiles.length){
-	                currentIndex = 0;
-	            }
-	            
-	            changeImage3();
-	        })
-	    }
-		function changeImage3(){
-	
-	        var nextIndex = currentIndex + 1 == imageFiles.length ? 0 : currentIndex +1;
-	        var nextIndex2 = nextIndex +1 == imageFiles.length ? 0 : nextIndex +1;
-	        var nextIndex3 = nextIndex2 +1 == imageFiles.length ? 0 : nextIndex2 +1;
-	        var lastIndex = nextIndex3 + 1 == imageFiles.length ? 0 : nextIndex3 +1;
-	        var lastIndex2 = lastIndex + 1 == imageFiles.length ? 0 : lastIndex +1;
-	        var lastIndex3 = lastIndex2 + 1 == imageFiles.length ? 0 : lastIndex2 +1;
-	        
-	        if(nextIndex== imageFiles.length){
-	            nextIndex = 0;
-	        }
-	        img8.src = 'resources/images/image-gallery/' + imageFiles[currentIndex];
-	        img9.src = 'resources/images/image-gallery/' + imageFiles[nextIndex];
-	        img10.src = 'resources/images/image-gallery/' + imageFiles[nextIndex2];
-	        img11.src = 'resources/images/image-gallery/' + imageFiles[nextIndex3];
-	        img12.src = 'resources/images/image-gallery/' + imageFiles[lastIndex];
-	        img13.src = 'resources/images/image-gallery/' + imageFiles[lastIndex2];
-	        img14.src = 'resources/images/image-gallery/' + imageFiles[lastIndex3];
-	        
-	        text8.innerText= textnum[currentIndex];
-	        text9.innerText= textnum[nextIndex];
-	        text10.innerText= textnum[nextIndex2];
-	        text11.innerText= textnum[nextIndex3];
-	        text12.innerText= textnum[lastIndex];
-	        text13.innerText= textnum[lastIndex2];
-	        text14.innerText= textnum[lastIndex3];
-	        
-	   	}
-	</script>
+    <script src="/mrp/resources/plugins/owl-carousel/owl.carousel.js"></script>
+    <script>
+        $(function () {
+            $('.owl-carousel').owlCarousel({
+                items: 6,
+                margin: 10,
+                loop: true,
+                nav: true,
+                navText: ["<div class='nav-button owl-prev'><</div>", "<div class='nav-button owl-next'>></div>"],
+                autoplay: true,
+                autoplayTimeout: 3000,
+                autoplayHoverPause: true,
+                touchDrag  : true,
+                mouseDrag  : true
+            });
+        });
+    </script>
+</body>
 
     
 </body>

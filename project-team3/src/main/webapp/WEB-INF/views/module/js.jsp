@@ -35,7 +35,6 @@
 
     <!-- Custom Js -->
     <script src="/mrp/resources/js/admin.js"></script>
-    <script src="/mrp/resources/js/pages/index.js"></script>
 
     <!-- Demo Js -->
     <script src="/mrp/resources/js/demo.js"></script>

@@ -12,6 +12,34 @@
     
     <jsp:include page="/WEB-INF/views/module/css.jsp"></jsp:include>
     
+	<style type="text/css">
+	section.content{
+    	margin: 100px 30px 0 30px;
+    }
+    .btn{
+    	display: none;
+    }
+    .btn-group{
+    	height: 50px;
+    	background-color: transparent;
+		outline: 0;
+	    border: 0;
+    }
+    .container{
+    	width: 1400px
+    }
+    .sub_name{
+    	margin-top: 10px;
+    	width: 80px;
+    }
+    .tt1.tt2{
+    	padding-left: 0px;
+    	padding-right: 0px;
+    }
+    .tt1{
+    	width: 70px;
+    }
+	</style>    
 </head>
 
 <body class="theme-red">
@@ -50,14 +78,23 @@
     <section>
     </section>
 
-    <section class="content">
-        <div class="container-fluid">
-            <div class="block-header">
-                <h2>BLANK PAGE</h2>
-            </div>
-        </div>
-    </section>
-
+	<section class="content">
+		<div class="row clearfix">
+			<div class="container">
+				<div class="col-xs-1 tt1">
+					<h2 class="sub_name">영화</h2>
+					</div>
+					<div class="col-xs-2 tt2">
+					<select class="form-control show-tick">
+					    <option disabled="disabled" selected="selected">장르</option>
+					    <c:forEach var="i" begin="1" end="20">
+						    <option>${ i }</option>
+					    </c:forEach>
+					</select>
+				</div>
+			</div>
+		</div>
+	</section>
     <jsp:include page="/WEB-INF/views/module/js.jsp"></jsp:include>
     
 </body>
