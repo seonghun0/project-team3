@@ -1,0 +1,160 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page pageEncoding="utf-8" contentType="text/html; charset=utf-8" %>
+
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>board</title>
+    
+    <jsp:include page="/WEB-INF/views/module/css.jsp"></jsp:include>
+</head>
+
+<body>
+<body class="theme-red">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="preloader">
+                <div class="spinner-layer pl-red">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+            <p>Please wait...</p>
+        </div>
+    </div>
+    <!-- #END# Page Loader -->
+    
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <div class="search-icon">
+            <i class="material-icons">search</i>
+        </div>
+        <input type="text" placeholder="START TYPING...">
+        <div class="close-search">
+            <i class="material-icons">close</i>
+        </div>
+    </div>
+    <!-- #END# Search Bar -->
+    <jsp:include page="/WEB-INF/views/module/topbar.jsp"></jsp:include>
+
+  	<section style="padding-top: 100px; width: 1500px; margin-left: auto; margin-right: auto">
+                
+                
+                
+               <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2 style="display: inline-block;">
+                                BASIC EXAMPLE
+                            </h2>
+                            <a href="/mrp/board/write"><button type="button" class="btn btn-success waves-effect" style="float: right">글쓰기</button></a>
+                        </div>
+                        <div class="body">
+                            <div class="table-responsive">
+                                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                                	<div class="row">
+	                                	
+	                                	<div class="col-sm-6">
+	                                		<div id="DataTables_Table_0_filter" class="dataTables_filter">
+	                                			<label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="DataTables_Table_0"></label>
+	                                		</div>
+	                                	</div>
+                                	</div>
+	                                <div class="row">
+	                                	<div class="col-sm-12">
+	                                		<table class="table table-bordered table-striped table-hover js-basic-example dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+			                                    <thead>
+			                                        <tr role="row">
+			                                        	<th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 73.0094px;">글번호</th>
+			                                        	<th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 343.009px;">제목</th>
+			                                        	<th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 153.009px;">작성자</th>
+			                                        	<th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 152.009px;">작성날짜</th>
+			                                        	<th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 61.009px;">조회수</th>
+			                                    </thead>
+			                                    
+			                                    <tbody>
+			                                        
+			                                        <c:forEach var = "board" items="${ boards }">
+			                                        <tr>
+			                                            <td>${ board.boardNo }</td>
+			                                            <td>
+			                                           	<c:choose>
+			                                           		<c:when test="${ not board.deleted }">
+			                                           		<a href="detail?boardNo=${ board.boardNo }">${ board.title }</a>
+			                                           		</c:when>
+			                                           		<c:otherwise>
+			                                           		<span style="color:lightgray">${ board.title } [삭제된 글]</span>
+			                                           		</c:otherwise>	
+			                                           	</c:choose>
+			                                            	
+			                                            </td>
+			                                            <td>${ board.writer }</td>
+			                                            <td>${ board.regDate }</td>
+			                                            <td>${ board.readCount }</td>
+			                                        </tr>
+			                                    </c:forEach>
+			                                        
+			                                    </tbody>
+	                                    
+	                                		</table>
+	                                	</div>
+	                                </div>
+	                                <div class="row">
+	                                	
+	                                	
+	                                		<div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
+	                                			<ul class="pagination" style="float: right; margin-right: 20px">
+	                                				<li class="paginate_button previous disabled" id="DataTables_Table_0_previous">
+	                                					<a href="#" aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0">Previous</a>
+	                                				</li>
+	                                				<li class="paginate_button active">
+	                                					<a href="#" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0">1</a>
+	                                				</li>
+	                                				<li class="paginate_button ">
+	                                					<a href="#" aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="0">2</a>
+	                                				</li><li class="paginate_button ">
+	                                					<a href="#" aria-controls="DataTables_Table_0" data-dt-idx="3" tabindex="0">3</a>
+	                                				</li>
+	                                				<li class="paginate_button ">
+	                                					<a href="#" aria-controls="DataTables_Table_0" data-dt-idx="4" tabindex="0">4</a>
+	                                				</li>
+	                                				<li class="paginate_button ">
+	                                					<a href="#" aria-controls="DataTables_Table_0" data-dt-idx="5" tabindex="0">5</a>
+	                                				</li>
+	                                				<li class="paginate_button ">
+	                                					<a href="#" aria-controls="DataTables_Table_0" data-dt-idx="6" tabindex="0">6</a>
+	                                				</li>
+	                                				<li class="paginate_button next" id="DataTables_Table_0_next">
+	                                					<a href="#" aria-controls="DataTables_Table_0" data-dt-idx="7" tabindex="0">Next</a>
+	                                				</li>
+	                                			</ul>
+	                                		</div>
+	                                	
+	                                </div>
+                               	</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                
+                
+                
+    </section>            
+      
+
+    <jsp:include page="/WEB-INF/views/module/js.jsp"></jsp:include>
+    
+    
+</body>
+</html>
