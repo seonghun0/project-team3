@@ -1,0 +1,228 @@
+-- 장르
+CREATE TABLE genre (
+	genre_id INTEGER     NOT NULL COMMENT '장르아이디', -- 장르아이디
+	name     VARCHAR(50) NOT NULL COMMENT '이름' -- 이름
+)
+COMMENT '장르';
+
+-- 장르
+ALTER TABLE genre
+	ADD CONSTRAINT PK_genre -- 장르 기본키
+		PRIMARY KEY (
+			genre_id -- 장르아이디
+		);
+
+-- 영화
+CREATE TABLE movie (
+	movie_id          INTEGER       NOT NULL COMMENT '번호', -- 번호
+	title             VARCHAR(255)  NOT NULL COMMENT '제목', -- 제목
+	subtitle          VARCHAR(255)  NULL     COMMENT '원제목', -- 원제목
+	original_language VARCHAR(10)   NULL     COMMENT '원작언어', -- 원작언어
+	vote_average      FLOAT         NULL     COMMENT '평균평점', -- 평균평점
+	vote_count        INTEGER       NULL     COMMENT '평점수', -- 평점수
+	overview          VARCHAR(1000) NULL     COMMENT '개요', -- 개요
+	release_date      VARCHAR(50)   NULL     COMMENT '개봉일', -- 개봉일
+	genre_id          INTEGER       NULL     COMMENT '장르아이디', -- 장르아이디
+	COL               INTEGER       NULL     COMMENT 'upcoming', -- upcoming
+	COL2              INTEGER       NULL     COMMENT 'top_rated', -- top_rated
+	COL3              INTEGER       NULL     COMMENT 'popular', -- popular
+	COL4              INTEGER       NULL     COMMENT 'now_playing' -- now_playing
+)
+COMMENT '영화';
+
+-- 영화
+ALTER TABLE movie
+	ADD CONSTRAINT PK_movie -- 영화_기본키
+		PRIMARY KEY (
+			movie_id -- 번호
+		);
+
+-- 평점리뷰
+CREATE TABLE rating_review (
+	idx       INTEGER       NOT NULL COMMENT '번호', -- 번호
+	vote      INTEGER       NOT NULL COMMENT '평점', -- 평점
+	review    VARCHAR(1000) NULL     COMMENT '리뷰', -- 리뷰
+	member_id INTEGER       NULL     COMMENT '회원번호', -- 회원번호
+	movie_id  INTEGER       NULL     COMMENT '영화번호' -- 영화번호
+)
+COMMENT '평점리뷰';
+
+-- 평점리뷰
+ALTER TABLE rating_review
+	ADD CONSTRAINT PK_rating_review -- 영화_기본키
+		PRIMARY KEY (
+			idx -- 번호
+		);
+
+ALTER TABLE rating_review
+	MODIFY COLUMN idx INTEGER NOT NULL AUTO_INCREMENT COMMENT '번호';
+
+-- 회원
+CREATE TABLE member (
+	member_id  INTEGER      NOT NULL COMMENT '번호', -- 번호
+	password   VARCHAR(20)  NOT NULL COMMENT '비밀번호', -- 비밀번호
+	gender     VARCHAR(10)  NULL     COMMENT '성별', -- 성별
+	birth_date VARCHAR(100) NULL     COMMENT '생년월일', -- 생년월일
+	join_date  VARCHAR(100) NULL     COMMENT '가입일', -- 가입일
+	user_tyoe  VARCHAR(10)  NULL     COMMENT '회원유형' -- 회원유형
+)
+COMMENT '회원';
+
+-- 회원
+ALTER TABLE member
+	ADD CONSTRAINT PK_member -- 영화_기본키
+		PRIMARY KEY (
+			member_id -- 번호
+		);
+
+-- upcoming_movies
+CREATE TABLE upcomingmovie (
+	movie_id INTEGER NOT NULL COMMENT '번호' -- 번호
+)
+COMMENT 'upcoming_movies';
+
+-- upcoming_movies
+ALTER TABLE upcomingmovie
+	ADD CONSTRAINT PK_upcomingmovie -- upcoming_movies 기본키
+		PRIMARY KEY (
+			movie_id -- 번호
+		);
+
+-- 회원_장르
+CREATE TABLE member_genre (
+	genre_id  INTEGER NULL COMMENT '장르아이디', -- 장르아이디
+	member_id INTEGER NULL COMMENT '번호' -- 번호
+)
+COMMENT '회원_장르';
+
+-- top_rated_movies
+CREATE TABLE upcomingmovie2 (
+	movie_id INTEGER NOT NULL COMMENT '번호' -- 번호
+)
+COMMENT 'top_rated_movies';
+
+-- top_rated_movies
+ALTER TABLE upcomingmovie2
+	ADD CONSTRAINT PK_upcomingmovie2 -- top_rated_movies 기본키
+		PRIMARY KEY (
+			movie_id -- 번호
+		);
+
+-- now_playing_movies
+CREATE TABLE upcomingmovie3 (
+	movie_id INTEGER NOT NULL COMMENT '번호' -- 번호
+)
+COMMENT 'now_playing_movies';
+
+-- now_playing_movies
+ALTER TABLE upcomingmovie3
+	ADD CONSTRAINT PK_upcomingmovie3 -- now_playing_movies 기본키
+		PRIMARY KEY (
+			movie_id -- 번호
+		);
+
+-- popular_movies
+CREATE TABLE upcomingmovie4 (
+	movie_id INTEGER NOT NULL COMMENT '번호' -- 번호
+)
+COMMENT 'popular_movies';
+
+-- popular_movies
+ALTER TABLE upcomingmovie4
+	ADD CONSTRAINT PK_upcomingmovie4 -- popular_movies 기본키
+		PRIMARY KEY (
+			movie_id -- 번호
+		);
+
+-- 영화
+ALTER TABLE movie
+	ADD CONSTRAINT FK_genre_TO_movie -- 장르 -> 영화
+		FOREIGN KEY (
+			genre_id -- 장르아이디
+		)
+		REFERENCES genre ( -- 장르
+			genre_id -- 장르아이디
+		),
+	ADD INDEX FK_genre_TO_movie (
+		genre_id ASC -- 장르아이디
+	);
+
+-- 평점리뷰
+ALTER TABLE rating_review
+	ADD CONSTRAINT FK_member_TO_rating_review -- 회원 -> 평점리뷰
+		FOREIGN KEY (
+			member_id -- 회원번호
+		)
+		REFERENCES member ( -- 회원
+			member_id -- 번호
+		);
+
+-- 평점리뷰
+ALTER TABLE rating_review
+	ADD CONSTRAINT FK_movie_TO_rating_review -- 영화 -> 평점리뷰
+		FOREIGN KEY (
+			movie_id -- 영화번호
+		)
+		REFERENCES movie ( -- 영화
+			movie_id -- 번호
+		);
+
+-- upcoming_movies
+ALTER TABLE upcomingmovie
+	ADD CONSTRAINT FK_movie_TO_upcomingmovie -- 영화 -> upcoming_movies
+		FOREIGN KEY (
+			movie_id -- 번호
+		)
+		REFERENCES movie ( -- 영화
+			movie_id -- 번호
+		);
+
+-- 회원_장르
+ALTER TABLE member_genre
+	ADD CONSTRAINT FK_genre_TO_member_genre -- 장르 -> 회원_장르
+		FOREIGN KEY (
+			genre_id -- 장르아이디
+		)
+		REFERENCES genre ( -- 장르
+			genre_id -- 장르아이디
+		);
+
+-- 회원_장르
+ALTER TABLE member_genre
+	ADD CONSTRAINT FK_member_TO_member_genre -- 회원 -> 회원_장르
+		FOREIGN KEY (
+			member_id -- 번호
+		)
+		REFERENCES member ( -- 회원
+			member_id -- 번호
+		);
+
+-- top_rated_movies
+ALTER TABLE upcomingmovie2
+	ADD CONSTRAINT FK_movie_TO_upcomingmovie2 -- 영화 -> top_rated_movies
+		FOREIGN KEY (
+			movie_id -- 번호
+		)
+		REFERENCES movie ( -- 영화
+			movie_id -- 번호
+		);
+
+-- now_playing_movies
+ALTER TABLE upcomingmovie3
+	ADD CONSTRAINT FK_movie_TO_upcomingmovie3 -- 영화 -> now_playing_movies
+		FOREIGN KEY (
+			movie_id -- 번호
+		)
+		REFERENCES movie ( -- 영화
+			movie_id -- 번호
+		);
+
+-- popular_movies
+ALTER TABLE upcomingmovie4
+	ADD CONSTRAINT FK_movie_TO_upcomingmovie4 -- 영화 -> popular_movies
+		FOREIGN KEY (
+			movie_id -- 번호
+		)
+		REFERENCES movie ( -- 영화
+			movie_id -- 번호
+		);
