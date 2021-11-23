@@ -72,7 +72,7 @@
                              	</div> -->
                              	<div class="form-group">
                              		<label>내용</label>
-                             		<textarea class="form-control" name="content" rows="18" id="contentarea" style="border: 1px solid lightgray; border-radius:10px"></textarea>
+                             		<textarea class="form-control" name="content" rows="23" id="contentarea" style="border: 1px solid lightgray; border-radius:10px"></textarea>
                              	</div>
                              	
                              	
