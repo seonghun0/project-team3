@@ -52,7 +52,7 @@
 	        	</th>
 	        	<td></td>
 	        	<td>
-	        		<input type="text" name="user_ID" placeholder="아이디 입력" class="input">
+	        		<input type="text" name="memberId" placeholder="아이디 입력" class="input">
 	        	</td>
 	        </tr>
 	        <tr>
@@ -61,7 +61,7 @@
 	        	</th>
 	        	<td></td>
 	        	<td>
-	        		<input type="password" name="user_PW1" value="123456" class="input">
+	        		<input type="password" name="passwd" value="123456" class="input">
 	        	</td>
 	        </tr>
 	        <tr>
@@ -70,7 +70,7 @@
 	        	</th>
 	        	<td></td>
 	        	<td>
-	        		<input type="password" name="user_PW2" value="123456" class="input">
+	        		<input type="password" name="passwd_confirm" value="123456" class="input">
 	        	</td>
 	        </tr>
 	        <tr>
@@ -121,28 +121,19 @@
 	          		<input type="checkbox" name="check" value="hobby2">뮤지컬
 	          		<input type="checkbox" name="check" value="hobby3">드라마
 					<input type="checkbox" name="check" value="hobby4">로맨스
-					<input type="checkbox" name="check" value="hobby4">판타지
-					<input type="checkbox" name="check" value="hobby4">공포
-					<input type="checkbox" name="check" value="hobby4">모험
-					<input type="checkbox" name="check" value="hobby4">스릴러
-					<input type="checkbox" name="check" value="hobby4">느와르
-					<input type="checkbox" name="check" value="hobby4">코미디
-					<input type="checkbox" name="check" value="hobby4">가족
-					<input type="checkbox" name="check" value="hobby4">미스터리
-					<input type="checkbox" name="check" value="hobby4">전쟁
-					<input type="checkbox" name="check" value="hobby4">범죄
-					<input type="checkbox" name="check" value="hobby4">SF
-					<input type="checkbox" name="check" value="hobby4">다큐멘터리
-					<input type="checkbox" name="check" value="hobby4">애니메이션
-	        	</td>
-	        </tr>
-	        <tr>
-	        	<th>
-	        		<span>좋아하는 배우</span>
-	        	</th>
-	        	<td></td>
-	        	<td>
-	        		<input type="text" name="user_name" value="" placeholder="입력해주세요" class="input">
+					<input type="checkbox" name="check" value="hobby5">판타지
+					<input type="checkbox" name="check" value="hobby6">공포
+					<input type="checkbox" name="check" value="hobby7">모험
+					<input type="checkbox" name="check" value="hobby8">스릴러
+					<input type="checkbox" name="check" value="hobby9">느와르
+					<input type="checkbox" name="check" value="hobby10">코미디
+					<input type="checkbox" name="check" value="hobby11">가족
+					<input type="checkbox" name="check" value="hobby12">미스터리
+					<input type="checkbox" name="check" value="hobby13">전쟁
+					<input type="checkbox" name="check" value="hobby14">범죄
+					<input type="checkbox" name="check" value="hobby15">SF
+					<input type="checkbox" name="check" value="hobby16">다큐멘터리
+					<input type="checkbox" name="check" value="hobby17">애니메이션
 	        	</td>
 	        </tr>
 		</table>
