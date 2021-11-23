@@ -35,7 +35,18 @@
 
     <!-- Custom Js -->
     <script src="/mrp/resources/js/admin.js"></script>
-    <script src="/mrp/resources/js/pages/index.js"></script>
+    <script src="/mrp/resources/js/pages/tables/jquery-datatable.js"></script>
 
     <!-- Demo Js -->
     <script src="/mrp/resources/js/demo.js"></script>
+    
+    <!-- Jquery DataTable Plugin Js -->
+    <script src="/mrp/resources/plugins/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="/mrp/resources/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+    <script src="/mrp/resources/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+    <script src="/mrp/resources/plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+    <script src="/mrp/resources/plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+    <script src="/mrp/resources/plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+    <script src="/mrp/resources/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+    <script src="/mrp/resources/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+    <script src="/mrp/resources/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
