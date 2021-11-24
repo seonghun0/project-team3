@@ -43,13 +43,11 @@
     .owl-next {
       right: -35px;
     }
-    .owl-carousel div h2{
-	   position:absolute;
-	   color:#FFF;
-	   font-size:17px;
-	   display:block;
-	   top:120px;
-	   left: 10px;
+    .cc{
+	   top:50px;
+	}
+	.textoverlay{
+		z-index: 5;
 	}
     </style>
 </head>
@@ -162,8 +160,10 @@
 			            <c:forEach var="i" begin="1" end="20">
 			            <div class="item">
 			            	<div class="textoverlay">
-			            	<h2>text${ i }</h2>
 			                <img src="/mrp/resources/images/image-gallery/${ i }.jpg">
+			                </div>
+			                <div class="carousel-caption cc">
+			                <h2>text${ i }</h2>
 			                </div>
 			            </div>
 			            </c:forEach>
