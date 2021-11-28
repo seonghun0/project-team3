@@ -10,9 +10,12 @@
 		BoardVO가 나오면 com.demoweb.vo.BoardVO로 처리하라는 의미
 	-->
 	<typeAliases>
+		<typeAlias type="teamproject3.team3.vo.BoardVO" alias="BoardVO" />	
+	
 	</typeAliases>
 	
 	<mappers>
+		<mapper resource="teamproject3/team3/mapper/BoardMapper.xml"/>
 	</mappers>
 	
 	

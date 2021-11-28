@@ -23,4 +23,6 @@
 		<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 			<constructor-arg ref="sqlSessionFactory"/>
 		</bean>
+		
+		<import resource="board-context.xml"/>
 </beans>

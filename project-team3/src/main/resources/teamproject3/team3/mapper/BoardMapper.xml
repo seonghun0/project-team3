@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+		   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="teamproject3.team3.mapper.BoardMapper">
+
+	<insert id="insertBoard" parameterType="BoardVO">
+	INSERT INTO BOARD (title, CONTENT) 
+	VALUES (#{ title }, #{ content })
+	</insert>
+	
+	<select id="selectAll" resultType="BoardVO">
+	SELECT BOARDNO, TITLE, MEMBER_ID, READCOUNT, REGDATE, DELETED
+	FROM BOARD
+	ORDER BY BOARDNO DESC
+	</select>
+	
+	<select id="selectBoardByBoardNo" parameterType="int" resultType="BoardVO">
+	SELECT BOARDNO, TITLE, CONTENT, MEMBER_ID, READCOUNT, REGDATE 
+	FROM BOARD
+	WHERE BOARDNO = #{ boardNo } AND DELETED = false 
+	</select>
+	
+	<update id="updateBoardDeleted" parameterType="int">
+	UPDATE BOARD 
+	SET DELETED = true
+	WHERE BOARDNO = #{ boardNo }
+	</update>
+	
+	<update id="updateBoardReadCount" parameterType="int">
+	UPDATE BOARD 
+	SET READCOUNT = READCOUNT + 1
+	WHERE BOARDNO = #{ boardNo }
+	</update>
+	
+	<update id="updateBoard" parameterType="BoardVO">
+	UPDATE BOARD 
+	SET TITLE = #{title}, CONTENT = #{content}
+	WHERE BOARDNO = #{ boardNo }
+	</update>
+
+	
+	
+</mapper>

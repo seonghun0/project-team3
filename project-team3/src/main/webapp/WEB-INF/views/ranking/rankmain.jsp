@@ -9,13 +9,14 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>Blank Page | Bootstrap Based Admin Template - Material Design</title>
-    
-    <jsp:include page="/WEB-INF/views/module/css.jsp"></jsp:include>
     <style type="text/css">
     	section.content{
     		margin : 100px 15px 0 15px;
     	}
     </style>
+    
+    <jsp:include page="/WEB-INF/views/module/css.jsp"></jsp:include>
+    
 </head>
 
 <body class="theme-red">

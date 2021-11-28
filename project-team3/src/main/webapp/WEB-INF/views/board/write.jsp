@@ -57,19 +57,19 @@
                             <h2 style="display: inline-block;">
                                 BASIC EXAMPLE
                             </h2>
-                            <a href="#"><button type="button" class="btn btn-success waves-effect" style="float: right">글쓰기</button></a>
-                            <a href="/mrp/board/boardmain"><button type="button" class="btn btn-success waves-effect" style="float: right; margin-right: 10px">목록보기</button></a>
+                            	<button id ="write-button" class="btn btn-success waves-effect" style="float: right">글쓰기</button>
+                            	<button id ="tolist-button" class="btn btn-success waves-effect" style="float: right; margin-right: 10px">목록보기</button>
                         </div>
                         <div class="body">
-                            <form id="board-khw-write-form" action="write" method="post">
+                            <form id="board-write-form" action="write" method="post">
                              	<div class="form-group">
                              		<label>제목</label>
                              		<input type="text" class="form-control" name="title" id="title" style="border: 1px solid lightgray; border-radius:10px">
                              	</div>
-                             	<!-- <div class="form-group">
+                             	<div class="form-group">
                              		<label>작성자</label>
-                             		<input type="text" class="form-control" name="memberId">
-                             	</div> -->
+                             		<input type="text" class="form-control" name="member_id" style="border: 1px solid lightgray; border-radius:10px">
+                             	</div>
                              	<div class="form-group">
                              		<label>내용</label>
                              		<textarea class="form-control" name="content" rows="23" id="contentarea" style="border: 1px solid lightgray; border-radius:10px"></textarea>
@@ -88,5 +88,42 @@
       
 
     <jsp:include page="/WEB-INF/views/module/js.jsp"></jsp:include>
+    <script type="text/javascript">
+	$(function() { // jQuery의 main 함수 역할 ( 시작점 )
+		
+		$('#write-button').on('click', function(event) {
+			event.preventDefault();		// 이벤트를 발생시킨 객체의 기본 동작 ( 다른페이지로 이동 등 ) 의 수행을 차단
+			event.stopPropagation();	// 상위 객체로 이벤트 전달 차단
+			
+			// 입력 데이터의 유효성 검사 등 처리
+			
+			var title = $('#title').val();
+			alert(title)
+			var content = $('#contentarea').val();
+			// 입력 데이터의 유효성 검사 등 처리
+			if(title == ""){
+				alert("제목을 입력하세요");
+				return;
+			}
+			if(content== null || content == ""){
+				alert("내용을 입력하세요");
+				return;
+			}
+			
+			$("#board-write-form").submit(); // form을 서버로 전송
+			
+		});
+	
+	
+		$('#tolist-button').on('click', function(event) {
+			event.preventDefault();		// 이벤트를 발생시킨 객체의 기본 동작 ( 다른페이지로 이동 등 ) 의 수행을 차단
+			event.stopPropagation();	// 상위 객체로 이벤트 전달 차단
+			
+			location.href = "boardmain";
+			
+		});
+		
+	});
+	</script>
 </body>
 </html>

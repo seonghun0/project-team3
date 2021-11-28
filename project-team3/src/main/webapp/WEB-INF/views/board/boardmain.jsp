@@ -62,14 +62,7 @@
                         <div class="body">
                             <div class="table-responsive">
                                 <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-                                	<div class="row">
-	                                	
-	                                	<div class="col-sm-6">
-	                                		<div id="DataTables_Table_0_filter" class="dataTables_filter">
-	                                			<label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="DataTables_Table_0"></label>
-	                                		</div>
-	                                	</div>
-                                	</div>
+                                	
 	                                <div class="row">
 	                                	<div class="col-sm-12">
 	                                		<table class="table table-bordered table-striped table-hover js-basic-example dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
@@ -86,7 +79,11 @@
 			                                        
 			                                        <c:forEach var = "board" items="${ boards }">
 			                                        <tr>
-			                                            <td>${ board.boardNo }</td>
+			                                            <td>
+			                                            	<a href="detail?boardNo=${ board.boardNo }">
+                                            					${ board.boardNo }
+                                            				</a>
+			                                            </td>
 			                                            <td>
 			                                           	<c:choose>
 			                                           		<c:when test="${ not board.deleted }">
@@ -98,8 +95,8 @@
 			                                           	</c:choose>
 			                                            	
 			                                            </td>
-			                                            <td>${ board.writer }</td>
-			                                            <td>${ board.regDate }</td>
+			                                            <td>${ board.member_id }</td>
+			                                            <td><fmt:formatDate value="${ board.regDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 			                                            <td>${ board.readCount }</td>
 			                                        </tr>
 			                                    </c:forEach>
