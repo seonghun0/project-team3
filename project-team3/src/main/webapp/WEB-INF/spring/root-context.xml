@@ -25,4 +25,6 @@
 		</bean>
 		
 		<import resource="board-context.xml"/>
+		<import resource="info-context.xml"/>
+		<import resource="member-context.xml"/>
 </beans>

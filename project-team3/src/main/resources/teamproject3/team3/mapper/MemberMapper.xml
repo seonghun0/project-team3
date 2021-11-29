@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+		   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="teamproject3.team3.mapper.MemberMapper">
+
+	<select id="getGenre" resultType="genreVO">
+		select genre_id genreid, name genrename from genre
+	</select>
+	
+	<insert id="insertmember" parameterType="String">
+		insert into member(member_id, password, gender, birth_date)
+		values
+		(#{ memberId }, #{ passwd }, #{ sex }, #{ year } '-' #{ month } '-' #{ day })
+	</insert>
+	
+	<insert id="insertgenre" parameterType="MemberGenreVO">
+		insert into member_genre (member_id, genre_id)
+		values
+		<foreach collection="list" item="item" separator=",">
+		(#{ item.memberId }, #{ item.genreId })
+		</foreach>
+	</insert>
+	
+	<select id="idcheck" resultType="int">
+		select count(*)
+		from member
+		where member_id = '${ memberId }' 
+	</select>
+	
+	<select id="login" resultType="memberVO">
+		select member_id memberId, gender, user_type usertype from member
+		where member_id = '${ memberId }'
+		and password = '${ passwd }'
+	</select>
+	
+	<select id="pwdcheck" resultType="int">
+		select count(*)
+		from member
+		where member_id = '${ memberId }'
+		and password = '${ passwd }'
+	</select>
+	
+	<select id="findtop10" resultType="movieVO">
+	select movie_id, title, vote_average ,posterpath 
+	from movie 
+	where posterpath not like '' and vote_count >10000 
+	order by vote_average desc  
+	limit 10;
+	</select>
+	
+	<select id="findpop" resultType="movieVO">
+	select movie_id, title, vote_average ,posterpath 
+	from movie 
+	where posterpath not like '' and vote_count >10 and original_language = 'ko' or original_language = 'en'
+	order by popularity desc  
+	limit 20;
+	</select>
+	
+</mapper>

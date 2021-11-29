@@ -93,8 +93,9 @@
 				<div class="col-xs-2 tt2">
 					<select class="form-control show-tick">
 					    <option disabled="disabled" selected="selected">장르</option>
-					    <c:forEach var="i" begin="1" end="20">
-						    <option>${ i }</option>
+					    	<option >전체</option>
+					    <c:forEach var="i" items="${ genre }">
+						    <option value="${ i.genreid }">${ i.genrename }</option>
 					    </c:forEach>
 					</select>
 				</div>
@@ -103,12 +104,12 @@
 		<div class="row">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<div id="aniimated-thumbnials" class="list-unstyled row clearfix">
-					<c:forEach var="i" begin="1" end="20">
-						<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-							<a href="/mrp/resources/images/image-gallery/${ i }.jpg" data-sub-html="Demo Description">
-								<img class="img-responsive thumbnail" src="/mrp/resources/images/image-gallery/thumb/thumb-${ i }.jpg">
+					<c:forEach var="i" items="${ movie }">
+						<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+							<a href="info?movie_id=${ i.movie_id }" data-sub-html="Demo Description">
+								<img class="img-responsive thumbnail" src="https://www.themoviedb.org/t/p/w220_and_h330_face/${ i.posterpath }">
 					   		</a>
-					   		text
+					   		${ i.title }
 						</div>
 					</c:forEach>
 				</div>
@@ -127,7 +128,7 @@
        if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
        	//실행할 로직 (콘텐츠 추가)
            count++;
-           var addContent = '<c:forEach var="i" begin="1" end="20"><div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"><a href="/mrp/resources/images/image-gallery/${ i }.jpg" data-sub-html="Demo Description"><img class="img-responsive thumbnail" src="/mrp/resources/images/image-gallery/thumb/thumb-${ i }.jpg"></a>text</div></c:forEach>';
+           var addContent = '<c:forEach var="i" begin="1" end="20"><div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"><a href="/mrp2/resources/images/image-gallery/${ i }.jpg" data-sub-html="Demo Description"><img class="img-responsive thumbnail" src="/mrp2/resources/images/image-gallery/thumb/thumb-${ i }.jpg"></a>text</div></c:forEach>';
            //div에 추가되는 콘텐츠를 append
            $('#aniimated-thumbnials').append(addContent);
        }

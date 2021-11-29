@@ -23,31 +23,44 @@
    		display: block;
    		margin: 0px auto;
     }
-    .nav-button {
-      height: 155px;
-      width: 25px;
-      position: absolute;
-      top: 0px !important;
-      outline: 0;
-      border: 0;
-      opacity: 0.8;
-      vertical-align: middle;
-    }
-    .owl-nav {
-      overflow: hidden;
-      height: 0px;
-    }
-    .owl-prev {
-      left: -35px;
-    }
-    .owl-next {
-      right: -35px;
-    }
     .cc{
 	   top:50px;
 	}
 	.textoverlay{
 		z-index: 5;
+	}
+	.owl-dots{
+		display: none;
+	}
+	h6{
+		margin-top:0;
+		margin-bottom:0;
+	}
+	.owl-nav button {
+	    position: absolute;
+	    top: 0;
+	    bottom: 0;
+	    width:10px;
+	}
+	
+	.owl-prev {
+	    left: -25px;
+	}
+	
+	.owl-next {
+	    right: -25px;
+	}
+	
+	.owl-nav button i {
+	    font-size: 25px;
+	    text-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+	}
+	.text{
+		position: absolute;
+		top: 300px;
+		left: 180px;
+		color: #fff;
+		font-size: 20px;
 	}
     </style>
 </head>
@@ -151,19 +164,19 @@
             </div>
             <!-- #END# CPU Usage -->
             <div class="block-header">
-                <h2>DASHBOARD</h2>
+                <h2>평점 TOP 10</h2>
             </div>
             <!-- Widgets -->
             <div class="row clearfix">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			        <div class="owl-carousel owl-theme">
-			            <c:forEach var="i" begin="1" end="20">
+			            <c:forEach var="top10" items="${ top10 }">
 			            <div class="item">
 			            	<div class="textoverlay">
-			                <img src="/mrp/resources/images/image-gallery/${ i }.jpg">
-			                </div>
-			                <div class="carousel-caption cc">
-			                <h2>text${ i }</h2>
+			            	<a href="https://www.themoviedb.org/movie/${ top10.movie_id }">
+			                <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/${ top10.posterpath }">
+			                <span class="text">${ top10.vote_average }</span> 
+			                </a>
 			                </div>
 			            </div>
 			            </c:forEach>
@@ -171,17 +184,19 @@
 				</div>
             </div>
             <!-- #END# Widgets -->
+            <br>
             <div class="block-header">
-                <h2>DASHBOARD</h2>
+                <h2>최고의 인기작</h2>
             </div>
             <!-- Widgets -->
             <div class="row clearfix">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			        <div class="owl-carousel owl-theme">
-			            <c:forEach var="i" begin="1" end="20">
-			            <div class="item">
-			                <img src="/mrp/resources/images/image-gallery/${ i }.jpg">
-			            </div>
+			            <c:forEach var="i" items="${ pop }">
+			            <a href="https://www.themoviedb.org/movie/${ i.movie_id }">
+			                <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/${ i.posterpath }">
+			                <span class="text">${ i.vote_average }</span>
+			                </a>
 			            </c:forEach>
 			        </div>
 				</div>
@@ -201,7 +216,7 @@
                 margin: 10,
                 loop: true,
                 nav: true,
-                navText: ["<div class='nav-button owl-prev'><</div>", "<div class='nav-button owl-next'>></div>"],
+                navText: ["<i class='fa fa-chevron-right'></i>","<i class='fa fa-chevron-left'></i>"],
                 autoplay: true,
                 autoplayTimeout: 3000,
                 autoplayHoverPause: true,

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+		   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="teamproject3.team3.mapper.infoMapper">
+
+	<select id="findgenre" resultType="genreVO">
+		select genre_id genreid, name genrename from genre
+	</select>
+	
+	<select id="findmovie" resultType="movieVO">
+		select title, posterpath, movie_id
+		from movie
+		where vote_count > 10
+		order by release_date desc	
+		limit 24;
+	</select>
+	
+	<select id="findinfo" parameterType="int" resultType="movieVO">
+		select *
+		from movie
+		where movie_id = "${ movie_id }"
+	</select>
+	
+</mapper>

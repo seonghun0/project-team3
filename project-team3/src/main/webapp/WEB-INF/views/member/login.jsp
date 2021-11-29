@@ -65,14 +65,14 @@
     
 
     <div class="member">
-		<form action="login" method="post" id ="loginform">
+		<form action="login" method="post" id ="login">
 	        <div class="id_passwd">
 	            ID
-	            <input type="text" name="memberId" placeholder="아이디를 입력해 주세요" class="input">
+	            <input type="text" name="memberId" id="memberId" placeholder="아이디를 입력해 주세요" class="input">
 	        </div><!--id_passwd-->
 	        <div class="id_passwd">
 	            PASSWD
-	            <input type="password" name="passwd" placeholder="비밀번호를 입력해 주세요" class="input">
+	            <input type="password" name="passwd" id="passwd" placeholder="비밀번호를 입력해 주세요" class="input">
 	        </div><!--id_passwd-->
 	        <div class="login">
 	        	<input type="button" class="login_button" id="login_button" value="로그인">
@@ -84,9 +84,29 @@
     
 	<script type="text/javascript">
 		
-		$('#login_button').click(function(){
-			/* ${'#loginform'}.submit() */
-			location.href = '/mrp';
+		$("#login_button").click(function(){
+			
+			var memberId = $("input[name=memberId]").val()
+			var passwd = $("input[name=passwd]").val()
+			
+			$.ajax({
+				type:'post',
+				url:'./passwdcheck',
+				data : {
+						memberId : memberId,
+						passwd : passwd
+						}
+			})
+			.done(function(data){
+				if(data==1){
+					$("#login").submit()		;
+				} else{
+					alert("아이디 또는 비밀번호가 다릅니다.");
+					return;
+				}
+			})
+				
+			
 		});
 	
 		$('#join_button').click(function(){

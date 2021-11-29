@@ -6,8 +6,6 @@
 <head>
     <title>join</title>
     <style>
-    
-    	
        body{background-color: #000; color: #fff; }
        
        .logoimg{
@@ -45,7 +43,7 @@
     <a href="/mrp"><img class="logoimg" src="/mrp/resources/images/ourmovie_03.gif"></a>
    
         <form id="joinform" action="join" method="post">
-        <table style="font-size: 17px; width: 600px; margin: 0 auto">
+        <table style="font-size: 17px; width: 610px; margin: 0 auto">
 	        <tr>
 	        	<th style=" width: 130px">
 	        		<span> 아이디</span>
@@ -70,7 +68,7 @@
 	        	</th>
 	        	<td></td>
 	        	<td>
-	        		<input type="password" name="passwd_confirm" placeholder="비밀번호 확인" class="input">
+	        		<input type="password" name="passwdconfirm" placeholder="비밀번호 확인" class="input">
 	        	</td>
 	        </tr>
 	        <tr>
@@ -79,23 +77,14 @@
 	        	</th>
 	        	<td></td>
 	        	<td>
-					<select name="year">
+					<select name="year" id="year" onchange="javascript:lastday();">
 						<option value="">-- 선택 --</option>
-			            <c:forEach var="i" begin="1970" end="2021">
-			            	<option value="${ i }">${ i }</option>
-			            </c:forEach>
 		          	</select>
-		          	<select name="month">
+		          	<select name="month" id="month" onchange="javascript:lastday();">
 		            	<option value="">-- 선택 --</option>
-		             	<c:forEach var="i" begin="1" end="12">
-		            		<option value="${ i }">${ i }</option>
-		            	</c:forEach>
 		          	</select>
-		          	<select name="day">
+		          	<select name="day" id="day">
 		            	<option value="">-- 선택 --</option>
-		             	<c:forEach var="i" begin="1" end="31">
-		            		<option value="${ i }">${ i }</option>
-		            	</c:forEach>
 		          	</select>
 	        	</td>
 	        </tr>
@@ -105,9 +94,9 @@
 	        	</th>
 	        	<td></td>
 	        	<td>
-					<input type="radio" name="male" value="m" id="man">
+					<input type="radio" name="sex" value="male" id="man">
 	          		<label for="man">남자</label>
-	          		<input type="radio" name="female" value="m" id="woman">
+	          		<input type="radio" name="sex" value="female" id="woman">
 					<label for="woman">여자</label>
 	        	</td>
 	        </tr>
@@ -117,23 +106,9 @@
 	        	</th>
 	        	<td></td>
 	        	<td>
-					<input type="checkbox" name="check1" value="hobby1">액션
-	          		<input type="checkbox" name="check2" value="hobby2">뮤지컬
-	          		<input type="checkbox" name="check3" value="hobby3">드라마
-					<input type="checkbox" name="check4" value="hobby4">로맨스
-					<input type="checkbox" name="check5" value="hobby5">판타지
-					<input type="checkbox" name="check6" value="hobby6">공포
-					<input type="checkbox" name="check7" value="hobby7">모험
-					<input type="checkbox" name="check8" value="hobby8">스릴러
-					<input type="checkbox" name="check9" value="hobby9">느와르
-					<input type="checkbox" name="check10" value="hobby10">코미디
-					<input type="checkbox" name="check11" value="hobby11">가족
-					<input type="checkbox" name="check12" value="hobby12">미스터리
-					<input type="checkbox" name="check13" value="hobby13">전쟁
-					<input type="checkbox" name="check14" value="hobby14">범죄
-					<input type="checkbox" name="check15" value="hobby15">SF
-					<input type="checkbox" name="check16" value="hobby16">다큐멘터리
-					<input type="checkbox" name="check17" value="hobby17">애니메이션
+	        		<c:forEach var="i" items="${ genre }">
+						<input type="checkbox" name="genre" value=${ i.genreid }>${ i.genrename }
+					</c:forEach>
 	        	</td>
 	        </tr>
 		</table>
@@ -147,10 +122,6 @@
     
 	<script type="text/javascript">
 		
-		$('#join_button').click(function(){
-			/* ${'#join'}.submit() */
-			location.href = '/mrp/member/login';
-		});
 		$(document).ready(function(){
 			$("input[type='checkbox']").on('click', function(){
 				var count = $("input:checked[type='checkbox']").length;
@@ -161,10 +132,120 @@
 				}
 			})
 			
+			var now = new Date();
+			var year = now.getFullYear();
+			var mon = (now.getMonth() + 1) > 9 ? ''+(now.getMonth() + 1) :'0'+(now.getMonth()+1);
+			var day = (now.getDate()) > 9 ? ''+(now.getDate()) : '0'+( now.getDate());
+			
+			//년도 selectbox 	만들기
+			for(var i = 1900; i <= year; i++){
+				$('#year').append('<option value="' + i + '">' + i + '년</option>');
+			}
+			
+			// 월별 selectbox 만들기 
+			for(var i=1; i <= 12; i++) { 
+				var mm = i > 9 ? i : "0"+i ; 
+				$('#month').append('<option value="' + mm + '">' + mm + '월</option>'); 
+			} 
+			
+			// 일별 selectbox 만들기 
+			for(var i=1; i <= 31; i++) { 
+				var dd = i > 9 ? i : "0"+i ; 
+				$('#day').append('<option value="' + dd + '">' + dd+ '일</option>'); 
+			} 
+			$("#year > option[value="+year+"]").attr("selected", "true"); 
+			$("#month > option[value="+mon+"]").attr("selected", "true"); 
+			$("#day > option[value="+day+"]").attr("selected", "true"); 
+			
 		})
 		$('#join_button').on('click', function(){
+			
+			var re = /^[A-Za-z0-9]{6,12}$/;
+			var memberId = $('#memberId').val();
+			if(!re.test(memberId)){
+				alert('아이디 형식 오류 (6~12개의 영문자 또는 숫자)');
+				return;
+			}
+			
+			if($("input[name=memberId]").val() == ""){
+				alert("아이디를 입력해주세요")
+				return;
+			}
+			if($("input[name=passwdconfirm]").val() == ""){
+				alert("비밀번호를 입력해주세요")
+				return;
+			}
+			
+			if($("input[type=radio]").is(':checked') == false){
+				alert("성별을 선택해주세요");
+				return;
+				$("input[type=radio]").focus();
+			}
+			if($("input[type=checkbox]").is(':checked') == false){
+				alert("장르를 선택해주세요");
+				return;
+			}
 			$('#joinform').submit();
 		})
+		
+		$("input[name=memberId]").blur(function(){
+			
+			var memberId = $(this).val()
+			var re = /^[A-Za-z0-9]{6,12}$/;
+			if(!re.test(memberId)){
+				alert('아이디 형식 오류 (6~12개의 영문자 또는 숫자)');
+				$(this).focus();
+				return;
+			}
+			
+			$.ajax({
+				type:'post',
+				url:'./idcheck',
+				data:{memberId : memberId}
+			})
+			.done(function(data){
+				if(data == "1"){
+					alert("아이디가 중복입니다.")
+					$(this).focus();
+				} else{
+					alert("사용가능한 아이디입니다.")
+					$("input[name=passwd]").focus();
+				}
+			})
+			.fail(function(data,textStatus,error){
+				alert("code:"+data.status+"\n"+"message:"+data.responseText+"\n"+"error:"+error);
+				alert('error');
+			})
+		});
+		
+		$("input[name=passwdconfirm]").blur(function(){
+			var passwd = $("input[name=passwd]").val();
+			var passwdconfirm = $("input[name=passwdconfirm]").val();
+			
+			if(passwd == passwdconfirm){
+				
+			}else{
+				alert("비밀번호가 일치하지 않습니다.");
+				return;
+				$(this).focus();
+			}
+		})
+		
+		function lastday(){ //년과 월에 따라 마지막 일 구하기 
+			var Year = $('#year').val(); 
+			var Month = $('#month').val(); 
+			var day= new Date(new Date(Year,Month,0)).getDate()
+			/* = new Date(new Date(Year,Month,0)).getDate(); */ 
+			
+			$('#day').children('option').remove();
+			
+			var dayindex_len = $('#day').length
+			if(day>dayindex_len){
+				for(var i=(dayindex_len); i<=day; i++)
+					$('#day').append('<option value="' + i + '">' + i + '일</option>')
+			}
+		}
+
 		
 	</script>
 </body>

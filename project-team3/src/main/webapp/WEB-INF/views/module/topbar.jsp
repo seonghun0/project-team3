@@ -17,7 +17,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/mrp/movieinfo/info">
+                        <a href="/mrp/movie/list">
                             <span>탐색하기</span>
                         </a>
                     </li>
@@ -58,8 +58,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/mrp/member/join">
-                            <span>빈칸 </span>
+                        <a href="/mrp/member/logout">
+                            <span>로그아웃</span>
                         </a>
                     </li>
                     </c:otherwise>
