@@ -34,5 +34,7 @@ public interface MemberMapper {
 
 	List<movieVO> findpop();
 
+	List<movieVO> prmovie();
+
 	
 }

@@ -24,4 +24,6 @@ public interface MemberService {
 
 	List<movieVO> findpop();
 
+	List<movieVO> prmovie();
+
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>teamproject3.team3</groupId>
@@ -23,7 +24,7 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-				
+
 		<!-- Servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -42,21 +43,21 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>org.projectlombok</groupId>
-		    <artifactId>lombok</artifactId>
-		    <version>1.18.20</version>
-		    <scope>provided</scope>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.20</version>
+			<scope>provided</scope>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>com.opencsv</groupId>
-		    <artifactId>opencsv</artifactId>
-		    <version>5.5.1</version>
+			<groupId>com.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>5.5.1</version>
 		</dependency>
-	
-	 <!-- spring jdbc library -->
+
+		<!-- spring jdbc library -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
@@ -67,62 +68,69 @@
 			<artifactId>spring-tx</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-		
+
 		<dependency>
-    		<groupId>mysql</groupId>
-    		<artifactId>mysql-connector-java</artifactId>
-    		<version>8.0.26</version>
-		</dependency>
- 		<dependency>
-		    <groupId>org.apache.commons</groupId>
-		    <artifactId>commons-dbcp2</artifactId>
-		    <version>2.9.0</version>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.26</version>
 		</dependency>
 		<dependency>
-		    <groupId>com.zaxxer</groupId>
-		    <artifactId>HikariCP</artifactId>
-		    <version>5.0.0</version>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+			<version>2.9.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+			<version>5.0.0</version>
 		</dependency>
 		<!-- end of spring jdbc library -->
-		
+
 		<!-- spring mybatis library -->
 		<dependency>
-		    <groupId>org.mybatis</groupId>
-		    <artifactId>mybatis</artifactId>
-		    <version>3.5.7</version>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.5.7</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.mybatis</groupId>
-		    <artifactId>mybatis-spring</artifactId>
-		    <version>2.0.6</version>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>2.0.6</version>
 		</dependency>
-		
+
 		<!-- end of spring mybatis library -->
-		
+
 		<dependency>
-	      	<groupId>com.fasterxml.jackson.core</groupId>
-	      	<artifactId>jackson-databind</artifactId>
-	      	<version>2.12.0</version>
-	 	</dependency>
-		
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.12.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.9</version>
+		</dependency>
+
+
 	</dependencies>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>11</source>
-                    <target>11</target>
-                    <encoding>utf-8</encoding>
-                </configuration>
-            </plugin>
-            <plugin>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<source>11</source>
+					<target>11</target>
+					<encoding>utf-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>3.3.2</version>
 			</plugin>
-        </plugins>
-    </build>
+		</plugins>
+	</build>
 </project>

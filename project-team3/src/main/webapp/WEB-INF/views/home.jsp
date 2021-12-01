@@ -57,8 +57,8 @@
 	}
 	.text{
 		position: absolute;
-		top: 300px;
-		left: 180px;
+		top: 90%;
+		left: 80%;
 		color: #fff;
 		font-size: 20px;
 	}
@@ -120,31 +120,31 @@
                                 <!-- Wrapper for slides -->
                                 <div class="carousel-inner" role="listbox">
                                     <div class="item active">
-                                        <img src="resources/images/image-gallery/10.jpg" class="main-img" />
+                                        <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2${ prmovie[0].posterpath }" class="main-img" />
                                         <div class="carousel-caption">
-                                            <h3>First slide label</h3>
-                                            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                                            <h3>${ prmovie[0].title }</h3>
+                                            <p>${ prmovie[0].overview }</p>
                                         </div>
                                     </div>
                                     <div class="item">
-                                        <img src="resources/images/image-gallery/12.jpg" class="main-img" />
+                                        <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2${ prmovie[1].posterpath }" class="main-img" />
                                         <div class="carousel-caption">
-                                            <h3>Second slide label</h3>
-                                            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                                            <h3>${ prmovie[1].title }</h3>
+                                            <p>${ prmovie[1].overview }</p>
                                         </div>
                                     </div>
                                     <div class="item">
-                                        <img src="resources/images/image-gallery/19.jpg" class="main-img" />
+                                        <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2${ prmovie[2].posterpath }" class="main-img" />
                                         <div class="carousel-caption">
-                                            <h3>Third slide label</h3>
-                                            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                                            <h3>${ prmovie[2].title }</h3>
+                                            <p>${ prmovie[2].overview }</p>
                                         </div>
                                     </div>
                                     <div class="item">
-                                        <img src="resources/images/image-gallery/19.jpg" class="main-img" />
+                                        <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2${ prmovie[3].posterpath }" class="main-img" />
                                         <div class="carousel-caption">
-                                            <h3>Third slide label</h3>
-                                            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                                            <h3>${ prmovie[3].title }</h3>
+                                            <p>${ prmovie[3].overview }</p>
                                         </div>
                                     </div>
                                 </div>
@@ -173,7 +173,7 @@
 			            <c:forEach var="top10" items="${ top10 }">
 			            <div class="item">
 			            	<div class="textoverlay">
-			            	<a href="https://www.themoviedb.org/movie/${ top10.movie_id }">
+			            	<a href="movie/info?movie_id=${ top10.movie_id }">
 			                <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/${ top10.posterpath }">
 			                <span class="text">${ top10.vote_average }</span> 
 			                </a>
@@ -193,7 +193,7 @@
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			        <div class="owl-carousel owl-theme">
 			            <c:forEach var="i" items="${ pop }">
-			            <a href="https://www.themoviedb.org/movie/${ i.movie_id }">
+			            <a href="movie/info?movie_id=${ i.movie_id }">
 			                <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/${ i.posterpath }">
 			                <span class="text">${ i.vote_average }</span>
 			                </a>

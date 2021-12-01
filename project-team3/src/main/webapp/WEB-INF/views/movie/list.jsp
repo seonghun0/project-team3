@@ -91,9 +91,9 @@
 					<h2 class="sub_name">영화</h2>
 				</div>
 				<div class="col-xs-2 tt2">
-					<select class="form-control show-tick">
+					<select class="form-control show-tick" id="genre">
 					    <option disabled="disabled" selected="selected">장르</option>
-					    	<option >전체</option>
+					    	<option value=0>전체</option>
 					    <c:forEach var="i" items="${ genre }">
 						    <option value="${ i.genreid }">${ i.genrename }</option>
 					    </c:forEach>
@@ -107,7 +107,7 @@
 					<c:forEach var="i" items="${ movie }">
 						<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
 							<a href="info?movie_id=${ i.movie_id }" data-sub-html="Demo Description">
-								<img class="img-responsive thumbnail" src="https://www.themoviedb.org/t/p/w220_and_h330_face/${ i.posterpath }">
+								<img class="img-responsive thumbnail" src="https://www.themoviedb.org/t/p/w440_and_h660_face/${ i.posterpath }">
 					   		</a>
 					   		${ i.title }
 						</div>
@@ -122,17 +122,40 @@
  	//Javascript
    var count = 0;
    //스크롤 바닥 감지
-   window.onscroll = function(e) {
+   $(window).scroll(function(e) {
        //추가되는 임시 콘텐츠
        //window height + window scrollY 값이 document height보다 클 경우,
        if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
        	//실행할 로직 (콘텐츠 추가)
-           count++;
-           var addContent = '<c:forEach var="i" begin="1" end="20"><div class="col-lg-3 col-md-4 col-sm-6 col-xs-12"><a href="/mrp2/resources/images/image-gallery/${ i }.jpg" data-sub-html="Demo Description"><img class="img-responsive thumbnail" src="/mrp2/resources/images/image-gallery/thumb/thumb-${ i }.jpg"></a>text</div></c:forEach>';
-           //div에 추가되는 콘텐츠를 append
-           $('#aniimated-thumbnials').append(addContent);
+        	count++;
+       		setTimeout(fetchlist,1000)
        }
-   };
+   });
+   function fetchlist(){
+	   $.ajax({
+  			type:"get",
+  			url:"./infinite",
+  			data:{ count : count }
+  		})
+  		.done(function(data){
+  			$.each(data, function(i, item){
+  				//alert(item.movie_id)
+  				var addcontent = '<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12"><a href="info?movie_id='+item.movie_id+'" data-sub-html="Demo Description"><img class="img-responsive thumbnail" src="https://www.themoviedb.org/t/p/w440_and_h660_face/'+item.posterpath+'"></a>'+item.title+'</div>'
+  				//div에 추가되는 콘텐츠를 append	
+  				$('#aniimated-thumbnials').append(addcontent);
+  			})
+  			
+  		})
+  		.fail(function(data,textStatus,error){
+			alert("code:"+data.status+"\n"+"message:"+data.responseText+"\n"+"error:"+error);
+			alert('error');
+		})
+   }
+   
+   $("#genre").on('change', function(){
+	   var genre = $('#genre option:selected').val();
+	   alert(genre);
+   })
    </script>
     
 </body>

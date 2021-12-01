@@ -15,7 +15,7 @@
 		from movie
 		where vote_count > 10
 		order by release_date desc	
-		limit 24;
+		limit ${ from }, ${ to };
 	</select>
 	
 	<select id="findinfo" parameterType="int" resultType="movieVO">
@@ -24,4 +24,28 @@
 		where movie_id = "${ movie_id }"
 	</select>
 	
+	<insert id="insertreview" parameterType="reviewVO">
+		insert into review (member_id, movie_id, review)
+		values
+		(#{member_id}, #{movie_id}, #{review})
+	</insert>
+	
+	<select id="findreview" resultType="reviewVO">
+		select * 
+		from review
+		where movie_id = '${ movie_id }'
+	</select>
+	
+	<select id="check" resultType="int">
+		select count(*)
+		from review
+		where movie_id = '${ movie_id }'
+		and member_id = '${ member_id }'
+	</select>
+	
+	<delete id="deletereview" parameterType="reviewVO">
+		delete from review
+		where movie_id = '${ movie_id }'
+		and member_id = '${ member_id }'
+	</delete>
 </mapper>

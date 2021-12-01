@@ -44,19 +44,28 @@
 	</select>
 	
 	<select id="findtop10" resultType="movieVO">
-	select movie_id, title, vote_average ,posterpath 
-	from movie 
-	where posterpath not like '' and vote_count >10000 
-	order by vote_average desc  
-	limit 10;
+		select movie_id, title, vote_average ,posterpath 
+		from movie 
+		where posterpath not like '' and vote_count >10000 
+		order by vote_average desc  
+		limit 10;
 	</select>
 	
 	<select id="findpop" resultType="movieVO">
-	select movie_id, title, vote_average ,posterpath 
-	from movie 
-	where posterpath not like '' and vote_count >10 and original_language = 'ko' or original_language = 'en'
-	order by popularity desc  
-	limit 20;
+		select movie_id, title, vote_average ,posterpath 
+		from movie 
+		where posterpath not like '' and vote_count >10 and original_language = 'ko' or original_language = 'en'
+		order by popularity desc  
+		limit 20;
+	</select>
+	
+	<select id="prmovie" resultType="movieVO">
+		select movie_id, title, posterpath, release_date, overview
+		from movie
+		where original_language = 'ko'
+		and release_date  &lt; '2021-11-30'
+		order by release_date desc
+		limit 4;
 	</select>
 	
 </mapper>
