@@ -25,6 +25,9 @@ public class HomeController {
 		List<movieVO> movie  = memberService.findtop10();
 		List<movieVO> popmovie  = memberService.findpop();
 		
+		List<movieVO> prmovie = memberService.prmovie();
+		
+		model.addAttribute("prmovie",prmovie);
 		model.addAttribute("top10", movie);
 		model.addAttribute("pop",popmovie);
 		

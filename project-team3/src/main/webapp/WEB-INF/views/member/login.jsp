@@ -105,6 +105,10 @@
 					return;
 				}
 			})
+			.fail(function(data,textStatus,error){
+				alert("code:"+data.status+"\n"+"message:"+data.responseText+"\n"+"error:"+error);
+				alert('error');
+			})
 				
 			
 		});

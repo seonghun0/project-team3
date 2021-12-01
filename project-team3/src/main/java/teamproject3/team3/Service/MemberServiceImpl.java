@@ -73,4 +73,9 @@ public class MemberServiceImpl implements MemberService {
 	public List<movieVO> findpop() {
 		return memberMapper.findpop();
 	}
+
+	@Override
+	public List<movieVO> prmovie() {
+		return memberMapper.prmovie();
+	}
 }

@@ -162,6 +162,15 @@
 			
 			var re = /^[A-Za-z0-9]{6,12}$/;
 			var memberId = $('#memberId').val();
+			var passwd = $("input[name=passwd]").val();
+			var passwdconfirm = $("input[name=passwdconfirm]").val();
+			
+			if(passwd == passwdconfirm){
+				
+			}else{
+				alert("비밀번호가 일치하지 않습니다.");
+				$("input[name=passwdconfirm]").val("");
+			}
 			if(!re.test(memberId)){
 				alert('아이디 형식 오류 (6~12개의 영문자 또는 숫자)');
 				return;
@@ -206,7 +215,8 @@
 			.done(function(data){
 				if(data == "1"){
 					alert("아이디가 중복입니다.")
-					$(this).focus();
+					$("input[name=memberId]").val("");
+					return;
 				} else{
 					alert("사용가능한 아이디입니다.")
 					$("input[name=passwd]").focus();
@@ -226,8 +236,8 @@
 				
 			}else{
 				alert("비밀번호가 일치하지 않습니다.");
+				$(this).val("");
 				return;
-				$(this).focus();
 			}
 		})
 		

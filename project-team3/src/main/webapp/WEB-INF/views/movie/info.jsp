@@ -1,3 +1,4 @@
+<%@page import="org.springframework.web.context.annotation.SessionScope"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page pageEncoding="utf-8" contentType="text/html; charset=utf-8" %>
@@ -20,6 +21,15 @@
     }
     #canvas{
     	text-align: center; 
+    }
+    textarea{
+    	resize: none;
+    }
+    .write{
+    	width: 10%;
+    	height: 90%;
+    	position: absolute;
+    	
     }
     </style>
     
@@ -102,20 +112,15 @@
 					</div>
             	</div>
 			</div>
-            <div class="row clearfix">
-	            <div class="col-lg-12 col-md-3 col-sm-6 col-xs-12">
-	            	<!-- Example Tab -->
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		<div class="row clearfix">
+        	<div class="col-lg-12 col-md-3 col-sm-6 col-xs-12">
                     <div class="body">
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs tab-nav-right" role="tablist">
                             <li role="presentation" class="active"><a href="#home" data-toggle="tab">HOME</a></li>
                             <li role="presentation"><a href="#profile" data-toggle="tab">PROFILE</a></li>
-                            <li role="presentation"><a href="#messages" data-toggle="tab">MESSAGES</a></li>
-                            <li role="presentation"><a href="#settings" data-toggle="tab">SETTINGS</a></li>
+                            <li role="presentation"><a href="#review" data-toggle="tab">REVIEW</a></li>
                         </ul>
-
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane fade in active" id="home">
@@ -136,35 +141,112 @@
                                     sadipscing mel.
                                 </p>
                             </div>
-                            <div role="tabpanel" class="tab-pane fade" id="messages">
-                                <b>Message Content</b>
-                                <p>
-                                    Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit mediocritatem an. Pri ut tation electram moderatius.
-                                    Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent aliquid
-                                    pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere gubergren
-                                    sadipscing mel.
-                                </p>
-                            </div>
-                            <div role="tabpanel" class="tab-pane fade" id="settings">
-                                <b>Settings Content</b>
-                                <p>
-                                    Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit mediocritatem an. Pri ut tation electram moderatius.
-                                    Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent aliquid
-                                    pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere gubergren
-                                    sadipscing mel.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #END# Example Tab -->
-	            </div>
-            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="review">
+                            <b>REVIEW</b>
+                            	<div class="row clearfix">
+                            		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+	                                	<textarea rows="3" cols="130" name="review" class="review"></textarea>
+										<button class="btn btn-block btn-lg waves-effect write">작성하기</button>
+	                                </div>
+								</div>
+								<br>
+	                            <div class="row clearfix">
+	                            	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						            	<div class="body table-responsive">
+						                	<table class="table">
+						                		<c:forEach var="i" items="${ list }">
+							                		<tr>
+							                			<td class="reviewtext">${ i.review }</td>
+							                			<td>${ i.member_id }</td>
+							                			<td><fmt:formatDate value="${ i.regdate }" pattern="yyyy-MM-dd HH:mm" /></td>
+							                			<c:if test="${ sessionScope.loginuser.memberId eq i.member_id }">
+							                			<td><a href="javascript:deletereview();" ><i class="material-icons">delete_sweep</i></a></td>
+							                			</c:if>
+							                		</tr>
+						                		</c:forEach>
+						                     </table>
+										</div>
+				                    </div>
+				                </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
+		<input type="hidden" value="${ movieinfo.movie_id }" id="movieid">
+            <!-- #END# Example Tab -->
     </section>
 
     <jsp:include page="/WEB-INF/views/module/js.jsp"></jsp:include>
+    
+    <script type="text/javascript">
+    var login_user_id = '${ sessionScope.loginuser.memberId }';
+    $(function(){
+		
+		$('.write').click(function(){
+			
+			var text = $('.review').val();
+			var movie_id = $('#movieid').val();
+			
+			$.ajax({
+				type:'post',
+				url:'./review',
+				data: { review : text, movie_id : movie_id }
+			})
+			.done(function(data){
+				var text = $('.review').val("");
+				if (data == "") {
+					alert('리뷰작성은 한번만 가능합니다.');
+					return;
+				}else{
+					$('.table').children().remove();
+					//$('.table').html(data)
+					$.each(data, function(i, item){
+						var html = '<tr><td class="reviewtext">'+item.review+'</td><td>'+item.member_id+'</td><td>'+item.regdate+'</td>';
+						if (item.member_id == login_user_id) {
+							html += '<td><a href="javascript:deletereview();" ><i class="material-icons">delete_sweep</i></a></td>';
+						}
+						html += '</tr>';
+						$('.table').append(html);	
+					})
+				}
+			})
+			.fail(function(data,textStatus,error){
+				alert("code:"+data.status+"\n"+"message:"+data.responseText+"\n"+"error:"+error);
+				alert('error');
+			})
+			
+		})
+				
+	})  
+	function deletereview(){
+		var movie_id = $('#movieid').val();
+		$.ajax({
+			type:'post',
+			url:'./deletereview',
+			data:{ movie_id : movie_id }
+		})
+		.done(function(data){
+			$('.table').children().remove();
+			//$('.table').html(data)
+			$.each(data, function(i, item){
+				var html = '<tr><td class="reviewtext">'+item.review+'</td><td>'+item.member_id+'</td><td>'+item.regdate+'</td>';
+				if (item.member_id == login_user_id) {
+					html += '<td><a href="javascript:deletereview();" ><i class="material-icons">delete_sweep</i></a></td>';
+				}
+				html += '</tr>';
+				$('.table').append(html);
+			})
+		})
+		.fail(function(data,textStatus,error){
+			alert("code:"+data.status+"\n"+"message:"+data.responseText+"\n"+"error:"+error);
+			alert('error');
+		})
+		
+	}
+
+    </script>
 </body>
 
 </html>
