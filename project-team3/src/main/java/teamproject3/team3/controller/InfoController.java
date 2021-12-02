@@ -1,6 +1,5 @@
 package teamproject3.team3.controller;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -64,31 +63,43 @@ public class InfoController {
 		return "movie/info";
 	}
 	
-	@GetMapping(path= { "/infinite" })
+	@GetMapping(path= { "/infinite" }, produces="application/json;charset=utf-8")
 	@ResponseBody
-	public List<movieVO> infinity(int count){
+	public String infinity(int count, int genre){
 		
 		int from = count*24;
 		int to = from +24;
 		
-		List<movieVO> list = infoService.getmovie(from, to);
-		return list;
+		if (genre == 0) {
+			List<movieVO> list = infoService.getmovie(from, to);
+			Gson gson = new Gson();
+			String json = gson.toJson(list);
+			return json;
+		}else {
+			List<movieVO> list = infoService.getmovie_genre(genre, from, to);
+			Gson gson = new Gson();
+			String json = gson.toJson(list);
+			return json;
+		}
+		
+		
 	}
 	
-	@PostMapping(path= {"/review"}, produces="application/json;charset=utf-8")
+	@PostMapping(path= {"/review_rating"}, produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String reviewlist(reviewVO review, HttpSession session, Model model){
+	public String reviewlist(reviewVO review, HttpSession session, Model model, int rating){
 		
 		memberVO member = (memberVO)session.getAttribute("loginuser");
 		
 		review.setMember_id(member.getMemberId());
 		
 		int check = infoService.check(review.getMember_id(), review.getMovie_id());
-		System.out.println(check); 
+//		System.out.println(check); 
 		if (check == 1) {
 			String json = null;
 			return json;
 		}else {
+			infoService.insertrating(review);
 			infoService.insertreview(review);
 			List<reviewVO> vo = infoService.findlist(review.getMovie_id());
 			model.addAttribute("reviewlist",vo);
@@ -106,13 +117,32 @@ public class InfoController {
 		memberVO member = (memberVO)session.getAttribute("loginuser");
 		
 		review.setMember_id(member.getMemberId());
+		infoService.deleterating(review);
 		infoService.deletereview(review);
 		List<reviewVO> vo = infoService.findlist(review.getMovie_id());
-		System.out.println(vo);
+//		System.out.println(vo);
 		model.addAttribute("reviewlist",vo);
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm").create();
 		String json = gson.toJson(vo);
 		return json;
+	}
+	@PostMapping(path= {"/genreselect"}, produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String genreselect(int genre, int count) {
+		
+		int from = count*24;
+		int to = from +24;
+		if (genre == 0) {
+			List<movieVO> list = infoService.getmovie(from, to);
+			Gson gson = new Gson();
+			String json = gson.toJson(list);
+			return json;
+		}else {
+			List<movieVO> list = infoService.getmovie_genre(genre, from, to);
+			Gson gson = new Gson();
+			String json = gson.toJson(list);
+			return json;
+		}
 	}
 	
 //	@PostMapping(path= {"/review2"}, produces="application/json;charset=utf-8")

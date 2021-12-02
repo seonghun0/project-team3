@@ -29,8 +29,49 @@
     	width: 10%;
     	height: 90%;
     	position: absolute;
-    	
     }
+	.star {
+	font-size: 30px;
+	}
+	.star a{
+ 	text-decoration: none;
+	color: gray;
+	}
+	.star a.on{
+	color: red;
+	}
+	.star-ratings {
+	  color: #aaa9a9; 
+	  position: relative;
+	  unicode-bidi: bidi-override;
+	  width: max-content;
+	  -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+	  -webkit-text-stroke-width: 1.3px;
+	  -webkit-text-stroke-color: #2b2a29;
+	  font-size: 30px
+	}
+	 
+	.star-ratings-fill {
+	  padding: 0;
+	  position: absolute;
+	  z-index: 1;
+	  display: flex;
+	  left: 0;
+	  overflow: hidden;
+	  -webkit-text-fill-color: red;
+	}
+	 
+	.star-ratings-base {
+	  z-index: 0;
+	  padding: 0;
+	}
+	.stars{
+		font-size: 20px;
+	}
+	p{
+		text-align: center;
+		width: 140px;
+	}
     </style>
     
 </head>
@@ -88,6 +129,33 @@
 	                                <div class="form-line">
 	                                	<h1> ${ movieinfo.title }</h1>
 	                                </div>
+	                                <div class="row">
+	                                <div class="col-md-6">
+	                                <div class="star-ratings">
+										<div class="star-ratings-fill" style="width: ${ movieinfo.vote_average * 10 }%">
+										   <span value="1">★</span>
+										   &nbsp;
+										   <span value="2">★</span>
+										   &nbsp;
+										   <span value="3">★</span>
+										   &nbsp;
+										   <span value="4">★</span>
+										   &nbsp;
+										   <span value="5">★</span>
+										</div>
+										<div class="star-ratings-base">
+										   <span value="1">★</span> 
+										   <span value="2">★</span>
+										   <span value="3">★</span>
+										   <span value="4">★</span>
+										   <span value="5">★</span>
+										</div>
+										</div>
+										</div>
+										<div class="col-md-3 star-ratings">
+										${ movieinfo.vote_average }
+										</div>
+									</div>
 	                            </div>
 	                        </div>
 						</div>
@@ -125,27 +193,31 @@
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane fade in active" id="home">
                                 <b>Home Content</b>
-                                <p>
-                                    Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit mediocritatem an. Pri ut tation electram moderatius.
-                                    Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent aliquid
-                                    pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere gubergren
-                                    sadipscing mel.
-                                </p>
+                                <P class="star"> 
+								   <a value="1">★</a><a value="2">★</a><a value="3">★</a><a value="4">★</a><a value="5">★</a>
+								<p>
+								<div class="star-ratings">
+								<div class="star-ratings-fill" style="width: 70%">
+								   <span value="1">★</span><span value="2">★</span><span value="3">★</span><span value="4">★</span><span value="5">★</span>
+								</div>
+								<div class="star-ratings-base">
+								   <span value="1">★</span><span value="2">★</span><span value="3">★</span><span value="4">★</span><span value="5">★</span>
+								</div>
+								</div>
                             </div>
                             <div role="tabpanel" class="tab-pane fade" id="profile">
-                                <b>Profile Content</b>
-                                <p>
-                                    Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit mediocritatem an. Pri ut tation electram moderatius.
-                                    Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent aliquid
-                                    pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere gubergren
-                                    sadipscing mel.
-                                </p>
+                            	
                             </div>
                             <div role="tabpanel" class="tab-pane fade" id="review">
                             <b>REVIEW</b>
                             	<div class="row clearfix">
-                            		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-	                                	<textarea rows="3" cols="130" name="review" class="review"></textarea>
+                            		<div class="col-lg-2 col-md-12 col-sm-12 col-xs-12 tt1">
+										<P class="star"> 
+								   			<a value="1">★</a><a value="2">★</a><a value="3">★</a><a value="4">★</a><a value="5">★</a>
+										<p>
+	                                </div>
+	                                <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12 tt">
+	                                	<textarea rows="3" cols="100" name="review" class="review"></textarea>
 										<button class="btn btn-block btn-lg waves-effect write">작성하기</button>
 	                                </div>
 								</div>
@@ -156,6 +228,16 @@
 						                	<table class="table">
 						                		<c:forEach var="i" items="${ list }">
 							                		<tr>
+							                			<td>
+							                				<div class="star-ratings stars">
+															<div class="star-ratings-fill" style="width: ${ i.rating*20 }%">
+															   <span value="1">★</span><span value="2">★</span><span value="3">★</span><span value="4">★</span><span value="5">★</span>
+															</div>
+															<div class="star-ratings-base">
+															   <span value="1">★</span><span value="2">★</span><span value="3">★</span><span value="4">★</span><span value="5">★</span>
+															</div>
+															</div>
+														</td>
 							                			<td class="reviewtext">${ i.review }</td>
 							                			<td>${ i.member_id }</td>
 							                			<td><fmt:formatDate value="${ i.regdate }" pattern="yyyy-MM-dd HH:mm" /></td>
@@ -183,16 +265,23 @@
     <script type="text/javascript">
     var login_user_id = '${ sessionScope.loginuser.memberId }';
     $(function(){
-		
+    	
+    	var star = 0;
+    	
+    	$('.star a').click(function(){ 
+			$(this).parent().children("a").removeClass("on");    
+			$(this).addClass("on").prevAll("a").addClass("on");
+			star = $(this).attr("value");
+		});
+    	
 		$('.write').click(function(){
 			
 			var text = $('.review').val();
 			var movie_id = $('#movieid').val();
-			
 			$.ajax({
 				type:'post',
-				url:'./review',
-				data: { review : text, movie_id : movie_id }
+				url:'./review_rating',
+				data: { review : text, movie_id : movie_id, rating: star }
 			})
 			.done(function(data){
 				var text = $('.review').val("");
@@ -203,7 +292,11 @@
 					$('.table').children().remove();
 					//$('.table').html(data)
 					$.each(data, function(i, item){
-						var html = '<tr><td class="reviewtext">'+item.review+'</td><td>'+item.member_id+'</td><td>'+item.regdate+'</td>';
+						var html = '<tr><td><div class="star-ratings stars"><div class="star-ratings-fill" style="width: '+ item.rating*20 +'%">'
+						html += '<span value="1">★</span><span value="2">★</span><span value="3">★</span><span value="4">★</span><span value="5">★</span></div>'
+						html += '<div class="star-ratings-base"><span value="1">★</span><span value="2">★</span><span value="3">★</span><span value="4">★</span><span value="5">★</span></div></div>'
+						html += '</td><td class="reviewtext">'+item.review+'</td><td>'+item.member_id+'</td><td>'+item.regdate+'</td>';
+						
 						if (item.member_id == login_user_id) {
 							html += '<td><a href="javascript:deletereview();" ><i class="material-icons">delete_sweep</i></a></td>';
 						}
@@ -231,7 +324,11 @@
 			$('.table').children().remove();
 			//$('.table').html(data)
 			$.each(data, function(i, item){
-				var html = '<tr><td class="reviewtext">'+item.review+'</td><td>'+item.member_id+'</td><td>'+item.regdate+'</td>';
+				var html = '<tr><td><div class="star-ratings stars"><div class="star-ratings-fill" style="width: '+ item.rating*20 +'%">'
+					html += '<span value="1">★</span><span value="2">★</span><span value="3">★</span><span value="4">★</span><span value="5">★</span></div>'
+					html += '<div class="star-ratings-base"><span value="1">★</span><span value="2">★</span><span value="3">★</span><span value="4">★</span><span value="5">★</span></div></div>'
+					html += '</td><td class="reviewtext">'+item.review+'</td><td>'+item.member_id+'</td><td>'+item.regdate+'</td>';
+					
 				if (item.member_id == login_user_id) {
 					html += '<td><a href="javascript:deletereview();" ><i class="material-icons">delete_sweep</i></a></td>';
 				}
@@ -243,9 +340,8 @@
 			alert("code:"+data.status+"\n"+"message:"+data.responseText+"\n"+"error:"+error);
 			alert('error');
 		})
-		
 	}
-
+   
     </script>
 </body>
 

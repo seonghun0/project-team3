@@ -13,7 +13,7 @@
 	<select id="findmovie" resultType="movieVO">
 		select title, posterpath, movie_id
 		from movie
-		where vote_count > 10
+		where vote_count > 1
 		order by release_date desc	
 		limit ${ from }, ${ to };
 	</select>
@@ -30,10 +30,17 @@
 		(#{member_id}, #{movie_id}, #{review})
 	</insert>
 	
+	<insert id="insertrating" parameterType="reviewVO">
+		insert into rating (member_id, movie_id, rating)
+		values
+		(#{member_id}, #{movie_id}, #{rating})
+	</insert>
+	
 	<select id="findreview" resultType="reviewVO">
-		select * 
-		from review
-		where movie_id = '${ movie_id }'
+		select g.rating rating, w.review review, w.regdate regdate, w.member_id member_id 
+		from review w join rating g 
+		on w.movie_id = g.movie_id and w.member_id = g.member_id
+		where w.movie_id = '${ movie_id }'
 	</select>
 	
 	<select id="check" resultType="int">
@@ -48,4 +55,19 @@
 		where movie_id = '${ movie_id }'
 		and member_id = '${ member_id }'
 	</delete>
+	
+	<delete id="deleterating" parameterType="reviewVO">
+		delete from rating
+		where movie_id = '${ movie_id }'
+		and member_id = '${ member_id }'
+	</delete>
+	
+	<select id="getmovie_genre" resultType="movieVO">
+		select title, posterpath, m.movie_id 
+		from movie m join movie_genre mg 
+		on (m.movie_id = mg.movie_id) 
+		where genre_id = '${ genre }' and vote_count>1 
+		order by release_date desc 
+		limit ${ from }, ${ to };
+	</select>
 </mapper>

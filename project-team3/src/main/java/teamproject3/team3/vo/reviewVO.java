@@ -20,4 +20,5 @@ public class reviewVO {
 	private String member_id;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Seoul")
 	private Date regdate;
+	private float rating;
 }

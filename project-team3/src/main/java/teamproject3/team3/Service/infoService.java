@@ -22,4 +22,11 @@ public interface infoService {
 
 	void deletereview(reviewVO review);
 
+	List<movieVO> getmovie_genre(int genre, int from, int to);
+
+	void insertrating(reviewVO review);
+
+	void deleterating(reviewVO review);
+
+
 }

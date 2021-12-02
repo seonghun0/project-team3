@@ -47,6 +47,22 @@ public class infoServiceImpl implements infoService {
 	public void deletereview(reviewVO review) {
 		infomapper.deletereview(review);
 	}
+
+	@Override
+	public List<movieVO> getmovie_genre(int genre, int from, int to) {
+		return infomapper.getmovie_genre(genre, from, to);
+	}
+
+	@Override
+	public void insertrating(reviewVO review) {
+		infomapper.insertrating(review);
+	}
+
+	@Override
+	public void deleterating(reviewVO review) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }

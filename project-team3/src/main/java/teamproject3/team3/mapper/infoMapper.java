@@ -26,5 +26,9 @@ public interface infoMapper {
 
 	void deletereview(reviewVO review);
 
+	List<movieVO> getmovie_genre(@Param("genre") int genre, @Param("from") int from,@Param("to") int to);
+
+	void insertrating(reviewVO review);
+
 	
 }
