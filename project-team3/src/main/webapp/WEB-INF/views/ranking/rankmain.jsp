@@ -102,7 +102,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="block-header">
-                <h2>최고 인기작</h2>
+                <h2>평점이 높은 영화</h2>
             </div>
             <div class="row clearfix">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
