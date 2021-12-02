@@ -28,5 +28,4 @@ public interface infoService {
 
 	void deleterating(reviewVO review);
 
-
 }

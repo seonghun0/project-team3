@@ -23,6 +23,7 @@
 		<mapper resource="teamproject3/team3/mapper/BoardMapper.xml"/>
 		<mapper resource="teamproject3/team3/mapper/MemberMapper.xml"/>
 		<mapper resource="teamproject3/team3/mapper/infoMapper.xml"/>
+		<mapper resource="teamproject3/team3/mapper/rankMapper.xml"/>
 	</mappers>
 	
 	
