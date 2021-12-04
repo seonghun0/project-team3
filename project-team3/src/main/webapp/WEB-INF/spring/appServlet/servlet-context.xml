@@ -23,6 +23,12 @@
 	
 	<context:component-scan base-package="teamproject3.team3.controller" />
 	
-	
+	<interceptors>
+		<interceptor>
+			<mapping path="/**"/>
+			<exclude-mapping path="/member/**" />
+			<beans:bean class="teamproject3.team3.interceptor.interceptor"></beans:bean>
+		</interceptor>
+	</interceptors>
 	
 </beans:beans>

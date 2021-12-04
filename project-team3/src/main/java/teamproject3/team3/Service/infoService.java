@@ -28,4 +28,16 @@ public interface infoService {
 
 	void deleterating(reviewVO review);
 
+	List<movieVO> moviesearch(String search);
+
+	List<movieVO> findmovie(String title);
+
+	int counttitle(String title);
+
+	int countjjim(reviewVO jjim);
+
+	void addjjim(reviewVO jjim);
+
+	void deletejjim(reviewVO jjim);
+
 }

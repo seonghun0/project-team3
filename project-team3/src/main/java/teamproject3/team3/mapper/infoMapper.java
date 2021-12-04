@@ -30,5 +30,19 @@ public interface infoMapper {
 
 	void insertrating(reviewVO review);
 
+	void deleterating(reviewVO review);
+
+	List<movieVO> moviesearch(@Param("search") String search);
+
+	List<movieVO> findtitle(@Param("title") String title);
+
+	int counttitle(String title);
+
+	int countjjim(reviewVO jjim);
+
+	void addjjim(reviewVO jjim);
+
+	void deletejjim(reviewVO jjim);
+
 	
 }

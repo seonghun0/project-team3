@@ -144,6 +144,23 @@ public class InfoController {
 			return json;
 		}
 	}
+	@PostMapping(path= {"/addjjim"}, produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String addjjim(reviewVO jjim) {
+		
+		int count = infoService.countjjim(jjim);
+		Gson gson = new Gson();
+		String json = null;
+		if (count == 0) {
+			infoService.addjjim(jjim);
+			 json = gson.toJson(0);
+			return json;
+		}else {
+			infoService.deletejjim(jjim);
+			json = gson.toJson(1);
+			return json;
+		}
+	}
 	
 //	@PostMapping(path= {"/review2"}, produces="application/json;charset=utf-8")
 //	@ResponseBody

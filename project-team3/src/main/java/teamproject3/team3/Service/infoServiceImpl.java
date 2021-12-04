@@ -60,8 +60,37 @@ public class infoServiceImpl implements infoService {
 
 	@Override
 	public void deleterating(reviewVO review) {
-		// TODO Auto-generated method stub
-		
+		infomapper.deleterating(review);
+	}
+
+	@Override
+	public List<movieVO> moviesearch(String search) {
+		return infomapper.moviesearch(search);
+	}
+
+	@Override
+	public List<movieVO> findmovie(String title) {
+		return infomapper.findtitle(title);
+	}
+
+	@Override
+	public int counttitle(String title) {
+		return infomapper.counttitle(title);
+	}
+
+	@Override
+	public int countjjim(reviewVO jjim) {
+		return infomapper.countjjim(jjim);
+	}
+
+	@Override
+	public void addjjim(reviewVO jjim) {
+		infomapper.addjjim(jjim);
+	}
+
+	@Override
+	public void deletejjim(reviewVO jjim) {
+		infomapper.deletejjim(jjim);
 	}
 	
 	

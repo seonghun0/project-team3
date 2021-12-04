@@ -255,7 +255,6 @@
 					$('#day').append('<option value="' + i + '">' + i + '일</option>')
 			}
 		}
-
 		
 	</script>
 </body>

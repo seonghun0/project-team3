@@ -70,4 +70,42 @@
 		order by release_date desc 
 		limit ${ from }, ${ to };
 	</select>
+	
+	<select id="moviesearch" resultType="movieVO">
+		select title
+		from movie
+		where title like '%${search}%'
+		limit 5;
+	</select>
+	
+	<select id="findtitle" resultType="movieVO">
+		select movie_id
+		from movie
+		where title = '${title}'
+	</select>
+	
+	<select id="counttitle" resultType="int">
+		select count(*)
+		from movie
+		where title = '${title}'
+	</select>
+	
+	<select id="countjjim" resultType="int">
+		select count(*)
+		from jjim
+		where member_id = '${ member_id }'
+		and movie_id = '${ movie_id }'
+	</select>
+	
+	<insert id="addjjim" parameterType="reviewVO">
+		insert into jjim (movie_id, member_id)
+		values
+		(#{ movie_id }, #{ member_id })
+	</insert>
+	
+	<delete id="deletejjim" parameterType="reviewVO">
+		delete from jjim
+		where movie_id = '${ movie_id }'
+		and member_id = '${ member_id }'
+	</delete>
 </mapper>

@@ -1,3 +1,4 @@
+<%@ page pageEncoding="utf-8" contentType="text/html; charset=utf-8" %>
 <!-- Jquery Core Js -->
     <script src="/mrp/resources/plugins/jquery/jquery.min.js"></script>
 
@@ -39,6 +40,7 @@
 
     <!-- Demo Js -->
     <script src="/mrp/resources/js/demo.js"></script>
+    <script src="/mrp/resources/plugins/sweetalert/sweetalert.min.js"></script>
     
     <!-- Jquery DataTable Plugin Js -->
     <script src="/mrp/resources/plugins/jquery-datatable/jquery.dataTables.js"></script>
@@ -49,3 +51,91 @@
     <script src="/mrp/resources/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
     <script src="/mrp/resources/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
     <script src="/mrp/resources/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+    
+    <script type="text/javascript">
+    $(function(){
+   	var title = 0;
+	var outerBox = $('<div></div>');
+	outerBox.css({
+		"background-color": "white",
+		"width": "100%",
+		"display": "none",
+	});
+	$('div.search-bar').append(outerBox);
+	
+	$('div.search-bar').on('click', function(event) {
+		outerBox.css('display', 'none');
+	})
+	
+	//엔터키 검색
+   	$("#search").keyup(function(e){
+   		
+       	var search = $(this).val();
+	   	if (search.length == 0) {
+	   		outerBox.css('display', 'none');
+			return;
+		}
+   			$.ajax({
+       			url:'/mrp/search',
+       			data:{ search : search },
+       			dataType:'Json'
+       		})
+       		.done(function(data){
+				outerBox.empty();
+				$.each(data, function(i, item){
+					var innerBox = $('<div></div>');
+					innerBox.text(item.title);
+					innerBox.css({
+						"padding": "5px"
+					});
+					innerBox.hover(function(event) {
+						$(this).css('background-color', 'lightgray');
+					}, function(event) {
+						$(this).css('background-color', 'white');
+					});
+					innerBox.on('click', function(event) {							
+						$('#search').val($(this).text())
+						title = $(this).text()
+						outerBox.css('display', 'none');
+						findmovie();
+					});
+					outerBox.append(innerBox);
+				})
+				
+				outerBox.css("display", "block");
+       		})
+       		.fail(function(xhr, status, err){
+       			console.log(status)
+       		})
+		if (e.keyCode == 13) {
+			title = search;
+			findmovie();    		
+		}
+       			
+      });
+	function message()
+	{
+		swal("hi");
+	};
+    
+    function findmovie(){
+    	$.ajax({
+    		url:"/mrp/findmovie",
+    		data:{ title : title },
+    		dataType:'Json'
+    	})
+    	.done(function(data, status, xhr){
+    		console.log(data.movie_id);
+    		if(data == 0){
+    			alert('해당하는 영화가 없습니다.');	
+    		}else{
+    			location.href = "http://localhost:8081/mrp/movie/info?movie_id="+data.movie_id;	
+    		}
+    		
+    	})
+    	.fail(function(xhr, status, err){
+    		alert('해당하는 영화가 없습니다.');
+    	})
+    }
+    });
+    </script>

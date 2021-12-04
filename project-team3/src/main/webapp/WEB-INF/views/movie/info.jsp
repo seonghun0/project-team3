@@ -17,7 +17,7 @@
     <style type="text/css">
     
     section.content{
-    	margin:100px 150px 0 150px;
+    	margin:87px 150px 0 150px;
     }
     #canvas{
     	text-align: center; 
@@ -68,14 +68,49 @@
 	.stars{
 		font-size: 20px;
 	}
-	p{
-		text-align: center;
-		width: 140px;
+	#op{
+		width: 30px;
 	}
+	.star-input{
+		width: 210px;
+	}
+	.tt1{
+		text-align: center;
+	}
+	.star-input>.input,
+	.star-input>.input>label:hover,
+	.star-input>.input>input:focus+label,
+	.star-input>.input>input:checked+label{display: inline-block;vertical-align:middle;background:url('https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbTCV6h%2FbtrmWrVGzP0%2FcbgJwemVYtKox2S6481AWK%2Fimg.png') no-repeat;}
+	.star-input{display:inline-block; white-space:nowrap;width:225px;height:40px;padding:25px;line-height:30px;}
+	.star-input>.input{display:inline-block;width:150px;background-size:150px;height:28px;white-space:nowrap;overflow:hidden;position: relative;}
+	.star-input>.input>input{position:absolute;width:1px;height:1px;opacity:0;}
+	star-input>.input.focus{outline:1px dotted #ddd;}
+	.star-input>.input>label{width:30px;height:0;padding:28px 0 0 0;overflow: hidden;float:left;cursor: pointer;position: absolute;top: 0;left: 0;}
+	.star-input>.input>label:hover,
+	.star-input>.input>input:focus+label,
+	.star-input>.input>input:checked+label{background-size: 150px; background-position: 0 bottom;}
+	.star-input>.input>label:hover~label{background-image: none;}
+	.star-input>.input>label[for="p1"]{width:15px;z-index:10;}
+	.star-input>.input>label[for="p2"]{width:30px;z-index:9;}
+	.star-input>.input>label[for="p3"]{width:45px;z-index:8;}
+	.star-input>.input>label[for="p4"]{width:60px;z-index:7;}
+	.star-input>.input>label[for="p5"]{width:75px;z-index:6;}
+	.star-input>.input>label[for="p6"]{width:90px;z-index:5;}
+	.star-input>.input>label[for="p7"]{width:105px;z-index:4;}
+	.star-input>.input>label[for="p8"]{width:120px;z-index:3;}
+	.star-input>.input>label[for="p9"]{width:135px;z-index:2;}
+	.star-input>.input>label[for="p10"]{width:150px;z-index:1;}
+	.star-input>output{display:inline-block;width:60px; font-size:18px;text-align:right; vertical-align:middle;}
+	[type="radio"]:not(:checked) + label:before,[type="radio"]:checked + label:after,[type="radio"]:checked + label:after,
+	[type="radio"].with-gap:checked + label:before,[type="radio"].with-gap:checked + label:after,[type="radio"]:checked + label:after,
+	[type="radio"].with-gap:checked + label:after,[type="radio"]:checked + label:before  {
+		border: 0;
+		background-color: rgba(255,255,255,0);
+	}
+	
     </style>
     
 </head>
-
 <body class="theme-red">
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
@@ -97,17 +132,7 @@
     <!-- Overlay For Sidebars -->
     <div class="overlay"></div>
     <!-- #END# Overlay For Sidebars -->
-    <!-- Search Bar -->
-    <div class="search-bar">
-        <div class="search-icon">
-            <i class="material-icons">search</i>
-        </div>
-        <input type="text" placeholder="START TYPING...">
-        <div class="close-search">
-            <i class="material-icons">close</i>
-        </div>
-    </div>
-    <!-- #END# Search Bar -->
+    
     <jsp:include page="/WEB-INF/views/module/topbar.jsp"></jsp:include>
     <section>    
         
@@ -128,9 +153,10 @@
 	                            <div class="form-group">
 	                                <div class="form-line">
 	                                	<h1> ${ movieinfo.title }</h1>
+	                                	<h4>(${ movieinfo.subtitle })</h4>
 	                                </div>
 	                                <div class="row">
-	                                <div class="col-md-6">
+	                                <div class="col-md-5">
 	                                <div class="star-ratings">
 										<div class="star-ratings-fill" style="width: ${ movieinfo.vote_average * 10 }%">
 										   <span value="1">★</span>
@@ -164,12 +190,15 @@
 	                            <div class="form-group">
 	                                <div class="form-line">
 	                                	<h4>${ movieinfo.subtitle }</h4>
+	                                	<button type="button" class="btn btn-default btn-circle waves-effect waves-circle waves-float" id="like">
+		                                    <i class="material-icons">favorite_border</i>
+		                                </button>
 	                                </div>
 	                            </div>
 	                        </div>
 						</div>
 						<div class="row clearfix">
-				            <div class="col-md-6">
+				            <div class="col-md-12">
 	                            <div class="form-group">
 	                                <div class="form-line">
 	                                	<h3>${ movieinfo.overview }</h3>
@@ -193,17 +222,8 @@
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane fade in active" id="home">
                                 <b>Home Content</b>
-                                <P class="star"> 
-								   <a value="1">★</a><a value="2">★</a><a value="3">★</a><a value="4">★</a><a value="5">★</a>
-								<p>
-								<div class="star-ratings">
-								<div class="star-ratings-fill" style="width: 70%">
-								   <span value="1">★</span><span value="2">★</span><span value="3">★</span><span value="4">★</span><span value="5">★</span>
-								</div>
-								<div class="star-ratings-base">
-								   <span value="1">★</span><span value="2">★</span><span value="3">★</span><span value="4">★</span><span value="5">★</span>
-								</div>
-								</div>
+                                
+                                
                             </div>
                             <div role="tabpanel" class="tab-pane fade" id="profile">
                             	
@@ -212,9 +232,31 @@
                             <b>REVIEW</b>
                             	<div class="row clearfix">
                             		<div class="col-lg-2 col-md-12 col-sm-12 col-xs-12 tt1">
-										<P class="star"> 
-								   			<a value="1">★</a><a value="2">★</a><a value="3">★</a><a value="4">★</a><a value="5">★</a>
-										<p>
+										<span class="star-input">
+											<span class="input">
+										    	<input type="radio" name="star-input" value="1" id="p1">
+										    	<label for="p1">1</label>
+										    	<input type="radio" name="star-input" value="2" id="p2">
+										    	<label for="p2">2</label>
+										    	<input type="radio" name="star-input" value="3" id="p3">
+										    	<label for="p3">3</label>
+										    	<input type="radio" name="star-input" value="4" id="p4">
+										    	<label for="p4">4</label>
+										    	<input type="radio" name="star-input" value="5" id="p5">
+										    	<label for="p5">5</label>
+												<input type="radio" name="star-input" value="6" id="p6">
+										    	<label for="p6">6</label>
+										    	<input type="radio" name="star-input" value="7" id="p7">
+										    	<label for="p7">7</label>
+										    	<input type="radio" name="star-input" value="8" id="p8">
+										    	<label for="p8">8</label>
+										    	<input type="radio" name="star-input" value="9" id="p9">
+										    	<label for="p9">9</label>
+										    	<input type="radio" name="star-input" value="10" id="p10">
+										    	<label for="p10">10</label>
+										  	</span>
+										  	<output for="star-input" id="op"><b>0</b>점</output>						
+										</span>
 	                                </div>
 	                                <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12 tt">
 	                                	<textarea rows="3" cols="100" name="review" class="review"></textarea>
@@ -230,7 +272,7 @@
 							                		<tr>
 							                			<td>
 							                				<div class="star-ratings stars">
-															<div class="star-ratings-fill" style="width: ${ i.rating*20 }%">
+															<div class="star-ratings-fill" style="width: ${ i.rating*10 }%">
 															   <span value="1">★</span><span value="2">★</span><span value="3">★</span><span value="4">★</span><span value="5">★</span>
 															</div>
 															<div class="star-ratings-base">
@@ -264,20 +306,62 @@
     
     <script type="text/javascript">
     var login_user_id = '${ sessionScope.loginuser.memberId }';
+    var movie_id = $('#movieid').val();
     $(function(){
     	
-    	var star = 0;
+    	$('#like').click(function(){
+    		
+    		if (login_user_id == ""){
+    			alert('로그인 후에 가능합니다.')
+    			var result = confirm('로그인하러 갈까요?')
+    			if(result == true){
+    				location.href="/mrp/member/login"
+    			}
+    			return;
+    		}
+    		$.ajax({
+    			type:'post',
+    			url:'./addjjim',
+    			data:{ member_id : login_user_id, movie_id : movie_id}
+    		})
+    		.done(function(data){
+    			if(data==0){
+    				alert('찜목록에 추가하였습니다.');
+    				$('#like i').text('favorite');
+    			}else{
+    				alert('찜목록에서 삭제하였습니다.');
+    				$('#like i').text('favorite_border');
+    			}
+    		})
+    		.fail(function(xhr, status, err){
+    			console.log(err);
+    		})
+    	})
     	
+    	$("#search").keyup(function(e){if(e.keyCode == 13)
+    		alert($(this).val()) 
+    	});
+
     	$('.star a').click(function(){ 
 			$(this).parent().children("a").removeClass("on");    
 			$(this).addClass("on").prevAll("a").addClass("on");
-			star = $(this).attr("value");
 		});
     	
 		$('.write').click(function(){
 			
+			if(login_user_id == ""){
+				alert('리뷰작성은 로그인 후에 가능합니다.')
+				var result = confirm('로그인하러 갈까요?')
+    			if(result == true){
+    				location.href="/mrp/member/login"
+    			}
+				return;
+			}
+			
+			var star = $('#op b').text()
+			alert($('#op b').text())
 			var text = $('.review').val();
-			var movie_id = $('#movieid').val();
+			
 			$.ajax({
 				type:'post',
 				url:'./review_rating',
@@ -292,7 +376,7 @@
 					$('.table').children().remove();
 					//$('.table').html(data)
 					$.each(data, function(i, item){
-						var html = '<tr><td><div class="star-ratings stars"><div class="star-ratings-fill" style="width: '+ item.rating*20 +'%">'
+						var html = '<tr><td><div class="star-ratings stars"><div class="star-ratings-fill" style="width: '+ item.rating*10 +'%">'
 						html += '<span value="1">★</span><span value="2">★</span><span value="3">★</span><span value="4">★</span><span value="5">★</span></div>'
 						html += '<div class="star-ratings-base"><span value="1">★</span><span value="2">★</span><span value="3">★</span><span value="4">★</span><span value="5">★</span></div></div>'
 						html += '</td><td class="reviewtext">'+item.review+'</td><td>'+item.member_id+'</td><td>'+item.regdate+'</td>';
@@ -324,7 +408,7 @@
 			$('.table').children().remove();
 			//$('.table').html(data)
 			$.each(data, function(i, item){
-				var html = '<tr><td><div class="star-ratings stars"><div class="star-ratings-fill" style="width: '+ item.rating*20 +'%">'
+				var html = '<tr><td><div class="star-ratings stars"><div class="star-ratings-fill" style="width: '+ item.rating*10 +'%">'
 					html += '<span value="1">★</span><span value="2">★</span><span value="3">★</span><span value="4">★</span><span value="5">★</span></div>'
 					html += '<div class="star-ratings-base"><span value="1">★</span><span value="2">★</span><span value="3">★</span><span value="4">★</span><span value="5">★</span></div></div>'
 					html += '</td><td class="reviewtext">'+item.review+'</td><td>'+item.member_id+'</td><td>'+item.regdate+'</td>';
@@ -343,6 +427,46 @@
 	}
    
     </script>
+    <script type="text/javascript">
+    
+    var starRating = function(){
+    	var $star = $(".star-input"),
+    	    $result = $star.find("output>b");
+    		
+    	  	$(document)
+    		.on("focusin", ".star-input>.input", 
+    			function(){
+    	   		 $(this).addClass("focus");
+    	 	})
+    			 
+    	   	.on("focusout", ".star-input>.input", function(){
+    	    	var $this = $(this);
+    	    	setTimeout(function(){
+    	      		if($this.find(":focus").length === 0){
+    	       			$this.removeClass("focus");
+    	     	 	}
+    	   		}, 100);
+    	 	 })
+    	  
+    	    .on("change", ".star-input :radio", function(){
+    	    	$result.text($(this).next().text());
+    	  	})
+    	    .on("mouseover", ".star-input label", function(){
+    	    	$result.text($(this).text());
+    	    })
+    	    .on("mouseleave", ".star-input>.input", function(){
+    	    	var $checked = $star.find(":checked");
+    	    		if($checked.length === 0){
+    	     	 		$result.text("0");
+    	   		 	} else {
+    	     	 		$result.text($checked.next().text());
+    	    		}
+    	  	});
+    	};
+
+    	starRating();
+    
+	</script>
 </body>
 
 </html>
