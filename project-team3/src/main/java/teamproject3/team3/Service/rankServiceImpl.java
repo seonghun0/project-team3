@@ -5,6 +5,7 @@ import java.util.List;
 import lombok.Setter;
 import teamproject3.team3.mapper.rankMapper;
 import teamproject3.team3.vo.movieVO;
+import teamproject3.team3.vo.ticketingVO;
 
 public class rankServiceImpl implements rankService {
 	
@@ -39,6 +40,11 @@ public class rankServiceImpl implements rankService {
 	@Override
 	public List<movieVO> thriller() {
 		return rankmapper.thriller();
+	}
+
+	@Override
+	public List<ticketingVO> ticketing() {
+		return rankmapper.ticketing();
 	}
 
 }

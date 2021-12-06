@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import teamproject3.team3.Service.rankService;
 import teamproject3.team3.vo.movieVO;
 import teamproject3.team3.vo.reviewVO;
+import teamproject3.team3.vo.ticketingVO;
 
 @Controller
 @RequestMapping(path= { "/ranking" })
@@ -30,6 +31,7 @@ public class RankController {
 		List<movieVO> comedy = rankService.comedy();
 		List<movieVO> action = rankService.action();
 		List<movieVO> thriller = rankService.thriller();
+		List<ticketingVO> ticketing = rankService.ticketing();
 		
 		model.addAttribute("best6",movie);
 		model.addAttribute("seventys",seventys);
@@ -37,6 +39,7 @@ public class RankController {
 		model.addAttribute("comedy",comedy);
 		model.addAttribute("action",action);
 		model.addAttribute("thriller",thriller);
+		model.addAttribute("ticketing",ticketing);
 				
 		return "ranking/rankmain";
 	}

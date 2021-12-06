@@ -48,4 +48,16 @@
 		where mg.genre_id = 53 order by popularity desc limit 10
 	</select>
 	
+	<resultMap type="movieVO" id="">
+		
+	</resultMap>
+	
+	<select id="ticketing" resultType="ticketingVO">
+		select mt.reserve_rate, mt.title, m.movie_id, mt.release_date, m.posterpath 
+		from movie m 
+		right join movie_ticketing mt on (m.title = mt.title) 
+		where mt.reserve_rate > 0 
+		order by mt.reserve_rate
+		desc limit 20;
+	</select>
 </mapper>

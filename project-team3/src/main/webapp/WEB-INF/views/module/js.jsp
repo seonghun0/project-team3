@@ -63,7 +63,7 @@
 	});
 	$('div.search-bar').append(outerBox);
 	
-	$('div.search-bar').on('click', function(event) {
+	$('.theme-red').on('click', function(event) {
 		outerBox.css('display', 'none');
 	})
 	
@@ -113,10 +113,6 @@
 		}
        			
       });
-	function message()
-	{
-		swal("hi");
-	};
     
     function findmovie(){
     	$.ajax({

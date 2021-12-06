@@ -23,18 +23,11 @@ public class interceptor implements HandlerInterceptor{
 		memberVO member = (memberVO)session.getAttribute("loginuser");
 		
 		boolean invalid =false;
-		if(uri.contains("/movie2/")) {
+		if(uri.contains("/profile")) {
 			if(member == null) {
-				invalid = true;
-			}else if (uri.contains("/manage") &&
-					!member.getUsertype().equals("admin")) {
 				invalid = true;
 			}else if (uri.contains("init-data.action")&& // 경로에 Init-data.action 이 포함되고
 					   !member.getUsertype().equals("admin") ) { // admin이 아닌 경우
-				invalid = true;
-			}
-		}else if (uri.contains("/line-khw")) { 
-			if(member == null) {
 				invalid = true;
 			}
 		}else if (uri.contains("/member/")) {

@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import teamproject3.team3.vo.movieVO;
+import teamproject3.team3.vo.ticketingVO;
 
 @Mapper
 public interface rankMapper {
@@ -21,6 +22,6 @@ public interface rankMapper {
 
 	List<movieVO> thriller();
 
-
+	List<ticketingVO> ticketing();
 	
 }

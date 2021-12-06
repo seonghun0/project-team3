@@ -5,8 +5,10 @@ import java.util.List;
 import lombok.Setter;
 import teamproject3.team3.mapper.infoMapper;
 import teamproject3.team3.vo.genreVO;
+import teamproject3.team3.vo.jjimVO;
 import teamproject3.team3.vo.movieVO;
 import teamproject3.team3.vo.reviewVO;
+import teamproject3.team3.vo.videoVO;
 
 public class infoServiceImpl implements infoService {
 
@@ -79,18 +81,23 @@ public class infoServiceImpl implements infoService {
 	}
 
 	@Override
-	public int countjjim(reviewVO jjim) {
+	public int countjjim(jjimVO jjim) {
 		return infomapper.countjjim(jjim);
 	}
 
 	@Override
-	public void addjjim(reviewVO jjim) {
+	public void addjjim(jjimVO jjim) {
 		infomapper.addjjim(jjim);
 	}
 
 	@Override
-	public void deletejjim(reviewVO jjim) {
+	public void deletejjim(jjimVO jjim) {
 		infomapper.deletejjim(jjim);
+	}
+
+	@Override
+	public List<videoVO> findvideo(int movie_id) {
+		return infomapper.findvideo(movie_id);
 	}
 	
 	

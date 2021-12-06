@@ -97,15 +97,22 @@
 		and movie_id = '${ movie_id }'
 	</select>
 	
-	<insert id="addjjim" parameterType="reviewVO">
+	<insert id="addjjim" parameterType="jjimVO">
 		insert into jjim (movie_id, member_id)
 		values
 		(#{ movie_id }, #{ member_id })
 	</insert>
 	
-	<delete id="deletejjim" parameterType="reviewVO">
+	<delete id="deletejjim" parameterType="jjimVO">
 		delete from jjim
 		where movie_id = '${ movie_id }'
 		and member_id = '${ member_id }'
 	</delete>
+	
+	<select id="findvideo" resultType="videoVO">
+		select videokey, videotype, name, site
+		from video
+		where movie_id = '${movie_id}'
+		order by name desc;
+	</select> 
 </mapper>

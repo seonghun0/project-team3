@@ -107,7 +107,83 @@
 		border: 0;
 		background-color: rgba(255,255,255,0);
 	}
-	
+	section.medei_panel{
+		width: 100%;
+		display: block;
+	}
+	div.scroller_wrap {
+	    position: relative;
+	    top: 0;
+	    left: 0;
+	}
+	section.media_panel div.content {
+	    display: flex;
+	    width: 100%;
+	    overflow-x: scroll;
+    }
+	div.wrapper{
+		width: 533px;
+    	height: 300px;
+	    overflow: hidden;
+	    min-width: 350px;
+	    width: 350px;
+	    height: 197px;
+	    box-sizing: border-box;
+	    background-position: center;
+	    background-repeat: no-repeat;
+	    background-size: cover;
+	}
+	div.video.card div.wrapper div.play_background span.glyphicons_v2 {
+	    width: 50%;
+	    height: 50%;
+	    left: 1px;
+	    transition: opacity 200ms linear;
+	    
+	}
+	.glyphicons_v2.play {
+	    background-image: url(https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-175-play-806cb05551791b8dedd7f8d38fd3bd806e2d397fcfeaa00a5cc9129f0819fd07.svg);
+	    z-index: 10;
+	}
+	a.play_trailer {
+	    width: 100%;
+	    height: 100%;
+	    display: flex;
+	    align-items: center;
+	    justify-content: center;
+	}
+	div.play_background {
+	    width: 67px;
+	    height: 67px;
+	    display: flex;
+	    align-items: center;
+	    justify-content: center;
+	    border-radius: 50%;
+	    background: rgba(0,0,0,0.7);
+	    
+	}
+	.glyphicons_v2 {
+	    position: relative;
+	    top: 0;
+	    left: 0;
+	    display: inline-flex;
+	    align-items: center;
+	    justify-content: center;
+	    min-width: 1em;
+	    min-height: 1em;
+	    width: 1em;
+	    height: 1em;
+	    line-height: inherit;
+	    background-position: center center;
+	    background-repeat: no-repeat;
+	    color: inherit;
+	    box-sizing: border-box;
+	}
+	.svg.invert {
+	    filter: invert(1);
+	}
+	.card{
+		margin-bottom: 0;
+	}
     </style>
     
 </head>
@@ -189,7 +265,6 @@
 				            <div class="col-md-6">
 	                            <div class="form-group">
 	                                <div class="form-line">
-	                                	<h4>${ movieinfo.subtitle }</h4>
 	                                	<button type="button" class="btn btn-default btn-circle waves-effect waves-circle waves-float" id="like">
 		                                    <i class="material-icons">favorite_border</i>
 		                                </button>
@@ -209,29 +284,50 @@
 					</div>
             	</div>
 			</div>
+			
+			
 		<div class="row clearfix">
         	<div class="col-lg-12 col-md-3 col-sm-6 col-xs-12">
                     <div class="body">
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs tab-nav-right" role="tablist">
-                            <li role="presentation" class="active"><a href="#home" data-toggle="tab">HOME</a></li>
-                            <li role="presentation"><a href="#profile" data-toggle="tab">PROFILE</a></li>
-                            <li role="presentation"><a href="#review" data-toggle="tab">REVIEW</a></li>
+                            <li role="presentation" class="active"><a href="#home" data-toggle="tab">Main</a></li>
+                            <li role="presentation"><a href="#media" data-toggle="tab">Media</a></li>
+                            <li role="presentation"><a href="#review" data-toggle="tab">Review</a></li>
                         </ul>
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane fade in active" id="home">
-                                <b>Home Content</b>
+                                <b>Main Content</b>
                                 
                                 
                             </div>
-                            <div role="tabpanel" class="tab-pane fade" id="profile">
-                            	
-                            </div>
+                         <div role="tabpanel" class="tab-pane fade" id="media">
+                         <b>media</b>
+                         	<section class="media_panel">
+                         		<div id="media_scroller" class="scroller_wrap should_fade is_fading">
+				                <div class="h_scroller content scroller">  
+				                <c:forEach var="i" items="${ video }" varStatus="status">
+								    <div class="video card no_border">
+								      <div class="wrapper" style="background-image: url('https://i.ytimg.com/vi/${ i.videokey }/hqdefault.jpg');">
+								        <a class="no_click play_trailer" href="https://www.youtube.com/watch?v=${ i.videokey }" target="_blank" data-site="${ i.site }" data-id="${ i.videokey }" data-title="${ i.name }">
+								        	<div class="play_background">
+								        		<span class="glyphicons_v2 play invert svg"></span>
+								        	</div>
+								        </a>
+								      </div>
+								      <span class="name">${ i.name }</span>
+								    </div>
+								     </c:forEach>
+								    </div>
+								</div>
+							</section>
+						</div>
+                           
                             <div role="tabpanel" class="tab-pane fade" id="review">
                             <b>REVIEW</b>
                             	<div class="row clearfix">
-                            		<div class="col-lg-2 col-md-12 col-sm-12 col-xs-12 tt1">
+                            		<div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 tt1">
 										<span class="star-input">
 											<span class="input">
 										    	<input type="radio" name="star-input" value="1" id="p1">
@@ -258,7 +354,7 @@
 										  	<output for="star-input" id="op"><b>0</b>점</output>						
 										</span>
 	                                </div>
-	                                <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12 tt">
+	                                <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 tt">
 	                                	<textarea rows="3" cols="100" name="review" class="review"></textarea>
 										<button class="btn btn-block btn-lg waves-effect write">작성하기</button>
 	                                </div>
@@ -297,6 +393,7 @@
 					</div>
 				</div>
 			</div>
+		</div>
 		</div>
 		<input type="hidden" value="${ movieinfo.movie_id }" id="movieid">
             <!-- #END# Example Tab -->
@@ -359,7 +456,7 @@
 			}
 			
 			var star = $('#op b').text()
-			alert($('#op b').text())
+			/* alert($('#op b').text()) */
 			var text = $('.review').val();
 			
 			$.ajax({
@@ -426,6 +523,31 @@
 		})
 	}
    
+    </script>
+    <script type="text/javascript">
+    	
+   	var playbox = $('<div></div>');
+    playbox.css({
+   		"position" : "absolute",
+   		"top" : "20%",
+   		"left" : "30%",
+   		"display":"none"
+	});
+   	$('.theme-red').append(playbox)
+   	
+   	$('.theme-red').click(function(){
+   		playbox.css({"display":"none"})
+   	})
+   	function playvideo(){
+    	playbox.css({"display":"block"})
+    	var innerbox = $('<div></div>');
+   		playbox.append(innerbox)
+    	var video = '<iframe tabindex="-1" class="video-stream html5-main-video" webkit-playsinline="" playsinline="" controlslist="nodownload" style="width: 1273px; height: 716px; left: 1px; top: 0px;" src="https://www.youtube.com/watch?v=V6aWnlhH6ug"></iframe>'
+    	innerbox.append(video)
+        
+      }
+   
+    	
     </script>
     <script type="text/javascript">
     

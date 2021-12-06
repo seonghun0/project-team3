@@ -31,9 +31,10 @@
 	</select>
 	
 	<select id="login" resultType="memberVO">
-		select member_id memberId, gender, user_type usertype from member
-		where member_id = '${ memberId }'
-		and password = '${ passwd }'
+		select m.member_id memberId, m.gender,m.birth_date, m.user_type usertype
+		from member m 
+		where m.member_id = '${ memberId }'
+		and m.password = '${ passwd }'
 	</select>
 	
 	<select id="pwdcheck" resultType="int">
@@ -68,4 +69,45 @@
 		limit 4;
 	</select>
 	
+	<select id="findusergenre" resultType="genreVO">
+		select g.genre_id genreid, g.name genrename
+		from member_genre mg
+		join genre g on(g.genre_id = mg.genre_id)
+		where mg.member_id = '${ memberId }'
+	</select>
+	
+	<select id="findjjimlist" resultType="jjimVO">
+		select m.title, m.movie_id
+		from jjim j
+		join movie m 
+		on (m.movie_id = j.movie_id)
+		where j.member_id = '${ memberId }'
+	</select>
+	
+	<update id="updatepwd" parameterType="String">
+		update member
+		set password = '${ npd }'
+		where member_id = '${ memberId }'
+	</update>
+	
+	<select id="membercheck" resultType="memberVO">
+		select member_id memberId, birth_date, join_date, user_type usertype, gender
+		from member
+	</select>
+	
+	<update id="updateuser" parameterType="memberVO">
+		update member
+		set user_type = '${ usertype }'
+		where member_id = '${ memberId }'
+	</update>
+	
+	<delete id="deletegenre" parameterType="memberVO">
+		delete from member_genre
+		where member_id = '${ memberId }'
+	</delete>
+	
+	<delete id="deleteuser" parameterType="memberVO">
+		delete from member
+		where member_id ='${ memberId }'
+	</delete>
 </mapper>

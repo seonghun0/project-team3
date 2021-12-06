@@ -16,6 +16,9 @@
 		<typeAlias type="teamproject3.team3.vo.memberVO" alias= "memberVO"/>
 		<typeAlias type="teamproject3.team3.vo.movieVO" alias= "movieVO"/>
 		<typeAlias type="teamproject3.team3.vo.reviewVO" alias= "reviewVO"/>
+		<typeAlias type="teamproject3.team3.vo.videoVO" alias= "videoVO"/>
+		<typeAlias type="teamproject3.team3.vo.ticketingVO" alias= "ticketingVO"/>
+		<typeAlias type="teamproject3.team3.vo.jjimVO" alias= "jjimVO"/>
 	
 	</typeAliases>
 	

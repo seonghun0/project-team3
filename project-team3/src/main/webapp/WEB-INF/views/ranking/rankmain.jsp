@@ -90,6 +90,27 @@
 
     <section class="content">
         <div class="container-fluid">
+        	<div class="block-header">
+                <h2>예매율 순위</h2>
+            </div>
+            <div class="row clearfix">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			        <div class="owl-carousel owl-theme">
+			            <c:forEach var="t" items="${ ticketing }" varStatus="status">
+			            <div class="item">
+			            	<div class="textoverlay">
+			            	<a href="/mrp/movie/info?movie_id=${ t.movie_id }">
+			                <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/${ t.posterpath }">
+			                </a>
+			                ${ status.index+1 } 위
+			                ${ t.title }
+			                ${ t.reserve_rate } %	
+			                </div>
+			            </div>
+			            </c:forEach>
+			        </div>
+				</div>
+            </div>
             <div class="block-header">
                 <h2>평점이 높은 영화</h2>
             </div>

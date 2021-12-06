@@ -8,8 +8,10 @@ import teamproject3.team3.common.Util;
 import teamproject3.team3.mapper.MemberMapper;
 import teamproject3.team3.vo.MemberGenreVO;
 import teamproject3.team3.vo.genreVO;
+import teamproject3.team3.vo.jjimVO;
 import teamproject3.team3.vo.memberVO;
 import teamproject3.team3.vo.movieVO;
+import teamproject3.team3.vo.reviewVO;
 
 public class MemberServiceImpl implements MemberService {
 
@@ -77,5 +79,41 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public List<movieVO> prmovie() {
 		return memberMapper.prmovie();
+	}
+
+	@Override
+	public List<genreVO> findusergenre(String memberId) {
+		return memberMapper.findusergenre(memberId);
+	}
+
+	@Override
+	public List<jjimVO> findjjimlist(String memberId) {
+		return memberMapper.findjjimlist(memberId);
+	}
+
+	@Override
+	public void updatepwd(String memberId, String newpwd) {
+		String npd = Util.getHashedString(newpwd, "SHA-256");
+		memberMapper.updatepwd(memberId, npd);
+	}
+
+	@Override
+	public List<memberVO> membercheck() {
+		return memberMapper.membercheck();
+	}
+
+	@Override
+	public void updateuser(memberVO member) {
+		memberMapper.updateuser(member);
+	}
+
+	@Override
+	public void deleteuser(memberVO member) {
+		memberMapper.deleteuser(member);
+	}
+
+	@Override
+	public void deletegenre(memberVO member) {
+		memberMapper.deletegenre(member);
 	}
 }

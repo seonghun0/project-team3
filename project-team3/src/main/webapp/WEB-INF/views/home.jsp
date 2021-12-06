@@ -108,21 +108,29 @@
                                 </ol>
                                 <!-- Wrapper for slides -->
                                 <div class="carousel-inner" role="listbox">
+                                
                                     <div class="item active">
+                                    	<a href="movie/info?movie_id=${ prmovie[0].movie_id }">
                                         <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2${ prmovie[0].posterpath }" class="main-img" />
+                                        </a>
                                         <div class="carousel-caption">
                                             <h3>${ prmovie[0].title }</h3>
                                             <p>${ prmovie[0].overview }</p>
                                         </div>
                                     </div>
-                                    <div class="item">
-                                        <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2${ prmovie[1].posterpath }" class="main-img" />
+								
+								<c:forEach var="i" items="${ prmovie }" begin="1">
+                                   <div class="item">
+                                   		<a href="movie/info?movie_id=${ i.movie_id }">
+                                        <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2${ i.posterpath }" class="main-img" />
+                                        </a>
                                         <div class="carousel-caption">
-                                            <h3>${ prmovie[1].title }</h3>
-                                            <p>${ prmovie[1].overview }</p>
+                                            <h3>${ i.title }</h3>
+                                            <p>${ i.overview }</p>
                                         </div>
                                     </div>
-                                    <div class="item">
+								</c:forEach>
+                                   <!-- <div class="item">
                                         <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2${ prmovie[2].posterpath }" class="main-img" />
                                         <div class="carousel-caption">
                                             <h3>${ prmovie[2].title }</h3>
@@ -135,7 +143,7 @@
                                             <h3>${ prmovie[3].title }</h3>
                                             <p>${ prmovie[3].overview }</p>
                                         </div>
-                                    </div>
+                                    </div> --%>
                                 </div>
                                 <!-- Controls -->
                                 <a class="left carousel-control" href="#carousel-example-generic_2" role="button" data-slide="prev">

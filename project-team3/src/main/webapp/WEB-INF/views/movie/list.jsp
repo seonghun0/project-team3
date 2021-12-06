@@ -112,7 +112,7 @@
    var mutex = false;
    
  	//Javascript
-   var count = 0;
+   var count = 1;
    //스크롤 바닥 감지
    $(window).scroll(function() {
        /* //추가되는 임시 콘텐츠

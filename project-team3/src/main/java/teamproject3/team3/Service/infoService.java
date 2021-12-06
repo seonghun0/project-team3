@@ -3,8 +3,10 @@ package teamproject3.team3.Service;
 import java.util.List;
 
 import teamproject3.team3.vo.genreVO;
+import teamproject3.team3.vo.jjimVO;
 import teamproject3.team3.vo.movieVO;
 import teamproject3.team3.vo.reviewVO;
+import teamproject3.team3.vo.videoVO;
 
 public interface infoService {
 
@@ -34,10 +36,12 @@ public interface infoService {
 
 	int counttitle(String title);
 
-	int countjjim(reviewVO jjim);
+	int countjjim(jjimVO jjim);
 
-	void addjjim(reviewVO jjim);
+	void addjjim(jjimVO jjim);
 
-	void deletejjim(reviewVO jjim);
+	void deletejjim(jjimVO jjim);
+
+	List<videoVO> findvideo(int movie_id);
 
 }

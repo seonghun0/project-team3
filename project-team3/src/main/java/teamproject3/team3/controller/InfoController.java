@@ -16,11 +16,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import teamproject3.team3.Service.MemberService;
 import teamproject3.team3.Service.infoService;
 import teamproject3.team3.vo.genreVO;
+import teamproject3.team3.vo.jjimVO;
 import teamproject3.team3.vo.memberVO;
 import teamproject3.team3.vo.movieVO;
 import teamproject3.team3.vo.reviewVO;
+import teamproject3.team3.vo.videoVO;
 
 @Controller
 @RequestMapping(path= { "/movie" })
@@ -29,6 +32,10 @@ public class InfoController {
 	@Autowired
 	@Qualifier("infoService")
 	private infoService infoService;
+	
+	@Autowired
+	@Qualifier("memberService")
+	private MemberService memberService;
 	
 	@GetMapping(path = { "/list" })
 	public String showinfoForm(Model model) {
@@ -50,9 +57,13 @@ public class InfoController {
 		
 		List<movieVO> movieinfo = infoService.getinfo(movie_id);
 		List<reviewVO> list = infoService.findlist(movie_id);
-		
+		List<videoVO> video = infoService.findvideo(movie_id);
+//		System.out.println(video);
 		if (movieinfo == null || movieinfo.size() == 0) {
 			return "redirect:list";
+		}
+		if (video != null) {
+			model.addAttribute("video",video);
 		}
 		
 		if (list != null) {
@@ -146,7 +157,7 @@ public class InfoController {
 	}
 	@PostMapping(path= {"/addjjim"}, produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String addjjim(reviewVO jjim) {
+	public String addjjim(jjimVO jjim) {
 		
 		int count = infoService.countjjim(jjim);
 		Gson gson = new Gson();
@@ -160,6 +171,64 @@ public class InfoController {
 			json = gson.toJson(1);
 			return json;
 		}
+	}
+	
+	@GetMapping(path = { "/profile" })
+	public String showprofileForm(HttpSession session, Model model) {
+		
+		memberVO member = (memberVO)session.getAttribute("loginuser");
+		
+		List<genreVO> usergenre = memberService.findusergenre(member.getMemberId());
+		List<jjimVO> jjimlist = memberService.findjjimlist(member.getMemberId());
+		
+		model.addAttribute("usergenre",usergenre);
+		model.addAttribute("jjimlist", jjimlist);
+		
+		return "movie/profile";
+	}
+	
+	@PostMapping(path = {"/delete"})
+	@ResponseBody
+	public void deletejjim(jjimVO jjim) {
+		infoService.deletejjim(jjim);
+	}
+	
+	@PostMapping(path= {"/pwdchange"}, produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String pwdchange(String pwd, String newpwd, HttpSession session) {
+		
+		memberVO member = (memberVO)session.getAttribute("loginuser");
+		int pwdcheck = memberService.pwdcheck(member.getMemberId(), pwd);
+		
+		if(pwdcheck == 1) {
+			memberService.updatepwd(member.getMemberId(), newpwd);
+			return "1";
+		}else {
+			return "0";
+		}
+	}
+	
+	@GetMapping(path= {"/admin"})
+	public String showadmin(Model model) {
+		
+		List<memberVO> memberlist =  memberService.membercheck();
+		
+		model.addAttribute("memberlist", memberlist);
+		
+		return "movie/admin";
+	}
+	
+	@PostMapping(path= {"/updateusertype"})
+	@ResponseBody
+	public void updateusertype(memberVO member){
+		memberService.updateuser(member);
+	}
+	
+	@PostMapping(path= {"/deleteuser"})
+	@ResponseBody
+	public void deleteuser(memberVO member) {
+		memberService.deletegenre(member);
+		memberService.deleteuser(member);
 	}
 	
 //	@PostMapping(path= {"/review2"}, produces="application/json;charset=utf-8")

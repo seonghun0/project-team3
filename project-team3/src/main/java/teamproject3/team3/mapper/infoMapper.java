@@ -6,8 +6,10 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import teamproject3.team3.vo.genreVO;
+import teamproject3.team3.vo.jjimVO;
 import teamproject3.team3.vo.movieVO;
 import teamproject3.team3.vo.reviewVO;
+import teamproject3.team3.vo.videoVO;
 
 @Mapper
 public interface infoMapper {
@@ -38,11 +40,13 @@ public interface infoMapper {
 
 	int counttitle(String title);
 
-	int countjjim(reviewVO jjim);
+	int countjjim(jjimVO jjim);
 
-	void addjjim(reviewVO jjim);
+	void addjjim(jjimVO jjim);
 
-	void deletejjim(reviewVO jjim);
+	void deletejjim(jjimVO jjim);
+
+	List<videoVO> findvideo(@Param("movie_id") int movie_id);
 
 	
 }
