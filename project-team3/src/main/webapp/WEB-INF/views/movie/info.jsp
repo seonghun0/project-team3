@@ -353,7 +353,14 @@
 				                <c:forEach var="a" items="${ actor }" varStatus="status">
 				                    <li class="card">
 				                    	<a href="https://www.themoviedb.org/person/${ a.id }">
-				                    		<img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${ a.profile_path }">
+											<c:choose>
+				                    		<c:when test="${ a.profile_path eq null }">
+												<img src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg">			                    		
+				                    		</c:when>
+				                    		<c:otherwise>
+					                    		<img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${ a.profile_path }">
+				                    		</c:otherwise>
+				                    		</c:choose>
 				                    	</a>
 				                      <p><a href="https://www.themoviedb.org/person/${ a.id }">${ a.name }</a></p>
 				                      <p class="character">${ a.role }</p>
@@ -371,7 +378,14 @@
 				                <c:forEach var="c" items="${ crew }" varStatus="status">
 				                    <li class="card">
 				                    	<a href="https://www.themoviedb.org/person/${ c.id }">
-				                    		<img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${ c.profile_path }">
+				                    		<c:choose>
+				                    		<c:when test="${ c.profile_path eq null }">
+												<img src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg">			                    		
+				                    		</c:when>
+				                    		<c:otherwise>
+					                    		<img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${ c.profile_path }">
+				                    		</c:otherwise>
+				                    		</c:choose>
 				                    	</a>
 				                      <p><a href="https://www.themoviedb.org/person/${ c.id }">${ c.name }</a></p>
 				                      <p class="character">${ c.department }</p>
