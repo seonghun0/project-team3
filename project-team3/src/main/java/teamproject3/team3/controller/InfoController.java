@@ -22,6 +22,7 @@ import teamproject3.team3.vo.genreVO;
 import teamproject3.team3.vo.jjimVO;
 import teamproject3.team3.vo.memberVO;
 import teamproject3.team3.vo.movieVO;
+import teamproject3.team3.vo.personVO;
 import teamproject3.team3.vo.reviewVO;
 import teamproject3.team3.vo.videoVO;
 
@@ -58,6 +59,9 @@ public class InfoController {
 		List<movieVO> movieinfo = infoService.getinfo(movie_id);
 		List<reviewVO> list = infoService.findlist(movie_id);
 		List<videoVO> video = infoService.findvideo(movie_id);
+		List<personVO> actor = infoService.findactor(movie_id);
+		List<personVO> crew = infoService.findcrew(movie_id);
+		
 //		System.out.println(video);
 		if (movieinfo == null || movieinfo.size() == 0) {
 			return "redirect:list";
@@ -70,6 +74,8 @@ public class InfoController {
 			model.addAttribute("list",list);
 		}
 		model.addAttribute("movieinfo",movieinfo.get(0));
+		model.addAttribute("crew",crew);
+		model.addAttribute("actor",actor);
 		
 		return "movie/info";
 	}

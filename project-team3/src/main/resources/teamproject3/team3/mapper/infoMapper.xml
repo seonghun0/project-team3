@@ -114,5 +114,21 @@
 		from video
 		where movie_id = '${movie_id}'
 		order by name desc;
-	</select> 
+	</select>
+	
+	<select id="findactor" resultType="personVO">
+		select a.id, a.name, a.profile_path, a.role
+		from actor a
+		join movie m 
+		on (m.movie_id = a.movie_id)
+		where m.movie_id ='${ movie_id }'
+	</select>
+	
+	<select id="findcrew" resultType="personVO">
+		select c.id, c.name, c.profile_path, c.department
+		from crew c
+		join movie m 
+		on (m.movie_id = c.movie_id)
+		where m.movie_id ='${ movie_id }'
+	</select>
 </mapper>

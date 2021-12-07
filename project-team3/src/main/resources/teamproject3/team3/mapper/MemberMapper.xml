@@ -65,6 +65,7 @@
 		from movie
 		where original_language = 'ko'
 		and release_date  &lt; '2021-11-30'
+		and posterpath not like ''
 		order by release_date desc
 		limit 4;
 	</select>

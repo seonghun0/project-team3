@@ -7,6 +7,7 @@ import teamproject3.team3.mapper.infoMapper;
 import teamproject3.team3.vo.genreVO;
 import teamproject3.team3.vo.jjimVO;
 import teamproject3.team3.vo.movieVO;
+import teamproject3.team3.vo.personVO;
 import teamproject3.team3.vo.reviewVO;
 import teamproject3.team3.vo.videoVO;
 
@@ -98,6 +99,16 @@ public class infoServiceImpl implements infoService {
 	@Override
 	public List<videoVO> findvideo(int movie_id) {
 		return infomapper.findvideo(movie_id);
+	}
+
+	@Override
+	public List<personVO> findactor(int movie_id) {
+		return infomapper.findactor(movie_id);
+	}
+
+	@Override
+	public List<personVO> findcrew(int movie_id) {
+		return infomapper.findcrew(movie_id);
 	}
 	
 	

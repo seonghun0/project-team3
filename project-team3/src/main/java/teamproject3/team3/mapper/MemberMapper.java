@@ -10,7 +10,6 @@ import teamproject3.team3.vo.genreVO;
 import teamproject3.team3.vo.jjimVO;
 import teamproject3.team3.vo.memberVO;
 import teamproject3.team3.vo.movieVO;
-import teamproject3.team3.vo.reviewVO;
 
 @Mapper
 public interface MemberMapper {

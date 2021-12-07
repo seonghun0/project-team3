@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import teamproject3.team3.vo.genreVO;
 import teamproject3.team3.vo.jjimVO;
 import teamproject3.team3.vo.movieVO;
+import teamproject3.team3.vo.personVO;
 import teamproject3.team3.vo.reviewVO;
 import teamproject3.team3.vo.videoVO;
 
@@ -47,6 +48,10 @@ public interface infoMapper {
 	void deletejjim(jjimVO jjim);
 
 	List<videoVO> findvideo(@Param("movie_id") int movie_id);
+
+	List<personVO> findactor(@Param("movie_id") int movie_id);
+
+	List<personVO> findcrew(@Param("movie_id") int movie_id);
 
 	
 }

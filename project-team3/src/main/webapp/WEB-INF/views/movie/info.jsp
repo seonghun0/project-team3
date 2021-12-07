@@ -12,6 +12,53 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>Welcome To | Bootstrap Based Admin Template - Material Design</title>
     
+    <style type="text/css">
+    div.scroller_wrap {
+    position: relative;
+    top: 0;
+    left: 0;
+	}
+	ol.people {
+    list-style-type: none;
+    list-style-position: inside;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    position: relative;
+    top: 0;
+    left: 0;
+	}
+	ol.people.scroller {
+    overflow-y: hidden;
+    overflow-x: scroll;
+    margin-left: -10px;
+    margin-top: -10px;
+    padding-bottom: 10px;
+	}
+	li.card {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 4px;
+    border: 1px solid rgba(var(--lightGrey), 1);
+    padding-bottom: 10px;
+    border-radius: var(--imageBorderRadius);
+    overflow: hidden;
+	}
+	ol.people li {
+    min-width: 140px;
+    width: 140px;
+    background-color: #fff;
+    margin-right: 10px;
+	}
+	ol.people li>a {
+    min-width: 138px;
+    width: 138px;
+    height: 175px;
+    display: block;
+	}
+    </style>
+    
     <jsp:include page="/WEB-INF/views/module/css.jsp"></jsp:include>
     
     <style type="text/css">
@@ -298,32 +345,65 @@
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane fade in active" id="home">
-                                <b>Main Content</b>
-                                
-                                
+                                <h3>주요 출연진</h3>
+                                <div class="row clearfix">
+                            
+                            <div id="cast_scroller" class="scroller_wrap should_fade is_fading">
+				                <ol class="people scroller">
+				                <c:forEach var="a" items="${ actor }" varStatus="status">
+				                    <li class="card">
+				                    	<a href="https://www.themoviedb.org/person/${ a.id }">
+				                    		<img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${ a.profile_path }">
+				                    	</a>
+				                      <p><a href="https://www.themoviedb.org/person/${ a.id }">${ a.name }</a></p>
+				                      <p class="character">${ a.role }</p>
+				                    </li>
+				                    </c:forEach>
+				                </ol>
+				                <div class="style_wrapper"></div>
+				              </div>
+				              </div>
+				              <br>
+				              <h3>스태프</h3>
+				              <div class="row clearfix">
+				              <div id="cast_scroller" class="scroller_wrap should_fade is_fading">
+				                <ol class="people scroller">
+				                <c:forEach var="c" items="${ crew }" varStatus="status">
+				                    <li class="card">
+				                    	<a href="https://www.themoviedb.org/person/${ c.id }">
+				                    		<img src="https://www.themoviedb.org/t/p/w138_and_h175_face/${ c.profile_path }">
+				                    	</a>
+				                      <p><a href="https://www.themoviedb.org/person/${ c.id }">${ c.name }</a></p>
+				                      <p class="character">${ c.department }</p>
+				                    </li>
+				                    </c:forEach>
+				                </ol>
+				                <div class="style_wrapper"></div>
+				              </div>
+                            
                             </div>
-                         <div role="tabpanel" class="tab-pane fade" id="media">
-                         <b>media</b>
-                         	<section class="media_panel">
-                         		<div id="media_scroller" class="scroller_wrap should_fade is_fading">
-				                <div class="h_scroller content scroller">  
-				                <c:forEach var="i" items="${ video }" varStatus="status">
-								    <div class="video card no_border">
-								      <div class="wrapper" style="background-image: url('https://i.ytimg.com/vi/${ i.videokey }/hqdefault.jpg');">
-								        <a class="no_click play_trailer" href="https://www.youtube.com/watch?v=${ i.videokey }" target="_blank" data-site="${ i.site }" data-id="${ i.videokey }" data-title="${ i.name }">
-								        	<div class="play_background">
-								        		<span class="glyphicons_v2 play invert svg"></span>
-								        	</div>
-								        </a>
-								      </div>
-								      <span class="name">${ i.name }</span>
-								    </div>
-								     </c:forEach>
-								    </div>
-								</div>
-							</section>
-						</div>
-                           
+                            </div>
+	                         <div role="tabpanel" class="tab-pane fade" id="media">
+	                         <b>media</b>
+	                         	<section class="media_panel">
+	                         		<div id="media_scroller" class="scroller_wrap should_fade is_fading">
+					                <div class="h_scroller content scroller">  
+					                <c:forEach var="i" items="${ video }" varStatus="status">
+									    <div class="video card no_border">
+									      <div class="wrapper" style="background-image: url('https://i.ytimg.com/vi/${ i.videokey }/hqdefault.jpg');">
+									        <a class="no_click play_trailer" href="https://www.youtube.com/watch?v=${ i.videokey }" target="_blank" data-site="${ i.site }" data-id="${ i.videokey }" data-title="${ i.name }">
+									        	<div class="play_background">
+									        		<span class="glyphicons_v2 play invert svg"></span>
+												</div>
+									        </a>
+									      </div>
+									      <span class="name">${ i.name }</span>
+									    </div>
+									     </c:forEach>
+									    </div>
+									</div>
+								</section>
+							</div>
                             <div role="tabpanel" class="tab-pane fade" id="review">
                             <b>REVIEW</b>
                             	<div class="row clearfix">
@@ -393,7 +473,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
 		</div>
 		<input type="hidden" value="${ movieinfo.movie_id }" id="movieid">
             <!-- #END# Example Tab -->

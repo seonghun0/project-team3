@@ -1,7 +1,5 @@
 package teamproject3.team3.vo;
 
-import java.util.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,11 +9,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ticketingVO {
-	
-	private int movie_id;
-	private int reserve_rate;
-	private String title;
-	private String posterpath;
-	
+public class personVO {
+
+	private int id;
+	private String name;
+	private String profile_path;
+	private String role;
+	private String department;
 }
