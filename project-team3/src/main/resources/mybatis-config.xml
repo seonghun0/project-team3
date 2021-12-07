@@ -11,6 +11,7 @@
 	-->
 	<typeAliases>
 		<typeAlias type="teamproject3.team3.vo.BoardVO" alias="BoardVO" />
+		<typeAlias type="teamproject3.team3.vo.BoardAttachVO" alias="BoardAttachVO" />
 		<typeAlias type="teamproject3.team3.vo.genreVO" alias= "genreVO"/>
 		<typeAlias type="teamproject3.team3.vo.MemberGenreVO" alias= "MemberGenreVO"/>
 		<typeAlias type="teamproject3.team3.vo.memberVO" alias= "memberVO"/>

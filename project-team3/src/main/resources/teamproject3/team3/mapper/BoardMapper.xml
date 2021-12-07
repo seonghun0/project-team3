@@ -6,9 +6,10 @@
 
 <mapper namespace="teamproject3.team3.mapper.BoardMapper">
 
-	<insert id="insertBoard" parameterType="BoardVO">
-	INSERT INTO BOARD (title, CONTENT) 
-	VALUES (#{ title }, #{ content })
+	<insert id="insertBoard" parameterType="BoardVO"
+			useGeneratedKeys="true" keyProperty="boardNo" keyColumn="boardno">
+	INSERT INTO BOARD (title, member_id, CONTENT) 
+	VALUES (#{ title }, #{ member_id}, #{ content })
 	</insert>
 	
 	<select id="selectAll" resultType="BoardVO">
@@ -17,10 +18,22 @@
 	ORDER BY BOARDNO DESC
 	</select>
 	
-	<select id="selectBoardByBoardNo" parameterType="int" resultType="BoardVO">
-	SELECT BOARDNO, TITLE, CONTENT, MEMBER_ID, READCOUNT, REGDATE 
-	FROM BOARD
-	WHERE BOARDNO = #{ boardNo } AND DELETED = false 
+	<resultMap id="boardResultMap" type="BoardVO">
+		<id column="BOARDNO" property="boardNo" />
+		<result column="TITLE" property="title" />
+		<result column="CONTENT" property="content" />
+		<result column="MEMBER_ID" property="member_id" />
+		<result column="READCOUNT" property="readCount" />
+		<result column="REGDATE" property="regDate" />
+		<collection property="attachments" column="BOARDNO" resultMap="boardAttachResultMap" />
+	</resultMap>
+	
+	<select id="selectBoardByBoardNo" parameterType="int" resultMap="boardResultMap">
+	SELECT B.BOARDNO, B.TITLE, B.CONTENT, B.member_id member_id, B.READCOUNT, B.REGDATE, BA.ATTACHNO, BA.SAVEDFILENAME, BA.USERFILENAME 
+	FROM BOARD B
+	LEFT OUTER JOIN BOARDATTACH BA
+	ON B.BOARDNO = BA.BOARDNO
+	WHERE B.BOARDNO = #{ boardNo } AND B.DELETED = false 
 	</select>
 	
 	<update id="updateBoardDeleted" parameterType="int">
@@ -41,6 +54,28 @@
 	WHERE BOARDNO = #{ boardNo }
 	</update>
 
+	<insert id="insertBoardAttach" parameterType="BoardAttachVO">
+	INSERT INTO BOARDATTACH (BOARDNO, SAVEDFILENAME, USERFILENAME)
+	VALUES (#{ boardNo }, #{ savedFileName }, #{ userFileName })
+	</insert>
+	
+	<resultMap id="boardAttachResultMap" type="BoardAttachVO">
+		<id column="ATTACHNO" property="attachNo" />
+		<result column="BOARDNO" property="boardNo" />
+		<result column="SAVEDFILENAME" property="savedFileName" />
+		<result column="USERFILENAME" property="userFileName" />
+	</resultMap>
+	<select id="selectBoardAttachByBoardNo" parameterType="int" resultType="BoardAttachVO">
+	SELECT ATTACHNO, BOARDNO, SAVEDFILENAME, USERFILENAME
+	FROM BOARDATTACH
+	WHERE BOARDNO = #{ BOARDNO }
+	</select>
+	
+	<select id="selectBoardAttachByAttachNo" parameterType="int" resultType="BoardAttachVO">
+	SELECT ATTACHNO, BOARDNO, SAVEDFILENAME, USERFILENAME
+	FROM BOARDATTACH
+	WHERE ATTACHNO = #{ attachNo }
+	</select>
 	
 	
 </mapper>

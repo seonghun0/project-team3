@@ -1,6 +1,7 @@
 package teamproject3.team3.vo;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -15,4 +16,5 @@ public class BoardVO {
 	private boolean deleted;
 	private Date regDate;
 	
+	private List<BoardAttachVO> attachments;
 }

@@ -10,10 +10,23 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>board</title>
     
+ 
+    
     <jsp:include page="/WEB-INF/views/module/css.jsp"></jsp:include>
 </head>
 
 <body>
+
+
+
+
+
+
+
+
+
+
+
 <body class="theme-red">
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
@@ -46,18 +59,20 @@
     <!-- #END# Search Bar -->
     <jsp:include page="/WEB-INF/views/module/topbar.jsp"></jsp:include>
 
-  	<section style="padding-top: 100px; width: 1500px; margin-left: auto; margin-right: auto">
+  	<section style="padding-top: 100px; width: 1500px; margin-left: auto; margin-right: auto;">
                 
                 
                 
                <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
+                    <div class="card" >
                         <div class="header">
                             <h2 style="display: inline-block;">
                                 BASIC EXAMPLE
                             </h2>
+                            <c:if test="${sessionScope.loginuser != null }">
                             <a href="/mrp/board/write"><button type="button" class="btn btn-success waves-effect" style="float: right">글쓰기</button></a>
+                        	</c:if>
                         </div>
                         <div class="body">
                             <div class="table-responsive">
@@ -114,10 +129,12 @@
                 </div>
             </div>
                 
-                
+            
                 
     </section>            
       
+      
+    
 
     <jsp:include page="/WEB-INF/views/module/js.jsp"></jsp:include>
     

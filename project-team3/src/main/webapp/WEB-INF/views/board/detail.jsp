@@ -53,59 +53,80 @@
                <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
-                        <div class="header">
-                            <h2 style="display: inline-block;">
+                        <div class="header" >
+                            <h2 style="display: inline-block; font-weight:bold; font-size:30px">
                                 글 상세 보기
                             </h2>
+                          
                             	<!-- <button id ="write-button" class="btn btn-success waves-effect" style="float: right">글쓰기</button> -->
+                            <c:if test="${ sessionScope.loginuser.memberId == board.member_id }">
+								<button id="delete-button" type="button" class="btn btn-success waves-effect" style="float: right; margin-right: 10px">삭제</button>
+								<button id="edit-button" type="button" class="btn btn-success waves-effect" style="float: right; margin-right: 10px">수정</button>
+							</c:if>
                             	<button id ="tolist-button" class="btn btn-success waves-effect" style="float: right; margin-right: 10px">목록보기</button>
                         </div>
                         <div class="body">
-                            <form id="board-write-form" action="write" method="post">
+                           
                              	<div class="form-group">
-                             		<label>제목</label>
-                             		<input type="text" class="form-control" name="title" id="title" value="${ board.title }" style="border: 1px solid lightgray; border-radius:10px">
+                             		<label style="font-size:15px; font-weight:bold">제목</label>
+                             		<input type="text" class="form-control" name="title" id="title" value="${ board.title }">
                              	</div>
-                             	<!-- <div class="form-group">
-                             		<label>작성자</label>
-                             		<input type="text" class="form-control" name="member_id" style="border: 1px solid lightgray; border-radius:10px">
-                             	</div> -->
+                             	<hr>
                              	<div class="form-group">
-                             		<label>내용</label>
-                             		<textarea class="form-control" name="content" rows="23" id="contentarea" style="border: 1px solid lightgray; border-radius:10px">${ board.content }</textarea>
-                             	</div>
-                             	<div class="form-group">
-									<label>조회수</label> 
-									<input class="form-control" id='readCount' value="${ board.readCount }" style="border: 1px solid lightgray; border-radius:10px; width: 60px">
+									<label style="font-size:15px; font-weight:bold">작성자</label> 
+									<input class="form-control" id='memberId'	name='memberId' value="${ board.member_id }">
 								</div>
-                             	
-                             </form>	
+								<hr>
+                             	<div class="form-group">
+                             		<label style="font-size:15px; font-weight:bold">내용</label>
+                             		<textarea class="form-control" name="content" id="contentarea">${ board.content }</textarea>
+                             	</div>
+                             	<hr>
+                             	<div class="form-group">
+									<label style="font-size:15px; font-weight:bold">조회수</label> 
+									<input class="form-control" id='readCount' value="${ board.readCount }">
+								</div>
+								<hr>
+								<div class="form-group">
+								<label style="font-size:15px; font-weight:bold">첨부파일</label>
+								<c:forEach var="attachment" items="${ board.attachments }"> 
+								<br>
+								<a id='attachment' href="download?attachNo=${ attachment.attachNo }">${ attachment.userFileName }</a>
+								</c:forEach>
+							</div>
+							
+						
+						
+                          
                         </div>
                     </div>
                 </div>
             </div>
-                
-                
-                
+            
     </section>            
       
 
     <jsp:include page="/WEB-INF/views/module/js.jsp"></jsp:include>
     <script type="text/javascript">
-	$(function() { // jQuery의 main 함수 역할 ( 시작점 )
+    $(function() {
+    	$(".form-group input, .form-group textarea").attr('readonly', true);
+    	
+    	$('#edit-button').on('click', function(event) {
+    		location.href = "edit?boardNo=${ board.boardNo }";
+    	});
+    	
+		$('#delete-button').on('click', function(event) {
+			var yes = confirm('${ board.boardNo }번 게시글을 삭제하겠습니까?');
+			if (yes) {
+    			location.href = "delete?boardNo=${ board.boardNo }";
+			}
+    	});
 		
-		
-	
-	
 		$('#tolist-button').on('click', function(event) {
-			event.preventDefault();		// 이벤트를 발생시킨 객체의 기본 동작 ( 다른페이지로 이동 등 ) 의 수행을 차단
-			event.stopPropagation();	// 상위 객체로 이벤트 전달 차단
-			
-			location.href = "boardmain";
-			
-		});
+    		location.href = "boardmain";
+    	});		
 		
-	});
+    });
 	</script>
 </body>
 </html>

@@ -53,75 +53,75 @@
                <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
-                        <div class="header">
+                        <div class="header" >
                             <h2 style="display: inline-block; font-weight:bold; font-size:30px">
-                                글쓰기
+                                글 수정
                             </h2>
-                            	<button id ="write-button" class="btn btn-success waves-effect" style="float: right">글쓰기</button>
+                          
+                            	<!-- <button id ="write-button" class="btn btn-success waves-effect" style="float: right">글쓰기</button> -->
                             	<button id ="tolist-button" class="btn btn-success waves-effect" style="float: right; margin-right: 10px">목록보기</button>
+                            	<button id="update-button" type="button" class="btn btn-success waves-effect" style="float: right; margin-right: 10px">수정</button>
+								<button id="cancel-button" type="button" class="btn btn-success" style="float: right; margin-right: 10px">취소</button>
                         </div>
                         <div class="body">
-                            <form id="board-write-form" action="write" method="post" enctype="multipart/form-data">
+                           	<form id="update-form" role="form" action="update" method="post">
+                           	<input type="hidden" name="boardNo" value="${ board.boardNo }">
+                           	
                              	<div class="form-group">
-                             		<label>제목</label>
-                             		<input type="text" class="form-control" name="title" id="title" style="border: 1px solid lightgray; border-radius:10px">
+                             		<label style="font-size:15px; font-weight:bold">제목</label>
+                             		<input type="text" class="form-control" name="title" id="title" value="${ board.title }">
                              	</div>
-                       
+                             	<hr>
+                             
                              	<div class="form-group">
-                             		<label>첨부파일</label>
-                             		<input type="file" class="form-control" name="attachment">
+                             		<label style="font-size:15px; font-weight:bold">내용</label>
+                             		<textarea class="form-control" name="content" id="contentarea">${ board.content }</textarea>
                              	</div>
+                             	<hr>
                              	<div class="form-group">
-                             		<label>내용</label>
-                             		<textarea class="form-control" name="content" rows="23" id="contentarea" style="border: 1px solid lightgray; border-radius:10px"></textarea>
-                             	</div>
-                             	
-                             	
-                             </form>	
+									<label style="font-size:15px; font-weight:bold">조회수</label> 
+									<input class="form-control" id='readCount' value="${ board.readCount }">
+								</div>
+								<hr>
+								<div class="form-group">
+								<label style="font-size:15px; font-weight:bold">첨부파일</label>
+								<c:forEach var="attachment" items="${ board.attachments }"> 
+								<br>
+								<a id='attachment' href="download?attachNo=${ attachment.attachNo }">${ attachment.userFileName }</a>
+								</c:forEach>
+							</div>
+							
+							
+							
+							
+						</form>
+                          
                         </div>
                     </div>
                 </div>
             </div>
                 
-                
+              
                 
     </section>            
       
 
     <jsp:include page="/WEB-INF/views/module/js.jsp"></jsp:include>
     <script type="text/javascript">
-	$(function() { // jQuery의 main 함수 역할 ( 시작점 )
-		
-		$('#write-button').on('click', function(event) {
-			event.preventDefault();		// 이벤트를 발생시킨 객체의 기본 동작 ( 다른페이지로 이동 등 ) 의 수행을 차단
-			event.stopPropagation();	// 상위 객체로 이벤트 전달 차단
+    $(function() {
+		$('#update-button').on('click', function(event) {
 			
-			// 입력 데이터의 유효성 검사 등 처리
-
-			var content = $('#contentarea').val();
-			// 입력 데이터의 유효성 검사 등 처리
-			if(title == ""){
-				alert("제목을 입력하세요");
-				return;
-			}
-			if(content== null || content == ""){
-				alert("내용을 입력하세요");
-				return;
-			} 
-			
-			$("#board-write-form").submit(); // form을 서버로 전송
+			// 필요한 경우 입력 데이터 유효성 검사 수행
+			// <form id="update-form" ...> ... </form> 요소를 서버로 전송
+			$('#update-form').submit();
 			
 		});
-	
-	
+		$('#cancel-button').on('click', function(event) {
+			location.href = "detail?boardNo=${ board.boardNo }";
+		});
 		$('#tolist-button').on('click', function(event) {
-			event.preventDefault();		// 이벤트를 발생시킨 객체의 기본 동작 ( 다른페이지로 이동 등 ) 의 수행을 차단
-			event.stopPropagation();	// 상위 객체로 이벤트 전달 차단
-			
 			location.href = "boardmain";
-			
 		});
-		
 	});
 	</script>
 </body>

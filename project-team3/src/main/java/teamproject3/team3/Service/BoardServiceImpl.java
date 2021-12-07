@@ -2,6 +2,8 @@ package teamproject3.team3.Service;
 
 import java.util.List;
 
+import teamproject3.team3.vo.BoardAttachVO;
+
 import teamproject3.team3.mapper.BoardMapper;
 import teamproject3.team3.vo.BoardVO;
 
@@ -11,6 +13,25 @@ public class BoardServiceImpl implements BoardService{
 	
 	@Setter
 	private BoardMapper boardMapper;
+	
+	@Override
+	public int writeBoard(BoardVO board) {
+		
+		// board.boardNo ==> null
+		
+		//boardDao.insertBoard(board);		
+		boardMapper.insertBoard(board); // Board 테이블에 데이터 저장 ( 데이터베이스에 새 boardNo 생성 )
+		
+		// 데이터베이스에 만들어진 boardNo를 조회하는 작업 필요 (mybaits가 자동으로 처리, useGeneratedKeys=true, ... )
+		// board.boardNo ==> 새로 생성된 boardNo
+		
+		for (BoardAttachVO attachment : board.getAttachments()) {
+			attachment.setBoardNo(board.getBoardNo());
+			boardMapper.insertBoardAttach(attachment); // BoardAttach 테이블에 데이터 저장
+		}
+				
+		return 0;
+	}
 	
 	@Override
 	public List<BoardVO> findAll() {
@@ -39,11 +60,12 @@ public class BoardServiceImpl implements BoardService{
 	public void updateBoard(BoardVO board) {
 		boardMapper.updateBoard(board);
 	}
-
+	
 	@Override
-	public void writeBoard(String title, String member_id, String content) {
-		boardMapper.insertBoard(title, member_id, content);
-		
+	public BoardAttachVO findBoardAttachByAttachNo(int attachNo) {
+		return boardMapper.selectBoardAttachByAttachNo(attachNo);
 	}
+
+
 
 }

@@ -99,6 +99,19 @@
 		</dependency>
 
 		<!-- end of spring mybatis library -->
+		
+		<!-- File Upload Library -->
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>1.4</version>
+		</dependency>		
+		<dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>2.6</version>
+		</dependency>
+		<!-- end of file upload library -->
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
