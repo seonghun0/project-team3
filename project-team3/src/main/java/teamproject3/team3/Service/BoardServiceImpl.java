@@ -24,10 +24,11 @@ public class BoardServiceImpl implements BoardService{
 		
 		// 데이터베이스에 만들어진 boardNo를 조회하는 작업 필요 (mybaits가 자동으로 처리, useGeneratedKeys=true, ... )
 		// board.boardNo ==> 새로 생성된 boardNo
-		
-		for (BoardAttachVO attachment : board.getAttachments()) {
-			attachment.setBoardNo(board.getBoardNo());
-			boardMapper.insertBoardAttach(attachment); // BoardAttach 테이블에 데이터 저장
+		if (board.getAttachments() != null) {
+			for (BoardAttachVO attachment : board.getAttachments()) {
+				attachment.setBoardNo(board.getBoardNo());
+				boardMapper.insertBoardAttach(attachment); // BoardAttach 테이블에 데이터 저장
+			}
 		}
 				
 		return 0;
