@@ -98,7 +98,7 @@
 							<a href="info?movie_id=${ i.movie_id }" data-sub-html="Demo Description">
 								<img class="img-responsive thumbnail" src="https://www.themoviedb.org/t/p/w440_and_h660_face/${ i.posterpath }">
 					   		</a>
-					   		${ i.title }
+					   		<h5> ${ i.title } </h5>
 						</div>
 					</c:forEach>
 				</div>
@@ -189,7 +189,7 @@
 		   $('#aniimated-thumbnials').children().remove();
 		   $.each(data, function(i, item){
  				//alert(item.movie_id)
- 				var addcontent = '<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12"><a href="info?movie_id='+item.movie_id+'" data-sub-html="Demo Description"><img class="img-responsive thumbnail" src="https://www.themoviedb.org/t/p/w440_and_h660_face/'+item.posterpath+'"></a>'+item.title+'</div>'
+ 				var addcontent = '<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12"><a href="info?movie_id='+item.movie_id+'" data-sub-html="Demo Description"><img class="img-responsive thumbnail" src="https://www.themoviedb.org/t/p/w440_and_h660_face/'+item.posterpath+'"></a><h5>'+item.title+'</h5></div>'
  				//div에 추가되는 콘텐츠를 append	
  				$('#aniimated-thumbnials').append(addcontent);
  			})

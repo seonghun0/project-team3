@@ -54,13 +54,28 @@ public class InfoController {
 	}
 	
 	@GetMapping(path = { "/info" })
-	public String showmovieinfoForm(int movie_id, Model model) {
+	public String showmovieinfoForm(jjimVO jjim ,int movie_id, Model model, HttpSession session) {
 		
 		List<movieVO> movieinfo = infoService.getinfo(movie_id);
+		List<genreVO> moviegenre = infoService.moviegenre(movie_id);
 		List<reviewVO> list = infoService.findlist(movie_id);
 		List<videoVO> video = infoService.findvideo(movie_id);
 		List<personVO> actor = infoService.findactor(movie_id);
 		List<personVO> crew = infoService.findcrew(movie_id);
+		
+		if ((memberVO)session.getAttribute("loginuser") != null) {
+			
+			memberVO s = (memberVO)session.getAttribute("loginuser");
+			
+			jjim.setMember_id(s.getMemberId());
+			jjim.setMovie_id(movie_id);
+			
+			int count = infoService.countjjim(jjim);
+			
+			if(count == 1) {
+				model.addAttribute("count", count);
+			}
+		}
 		
 //		System.out.println(video);
 		if (movieinfo == null || movieinfo.size() == 0) {
@@ -73,7 +88,9 @@ public class InfoController {
 		if (list != null) {
 			model.addAttribute("list",list);
 		}
+		
 		model.addAttribute("movieinfo",movieinfo.get(0));
+		model.addAttribute("moviegenre",moviegenre);
 		model.addAttribute("crew",crew);
 		model.addAttribute("actor",actor);
 		

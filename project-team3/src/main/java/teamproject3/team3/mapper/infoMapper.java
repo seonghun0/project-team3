@@ -53,5 +53,6 @@ public interface infoMapper {
 
 	List<personVO> findcrew(@Param("movie_id") int movie_id);
 
+	List<genreVO> moviegenre(int movie_id);
 	
 }

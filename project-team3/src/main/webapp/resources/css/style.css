@@ -1,5 +1,9 @@
 ﻿/* Navbar ====================================== */
 @import url(materialize.css);
+
+   body.theme-red{
+    	background-color: #fff;
+    }
 .navbar {
   font-family: "Roboto", sans-serif;
   -webkit-border-radius: 0;

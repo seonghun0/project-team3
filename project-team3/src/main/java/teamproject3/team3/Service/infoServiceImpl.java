@@ -110,6 +110,11 @@ public class infoServiceImpl implements infoService {
 	public List<personVO> findcrew(int movie_id) {
 		return infomapper.findcrew(movie_id);
 	}
-	
+
+	@Override
+	public List<genreVO> moviegenre(int movie_id) {
+		return infomapper.moviegenre(movie_id);
+	}
+
 	
 }

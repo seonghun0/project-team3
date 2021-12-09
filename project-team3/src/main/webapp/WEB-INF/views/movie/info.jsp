@@ -13,43 +13,45 @@
     <title>Welcome To | Bootstrap Based Admin Template - Material Design</title>
     
     <style type="text/css">
+    
     div.scroller_wrap {
-    position: relative;
-    top: 0;
-    left: 0;
+	    position: relative;
+	    top: 0;
+	    left: 0;
 	}
 	ol.people {
-    list-style-type: none;
-    list-style-position: inside;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    position: relative;
-    top: 0;
-    left: 0;
+	    list-style-type: none;
+	    list-style-position: inside;
+	    margin: 0;
+	    padding: 0;
+	    display: flex;
+	    position: relative;
+	    top: 0;
+	    left: 0;
 	}
 	ol.people.scroller {
-    overflow-y: hidden;
-    overflow-x: scroll;
-    margin-left: -10px;
-    margin-top: -10px;
-    padding-bottom: 10px;
+	    overflow-y: hidden;
+	    overflow-x: scroll;
+	    margin-left: -10px;
+	    margin-top: -10px;
+	    padding-bottom: 10px;
 	}
 	li.card {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: 10px;
-    margin-right: 4px;
-    border: 1px solid rgba(var(--lightGrey), 1);
-    padding-bottom: 10px;
-    border-radius: var(--imageBorderRadius);
-    overflow: hidden;
+	    margin-top: 10px;
+	    margin-bottom: 10px;
+	    margin-left: 10px;
+	    margin-right: 4px;
+	    border: 1px solid rgba(var(--lightGrey), 1);
+	    padding-bottom: 10px;
+	    border-radius: var(--imageBorderRadius);
+	    overflow: hidden;
 	}
 	ol.people li {
-    min-width: 140px;
-    width: 140px;
+    min-width: 138px;
+    width: 138px;
     background-color: #fff;
     margin-right: 10px;
+    height: 250px;
 	}
 	ol.people li>a {
     min-width: 138px;
@@ -62,6 +64,8 @@
     <jsp:include page="/WEB-INF/views/module/css.jsp"></jsp:include>
     
     <style type="text/css">
+    
+    
     
     section.content{
     	margin:87px 150px 0 150px;
@@ -153,6 +157,9 @@
 	[type="radio"].with-gap:checked + label:after,[type="radio"]:checked + label:before  {
 		border: 0;
 		background-color: rgba(255,255,255,0);
+	}
+	[type="radio"]:not(:checked) + label, [type="radio"]:checked + label {
+		transition:none;
 	}
 	section.medei_panel{
 		width: 100%;
@@ -272,13 +279,29 @@
 	            <div class="col-lg-8">
 		            <div class="content">
 			            <div class="row clearfix">
-			            	<div class="col-md-6">
+			            	<div class="col-md-10">
 	                            <div class="form-group">
 	                                <div class="form-line">
 	                                	<h1> ${ movieinfo.title }</h1>
-	                                	<h4>(${ movieinfo.subtitle })</h4>
+	                                	<div class="row">
+	                                	<div class="col-md-4">
+	                                	<h5>(${ movieinfo.subtitle })</h5>
+	                                	</div>
+	                                	<div class="col-md-8">
+		                                	<h5>
+		                                	장르 : 
+		                                	<c:forEach var="i" items="${ moviegenre }">
+											${i.genrename }.
+											</c:forEach>
+											</h5>
+											<h5> 개봉일 : ${ movieinfo.release_date }</h5>
+										</div>
+										</div>
 	                                </div>
 	                                <div class="row">
+	                                <div class="col-md-2 star-ratings">
+										${ movieinfo.vote_average }
+										</div>
 	                                <div class="col-md-5">
 	                                <div class="star-ratings">
 										<div class="star-ratings-fill" style="width: ${ movieinfo.vote_average * 10 }%">
@@ -300,10 +323,7 @@
 										   <span value="5">★</span>
 										</div>
 										</div>
-										</div>
-										<div class="col-md-3 star-ratings">
-										${ movieinfo.vote_average }
-										</div>
+										</div>	
 									</div>
 	                            </div>
 	                        </div>
@@ -313,7 +333,20 @@
 	                            <div class="form-group">
 	                                <div class="form-line">
 	                                	<button type="button" class="btn btn-default btn-circle waves-effect waves-circle waves-float" id="like">
+											<c:choose>
+											<c:when test="${ count != '1' }">
 		                                    <i class="material-icons">favorite_border</i>
+		                                    </c:when>
+		                                    <c:otherwise>
+		                                    <i class="material-icons">favorite</i>
+		                                    </c:otherwise>
+		                                    </c:choose>
+		                                </button>
+		                                <button type="button" class="btn btn-success waves-effect" id="naversearch">
+		                                	네이버 검색결과 보기
+		                                </button>
+		                                <button type="button" class="btn btn-danger waves-effect" id="watchasearch">
+		                                	왓챠피디아 검색결과 보기
 		                                </button>
 	                                </div>
 	                            </div>
@@ -323,7 +356,7 @@
 				            <div class="col-md-12">
 	                            <div class="form-group">
 	                                <div class="form-line">
-	                                	<h3>${ movieinfo.overview }</h3>
+	                                	<h4>${ movieinfo.overview }</h4>
 	                                </div>
 	                            </div>
 	                        </div>
@@ -498,6 +531,15 @@
     var login_user_id = '${ sessionScope.loginuser.memberId }';
     var movie_id = $('#movieid').val();
     $(function(){
+    	
+    	$('#naversearch').click(function(){
+    		var search = '${ movieinfo.title }';
+    		location.href = 'https://movie.naver.com/movie/search/result.naver?query='+ search +'&section=all&ie=utf8';
+    	})
+    	$('#watchasearch').click(function(){
+    		var search = '${ movieinfo.title }';
+    		location.href ='https://pedia.watcha.com/ko-KR/search?query='+ search +'&category=contents';
+    	})
     	
     	$('#like').click(function(){
     		

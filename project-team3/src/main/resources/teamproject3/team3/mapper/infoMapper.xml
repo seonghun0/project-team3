@@ -10,6 +10,14 @@
 		select genre_id genreid, name genrename from genre
 	</select>
 	
+	<select id="moviegenre" resultType="genreVO">
+		select g.genre_id genreid, name genrename 
+		from genre g
+		join movie_genre mg
+		on (g.genre_id = mg.genre_id)
+		where movie_id = #{ movie_id }
+	</select>
+	
 	<select id="findmovie" resultType="movieVO">
 		select title, posterpath, movie_id
 		from movie
@@ -19,7 +27,7 @@
 	</select>
 	
 	<select id="findinfo" parameterType="int" resultType="movieVO">
-		select *
+		select * 
 		from movie
 		where movie_id = "${ movie_id }"
 	</select>
@@ -130,5 +138,12 @@
 		join movie m 
 		on (m.movie_id = c.movie_id)
 		where m.movie_id ='${ movie_id }'
+	</select>
+	
+	<select id="findjjim" resultType="int">
+		select count(*)
+		from jjim
+		where movie_id = '${ movie_id }'
+		and member_id = '${ memberId }'
 	</select>
 </mapper>

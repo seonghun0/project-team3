@@ -49,4 +49,6 @@ public interface infoService {
 
 	List<personVO> findcrew(int movie_id);
 
+	List<genreVO> moviegenre(int movie_id);
+
 }

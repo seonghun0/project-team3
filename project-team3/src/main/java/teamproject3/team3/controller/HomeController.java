@@ -32,11 +32,13 @@ public class HomeController {
 		
 		List<movieVO> movie  = memberService.findtop10();
 		List<movieVO> popmovie  = memberService.findpop();
+		List<movieVO> now = memberService.findnow();
 		
 		List<movieVO> prmovie = memberService.prmovie();
 		
+		model.addAttribute("now",now);
 		model.addAttribute("prmovie",prmovie);
-		model.addAttribute("top10", movie);
+		model.addAttribute("top", movie);
 		model.addAttribute("pop",popmovie);
 		
 		return "home";

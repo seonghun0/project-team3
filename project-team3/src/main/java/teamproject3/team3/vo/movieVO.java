@@ -15,7 +15,7 @@ public class movieVO {
 	private String title;
 	private String subtitle;
 	private String language;
-	private String releasedate;
+	private String release_date;
 	private String overview;
 	private String vote_average;
 	private String posterpath;

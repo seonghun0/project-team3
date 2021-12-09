@@ -159,20 +159,21 @@
                     </div>
                 </div>
             </div>
+            </div>
             <!-- #END# CPU Usage -->
             <div class="block-header">
-                <h2>평점 TOP 10</h2>
+                <h2>현재 상영중인 영화</h2>
             </div>
             <!-- Widgets -->
             <div class="row clearfix">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			        <div class="owl-carousel owl-theme">
-			            <c:forEach var="top10" items="${ top10 }">
+			            <c:forEach var="t" items="${ now }">
 			            <div class="item">
 			            	<div class="textoverlay">
-			            	<a href="movie/info?movie_id=${ top10.movie_id }">
-			                <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/${ top10.posterpath }">
-			                <span class="text">${ top10.vote_average }</span> 
+			            	<a href="movie/info?movie_id=${ t.movie_id }">
+			                <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/${ t.posterpath }">
+			                <span class="text">${ t.vote_average }</span> 
 			                </a>
 			                </div>
 			            </div>
@@ -183,7 +184,7 @@
             <!-- #END# Widgets -->
             <br>
             <div class="block-header">
-                <h2>최고의 인기작</h2>
+                <h2>인기 영화</h2>
             </div>
             <!-- Widgets -->
             <div class="row clearfix">
@@ -199,6 +200,27 @@
 				</div>
             </div>
             <!-- #END# Widgets -->
+            <br>
+            <div class="block-header">
+                <h2>평점 높은 영화</h2>
+            </div>
+            <!-- Widgets -->
+            <div class="row clearfix">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			        <div class="owl-carousel owl-theme">
+			            <c:forEach var="t" items="${ top }">
+			            <div class="item">
+			            	<div class="textoverlay">
+			            	<a href="movie/info?movie_id=${ t.movie_id }">
+			                <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/${ t.posterpath }">
+			                <span class="text">${ t.vote_average }</span> 
+			                </a>
+			                </div>
+			            </div>
+			            </c:forEach>
+			        </div>
+				</div>
+            </div>
 			</div>
             
     </section>

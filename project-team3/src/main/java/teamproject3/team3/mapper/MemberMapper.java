@@ -51,5 +51,7 @@ public interface MemberMapper {
 
 	void deletegenre(memberVO member);
 
+	List<movieVO> findnow();
+
 	
 }

@@ -42,5 +42,7 @@ public interface MemberService {
 
 	void deletegenre(memberVO member);
 
+	List<movieVO> findnow();
+
 
 }

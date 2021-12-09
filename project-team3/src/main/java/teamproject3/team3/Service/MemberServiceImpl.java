@@ -116,4 +116,9 @@ public class MemberServiceImpl implements MemberService {
 	public void deletegenre(memberVO member) {
 		memberMapper.deletegenre(member);
 	}
+
+	@Override
+	public List<movieVO> findnow() {
+		return memberMapper.findnow();
+	}
 }
