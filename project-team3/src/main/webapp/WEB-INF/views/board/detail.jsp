@@ -104,6 +104,28 @@
             </div>
             
     </section>            
+    
+    <section style="width: 1500px; margin-left: auto; margin-right: auto">
+    
+    <div class="row_comment">
+    
+    <div>
+    	<h3>댓글</h3>
+    </div>
+    <div>
+    	<textarea rows="4" class="form-control no-resize" placeholder="Please type what you want..."></textarea>
+    	<button type="button" class="btn btn-block btn-lg btn-default waves-effect">입력하기</button>
+    </div>
+    
+    <div>
+    	<table>
+    		
+    	</table>
+    </div>
+    
+    </div><!-- row_comment -->
+    
+    </section>
       
 
     <jsp:include page="/WEB-INF/views/module/js.jsp"></jsp:include>

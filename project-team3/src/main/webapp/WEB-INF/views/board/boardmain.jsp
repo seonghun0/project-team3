@@ -68,7 +68,7 @@
                     <div class="card" >
                         <div class="header">
                             <h2 style="display: inline-block;">
-                                BASIC EXAMPLE
+                                게시판
                             </h2>
                             <c:if test="${sessionScope.loginuser != null }">
                             <a href="/mrp/board/write"><button type="button" class="btn btn-success waves-effect" style="float: right">글쓰기</button></a>
