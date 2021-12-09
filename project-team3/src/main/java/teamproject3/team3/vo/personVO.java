@@ -1,7 +1,5 @@
 package teamproject3.team3.vo;
 
-import java.util.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,12 +9,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class memberVO {
-	
-	private String memberId;
-	private String gender;
-	private String usertype;
-	private Date birth_date;
-	private Date join_date;
-	
+public class personVO {
+
+	private int id;
+	private String name;
+	private String profile_path;
+	private String role;
+	private String department;
 }

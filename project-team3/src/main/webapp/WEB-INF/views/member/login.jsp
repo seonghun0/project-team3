@@ -83,40 +83,47 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     
 	<script type="text/javascript">
+	
+	$(function() {
+		
+		 $("#passwd").keyup(function(e){if(e.keyCode == 13)
+	    		login();
+	    	});
 		
 		$("#login_button").click(function(){
-			
-			var memberId = $("input[name=memberId]").val()
-			var passwd = $("input[name=passwd]").val()
-			
-			$.ajax({
-				type:'post',
-				url:'./passwdcheck',
-				data : {
-						memberId : memberId,
-						passwd : passwd
-						}
-			})
-			.done(function(data){
-				if(data==1){
-					$("#login").submit()		;
-				} else{
-					alert("아이디 또는 비밀번호가 다릅니다.");
-					return;
-				}
-			})
-			.fail(function(data,textStatus,error){
-				alert("code:"+data.status+"\n"+"message:"+data.responseText+"\n"+"error:"+error);
-				alert('error');
-			})
-				
-			
+				login();			
 		});
 	
 		$('#join_button').click(function(){
 			location.href = '/mrp/member/join';
 		});
+	});
+	
+	function login(){
+		var memberId = $("input[name=memberId]").val()
+		var passwd = $("input[name=passwd]").val()
 		
+		$.ajax({
+			type:'post',
+			url:'./passwdcheck',
+			data : {
+					memberId : memberId,
+					passwd : passwd
+					}
+		})
+		.done(function(data){
+			if(data==1){
+				$("#login").submit()		;
+			} else{
+				alert("아이디 또는 비밀번호가 다릅니다.");
+				return;
+			}
+		})
+		.fail(function(data,textStatus,error){
+			alert("code:"+data.status+"\n"+"message:"+data.responseText+"\n"+"error:"+error);
+			alert('error');
+		})
+	}
 	</script>
 </body>
 </html>

@@ -13,7 +13,7 @@
 	<select id="findmovie" resultType="movieVO">
 		select title, posterpath, movie_id
 		from movie
-		where vote_count > 10
+		where vote_count > 1
 		order by release_date desc	
 		limit ${ from }, ${ to };
 	</select>
@@ -30,10 +30,17 @@
 		(#{member_id}, #{movie_id}, #{review})
 	</insert>
 	
+	<insert id="insertrating" parameterType="reviewVO">
+		insert into rating (member_id, movie_id, rating)
+		values
+		(#{member_id}, #{movie_id}, #{rating})
+	</insert>
+	
 	<select id="findreview" resultType="reviewVO">
-		select * 
-		from review
-		where movie_id = '${ movie_id }'
+		select g.rating rating, w.review review, w.regdate regdate, w.member_id member_id 
+		from review w join rating g 
+		on w.movie_id = g.movie_id and w.member_id = g.member_id
+		where w.movie_id = '${ movie_id }'
 	</select>
 	
 	<select id="check" resultType="int">
@@ -48,4 +55,80 @@
 		where movie_id = '${ movie_id }'
 		and member_id = '${ member_id }'
 	</delete>
+	
+	<delete id="deleterating" parameterType="reviewVO">
+		delete from rating
+		where movie_id = '${ movie_id }'
+		and member_id = '${ member_id }'
+	</delete>
+	
+	<select id="getmovie_genre" resultType="movieVO">
+		select title, posterpath, m.movie_id 
+		from movie m join movie_genre mg 
+		on (m.movie_id = mg.movie_id) 
+		where genre_id = '${ genre }' and vote_count>1 
+		order by release_date desc 
+		limit ${ from }, ${ to };
+	</select>
+	
+	<select id="moviesearch" resultType="movieVO">
+		select title
+		from movie
+		where title like '%${search}%'
+		limit 5;
+	</select>
+	
+	<select id="findtitle" resultType="movieVO">
+		select movie_id
+		from movie
+		where title = '${title}'
+	</select>
+	
+	<select id="counttitle" resultType="int">
+		select count(*)
+		from movie
+		where title = '${title}'
+	</select>
+	
+	<select id="countjjim" resultType="int">
+		select count(*)
+		from jjim
+		where member_id = '${ member_id }'
+		and movie_id = '${ movie_id }'
+	</select>
+	
+	<insert id="addjjim" parameterType="jjimVO">
+		insert into jjim (movie_id, member_id)
+		values
+		(#{ movie_id }, #{ member_id })
+	</insert>
+	
+	<delete id="deletejjim" parameterType="jjimVO">
+		delete from jjim
+		where movie_id = '${ movie_id }'
+		and member_id = '${ member_id }'
+	</delete>
+	
+	<select id="findvideo" resultType="videoVO">
+		select videokey, videotype, name, site
+		from video
+		where movie_id = '${movie_id}'
+		order by name desc;
+	</select>
+	
+	<select id="findactor" resultType="personVO">
+		select a.id, a.name, a.profile_path, a.role
+		from actor a
+		join movie m 
+		on (m.movie_id = a.movie_id)
+		where m.movie_id ='${ movie_id }'
+	</select>
+	
+	<select id="findcrew" resultType="personVO">
+		select c.id, c.name, c.profile_path, c.department
+		from crew c
+		join movie m 
+		on (m.movie_id = c.movie_id)
+		where m.movie_id ='${ movie_id }'
+	</select>
 </mapper>
