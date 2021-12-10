@@ -533,12 +533,12 @@
     $(function(){
     	
     	$('#naversearch').click(function(){
-    		var search = '${ movieinfo.title }';
-    		location.href = 'https://movie.naver.com/movie/search/result.naver?query='+ search +'&section=all&ie=utf8';
+    		var search = "${ movieinfo.title }";
+    		window.open('https://movie.naver.com/movie/search/result.naver?query='+ search +'&section=all&ie=utf8');
     	})
     	$('#watchasearch').click(function(){
-    		var search = '${ movieinfo.title }';
-    		location.href ='https://pedia.watcha.com/ko-KR/search?query='+ search +'&category=contents';
+    		var search = "${ movieinfo.title }";
+    		window.open('https://pedia.watcha.com/ko-KR/search?query='+ search +'&category=contents');
     	})
     	
     	$('#like').click(function(){

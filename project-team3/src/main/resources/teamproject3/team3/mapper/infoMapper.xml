@@ -18,14 +18,6 @@
 		where movie_id = #{ movie_id }
 	</select>
 	
-	<select id="findmovie" resultType="movieVO">
-		select title, posterpath, movie_id
-		from movie
-		where vote_count > 1
-		order by release_date desc	
-		limit ${ from }, ${ to };
-	</select>
-	
 	<select id="findinfo" parameterType="int" resultType="movieVO">
 		select * 
 		from movie
@@ -70,12 +62,44 @@
 		and member_id = '${ member_id }'
 	</delete>
 	
+	<select id="findmovie" resultType="movieVO">
+		select row_number() over(order by release_date desc) vote_count, title, posterpath, movie_id
+		from movie
+		where vote_count &gt; 0
+		and posterpath not like ''
+		limit ${ from }, ${ to };
+	</select>
+	
 	<select id="getmovie_genre" resultType="movieVO">
 		select title, posterpath, m.movie_id 
-		from movie m join movie_genre mg 
+		from movie m  
+		join movie_genre mg 
+		on (m.movie_id = mg.movie_id)
+		where genre_id = '${ genre }' and vote_count &gt; 0 
+		and posterpath not like ''
+		order by release_date desc
+		limit ${ from }, ${ to };
+	</select>
+	
+	<select id="movie_ol" resultType="movieVO">
+		select title, posterpath, m.movie_id 
+		from movie m
+		where vote_count &gt; 0
+		and original_language = '${ ol }' 
+		and posterpath not like ''
+		order by release_date desc
+		limit ${ from }, ${ to };
+	</select>
+	
+	<select id="movie_ol_genre" resultType="movieVO">
+		select title, posterpath, m.movie_id 
+		from movie m  
+		join movie_genre mg
 		on (m.movie_id = mg.movie_id) 
-		where genre_id = '${ genre }' and vote_count>1 
-		order by release_date desc 
+		where genre_id = '${ genre }' and vote_count &gt; 0
+		and original_language = '${ ol }' 
+		and posterpath not like ''
+		order by release_date desc
 		limit ${ from }, ${ to };
 	</select>
 	
