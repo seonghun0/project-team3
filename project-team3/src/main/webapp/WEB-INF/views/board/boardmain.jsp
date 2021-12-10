@@ -13,19 +13,13 @@
  
     
     <jsp:include page="/WEB-INF/views/module/css.jsp"></jsp:include>
+    
+    <style type="text/css">
+    	section.content{
+    		margin: 100px 15px 0 15px;
+    	}
+    </style>
 </head>
-
-<body>
-
-
-
-
-
-
-
-
-
-
 
 <body class="theme-red">
     <!-- Page Loader -->
@@ -48,9 +42,7 @@
     
     <jsp:include page="/WEB-INF/views/module/topbar.jsp"></jsp:include>
 
-  	<section style="padding-top: 100px; width: 1500px; margin-left: auto; margin-right: auto;">
-                
-                
+  	<section class="content">
                 
                <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

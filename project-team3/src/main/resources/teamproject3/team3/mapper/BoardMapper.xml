@@ -36,7 +36,12 @@
 	WHERE B.BOARDNO = #{ boardNo } AND B.DELETED = false 
 	</select>
 	
-	<update id="updateBoardDeleted" parameterType="int">
+	<delete id="updateBoardDeleted">
+		delete from board
+		where boardno = #{ boardNo }
+	</delete>
+	
+	<update id="updateBoardDelete" parameterType="int">
 	UPDATE BOARD 
 	SET DELETED = true
 	WHERE BOARDNO = #{ boardNo }

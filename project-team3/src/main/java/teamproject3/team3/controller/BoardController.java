@@ -63,47 +63,49 @@ public class BoardController {
 		board.setMember_id(s.getMemberId()); // 보드에 memberId 저장하기
 		
 		// 데이터 읽기 ( 전달인자를 통해서 자동으로 읽어서 저장 )		
-				MultipartFile mf = req.getFile("attachment");
-				
-				if (mf != null) {
-					
-					ServletContext application = req.getServletContext();
-					String path = application.getRealPath("/resources/upload-files"); // web-path --> computer-path
-					
-					String userFileName = mf.getOriginalFilename();
-					if (userFileName.contains("\\")) { // iexplore 경우
-						//C:\AAA\BBB\CCC.png -> CCC.png 
-						userFileName = userFileName.substring(userFileName.lastIndexOf("\\") + 1);
-					}
-					String savedFileName = Util.makeUniqueFileName(userFileName);
-					
-					try {
-						//1. 파일 저장
-						mf.transferTo(new File(path, savedFileName)); 
-						
-						//2. 파일 정보 저장
-						BoardAttachVO attachment = new BoardAttachVO();
-						attachment.setUserFileName(userFileName);
-						attachment.setSavedFileName(savedFileName);
-						
-						ArrayList<BoardAttachVO> attachments = new ArrayList<>();
-						attachments.add(attachment);
-						board.setAttachments(attachments);
-
-						// 데이터베이스에 저장
-						boardService.writeBoard(board);
-						
-					} catch (Exception ex) {
-						ex.printStackTrace();
-						model.addAttribute("fail", true);
-						return "board/write";
-					}
-				}
-				
-				// 목록으로 이동
-				return "redirect:boardmain";
+		MultipartFile mf = req.getFile("attachment");
+		
+		if (mf != null && mf.getOriginalFilename().length() > 0) {
+			
+			ServletContext application = req.getServletContext();
+			String path = application.getRealPath("/resources/upload-files"); // web-path --> computer-path
+			
+			String userFileName = mf.getOriginalFilename();
+			if (userFileName.contains("\\")) { // iexplore 경우
+				//C:\AAA\BBB\CCC.png -> CCC.png 
+				userFileName = userFileName.substring(userFileName.lastIndexOf("\\") + 1);
 			}
-	
+			String savedFileName = Util.makeUniqueFileName(userFileName);
+			
+			try {
+				//1. 파일 저장
+				mf.transferTo(new File(path, savedFileName)); 
+				
+				//2. 파일 정보 저장
+				BoardAttachVO attachment = new BoardAttachVO();
+				attachment.setUserFileName(userFileName);
+				attachment.setSavedFileName(savedFileName);
+				
+				ArrayList<BoardAttachVO> attachments = new ArrayList<>();
+				
+				attachments.add(attachment);
+				board.setAttachments(attachments);
+
+				
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				model.addAttribute("fail", true);
+				return "board/write";
+			}
+		}
+		// 데이터베이스에 저장
+		boardService.writeBoard(board);
+		
+		
+		// 목록으로 이동
+		return "redirect:boardmain";
+	}
+
 	@GetMapping(path = { "/detail" })
 	public String detail(int boardNo, Model model) {
 		
