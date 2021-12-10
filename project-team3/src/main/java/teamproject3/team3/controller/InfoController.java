@@ -86,7 +86,7 @@ public class InfoController {
 	public String showinfoForm(Model model) {
 		
 		int from = 0;
-		int to = from +24;
+		int to = 24;
 		
 		List<genreVO> genre = infoService.getgenre();
 		List<movieVO> movie = infoService.getmovie(from, to);
@@ -101,8 +101,8 @@ public class InfoController {
 	@ResponseBody
 	public String infinity(int count, int genre, String ol){
 		
-		int from = (count*2+1)*25;
-		int to = from + 24;
+		int from = (count+1)*25;
+		int to = 24;
 		Gson gson = new Gson();
 		String json = null;
 		if (genre == 0 && ol.equals("0")) {
@@ -130,7 +130,7 @@ public class InfoController {
 		
 		count = 0;
 		int from = count*25;
-		int to = from +24;
+		int to = 24;
 		Gson gson = new Gson();
 		String json = null;
 		

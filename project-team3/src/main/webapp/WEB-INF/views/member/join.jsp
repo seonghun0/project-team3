@@ -4,7 +4,7 @@
 
 <!DOCTYPE html>
 <head>
-    <title>join</title>
+    <title> Our Movie | kdigital-busan.team3</title>
     <style>
        body{background-color: #000; color: #fff; }
        

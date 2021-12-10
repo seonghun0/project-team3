@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Blank Page | Bootstrap Based Admin Template - Material Design</title>
+    <title> Our Movie | kdigital-busan.team3</title>
     
     <jsp:include page="/WEB-INF/views/module/css.jsp"></jsp:include>
     
@@ -27,7 +27,7 @@
 	    border: 0;
     }
     .container{
-    	width: 1660px
+    	width: 100%;
     }
     .sub_name{
     	margin-top: 10px;
@@ -111,7 +111,7 @@
 							<a href="info?movie_id=${ i.movie_id }" data-sub-html="Demo Description">
 								<img class="img-responsive thumbnail" src="https://www.themoviedb.org/t/p/w440_and_h660_face/${ i.posterpath }">
 					   		</a>
-					   		<h5>${ status.index } ${ i.title } ${ i.vote_count } </h5>
+					   		<h5>${ i.title } </h5>
 						</div>
 					</c:forEach>
 				</div>
@@ -158,23 +158,24 @@
    function fetchlist(){
 	   var genre = $('#genre option:selected').val();
 	   var ol = $('#original_language option:selected').val();
-	   console.log(count)
+	   console.log("count :"+count)
 	   $.ajax({
   			type:"get",
   			url:"./infinite",
   			data:{ count : count, genre : genre, ol : ol }
   		})
   		.done(function(data){
+  			console.log("length :"+ data.length)
   			var length = data.length;
   			// 남은 데이터가 0개 이하일 경우 무한 스크롤 종료
-  			if( length<=-1){
+  			if( length < -1){
   				mutex = true;
   				scrollchk = false;
   				return;
   			}
   			$.each(data, function(i, item){
   				//alert(item.movie_id)
-  				var addcontent = '<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12"><a href="info?movie_id='+item.movie_id+'" data-sub-html="Demo Description"><img class="img-responsive thumbnail" src="https://www.themoviedb.org/t/p/w440_and_h660_face/'+item.posterpath+'"></a><h5>'+(i+24)+item.title+'</h5></div>'
+  				var addcontent = '<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12"><a href="info?movie_id='+item.movie_id+'" data-sub-html="Demo Description"><img class="img-responsive thumbnail" src="https://www.themoviedb.org/t/p/w440_and_h660_face/'+item.posterpath+'"></a><h5>'+item.title+'</h5></div>'
   				//div에 추가되는 콘텐츠를 append	
   				$('#aniimated-thumbnials').append(addcontent);
   			})
@@ -216,6 +217,7 @@
  				var addcontent = '<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12"><a href="info?movie_id='+item.movie_id+'" data-sub-html="Demo Description"><img class="img-responsive thumbnail" src="https://www.themoviedb.org/t/p/w440_and_h660_face/'+item.posterpath+'"></a><h5>'+item.title+'</h5></div>'
  				//div에 추가되는 콘텐츠를 append	
  				$('#aniimated-thumbnials').append(addcontent);
+ 				count = 0;
  			})
 	   })
 	   .fail(function(data,textStatus,error){
