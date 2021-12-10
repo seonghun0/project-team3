@@ -3,7 +3,6 @@ package teamproject3.team3.Service;
 import java.util.List;
 
 import teamproject3.team3.vo.BoardAttachVO;
-
 import teamproject3.team3.vo.BoardVO;
 
 public interface BoardService {
@@ -21,6 +20,7 @@ public interface BoardService {
 	void updateBoard(BoardVO board);
 	
 	BoardAttachVO findBoardAttachByAttachNo(int attachNo);
+
 
 
 }

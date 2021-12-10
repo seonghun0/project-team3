@@ -27,4 +27,5 @@ public interface BoardMapper {
 	BoardAttachVO selectBoardAttachByAttachNo(int attachNo);
 	
 
+	
 }

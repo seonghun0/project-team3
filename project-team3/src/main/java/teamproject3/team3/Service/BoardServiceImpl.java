@@ -2,12 +2,10 @@ package teamproject3.team3.Service;
 
 import java.util.List;
 
-import teamproject3.team3.vo.BoardAttachVO;
-
-import teamproject3.team3.mapper.BoardMapper;
-import teamproject3.team3.vo.BoardVO;
-
 import lombok.Setter;
+import teamproject3.team3.mapper.BoardMapper;
+import teamproject3.team3.vo.BoardAttachVO;
+import teamproject3.team3.vo.BoardVO;
 
 public class BoardServiceImpl implements BoardService{
 	
@@ -66,6 +64,9 @@ public class BoardServiceImpl implements BoardService{
 	public BoardAttachVO findBoardAttachByAttachNo(int attachNo) {
 		return boardMapper.selectBoardAttachByAttachNo(attachNo);
 	}
+
+
+
 
 
 

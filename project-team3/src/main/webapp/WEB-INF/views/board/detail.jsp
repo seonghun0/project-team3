@@ -9,11 +9,16 @@
 	<meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>board</title>
-    
+    <style type="text/css">
+    	section.contents{
+    		margin: 100px 15px 0 15px;
+    	}
+
+    </style>
     <jsp:include page="/WEB-INF/views/module/css.jsp"></jsp:include>
 </head>
 
-<body>
+
 <body class="theme-red">
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
@@ -35,7 +40,7 @@
     
     <jsp:include page="/WEB-INF/views/module/topbar.jsp"></jsp:include>
 
-  	<section style="padding-top: 100px; width: 1500px; margin-left: auto; margin-right: auto">
+  	<section class="contents">
                 
                 
                 
@@ -94,27 +99,7 @@
             
     </section>            
     
-    <section style="width: 1500px; margin-left: auto; margin-right: auto">
     
-    <div class="row_comment">
-    
-    <div>
-    	<h3>댓글</h3>
-    </div>
-    <div>
-    	<textarea rows="4" class="form-control no-resize" placeholder="Please type what you want..."></textarea>
-    	<button type="button" class="btn btn-block btn-lg btn-default waves-effect">입력하기</button>
-    </div>
-    
-    <div>
-    	<table>
-    		
-    	</table>
-    </div>
-    
-    </div><!-- row_comment -->
-    
-    </section>
       
 
     <jsp:include page="/WEB-INF/views/module/js.jsp"></jsp:include>

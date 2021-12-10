@@ -81,6 +81,6 @@
 	FROM BOARDATTACH
 	WHERE ATTACHNO = #{ attachNo }
 	</select>
-	
+
 	
 </mapper>

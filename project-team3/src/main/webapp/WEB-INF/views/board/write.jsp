@@ -9,11 +9,15 @@
 	<meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>board</title>
-    
+    <style type="text/css">
+    	section.contents{
+    		margin: 100px 15px 0 15px;
+    	}
+    </style>
     <jsp:include page="/WEB-INF/views/module/css.jsp"></jsp:include>
 </head>
 
-<body>
+
 <body class="theme-red">
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
@@ -35,7 +39,7 @@
     
     <jsp:include page="/WEB-INF/views/module/topbar.jsp"></jsp:include>
 
-  	<section style="padding-top: 100px; width: 1500px; margin-left: auto; margin-right: auto">
+  	<section class="contents">
                 
                 
                 
