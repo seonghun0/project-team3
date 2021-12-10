@@ -4,7 +4,7 @@
 
 <!DOCTYPE html>
 <head>
-    <title>Login</title>
+    <title> Our Movie | kdigital-busan.team3</title>
   
     <style>
     

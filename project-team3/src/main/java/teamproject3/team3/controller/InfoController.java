@@ -38,21 +38,6 @@ public class InfoController {
 	@Qualifier("memberService")
 	private MemberService memberService;
 	
-	@GetMapping(path = { "/list" })
-	public String showinfoForm(Model model) {
-		
-		int from = 0;
-		int to = from +24;
-		
-		List<genreVO> genre = infoService.getgenre();
-		List<movieVO> movie = infoService.getmovie(from, to);
-		
-		model.addAttribute("movie", movie);
-		model.addAttribute("genre", genre);
-		
-		return "movie/list";
-	}
-	
 	@GetMapping(path = { "/info" })
 	public String showmovieinfoForm(jjimVO jjim ,int movie_id, Model model, HttpSession session) {
 		
@@ -97,26 +82,75 @@ public class InfoController {
 		return "movie/info";
 	}
 	
+	@GetMapping(path = { "/list" })
+	public String showinfoForm(Model model) {
+		
+		int from = 0;
+		int to = 24;
+		
+		List<genreVO> genre = infoService.getgenre();
+		List<movieVO> movie = infoService.getmovie(from, to);
+		
+		model.addAttribute("movie", movie);
+		model.addAttribute("genre", genre);
+		
+		return "movie/list";
+	}
+	
 	@GetMapping(path= { "/infinite" }, produces="application/json;charset=utf-8")
 	@ResponseBody
-	public String infinity(int count, int genre){
+	public String infinity(int count, int genre, String ol){
 		
-		int from = count*24;
-		int to = from +24;
-		
-		if (genre == 0) {
+		int from = (count+1)*25;
+		int to = 24;
+		Gson gson = new Gson();
+		String json = null;
+		if (genre == 0 && ol.equals("0")) {
 			List<movieVO> list = infoService.getmovie(from, to);
-			Gson gson = new Gson();
-			String json = gson.toJson(list);
+			json = gson.toJson(list);
+			return json;
+		}else if(ol.equals("0")){
+			List<movieVO> list = infoService.getmovie_genre(genre, from, to);
+			json = gson.toJson(list);
+			return json;
+		}else if(genre == 0) {
+			List<movieVO> list = infoService.getmovie_ol(ol, from, to);
+			json = gson.toJson(list);
 			return json;
 		}else {
-			List<movieVO> list = infoService.getmovie_genre(genre, from, to);
-			Gson gson = new Gson();
-			String json = gson.toJson(list);
+			List<movieVO> list = infoService.getmovie_ol_genre(genre,ol, from, to);
+			json = gson.toJson(list);
 			return json;
 		}
+	}
+
+	@PostMapping(path= {"/select"}, produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String genreselect(int genre, int count, String ol) {
 		
+		count = 0;
+		int from = count*25;
+		int to = 24;
+		Gson gson = new Gson();
+		String json = null;
 		
+		if (genre == 0 && ol.equals("0")) {
+			List<movieVO> list = infoService.getmovie(from, to);
+			json = gson.toJson(list);
+			return json;
+		}else if(ol.equals("0")){
+			List<movieVO> list = infoService.getmovie_genre(genre, from, to);
+			json = gson.toJson(list);
+			return json;
+		}else if(genre == 0) {
+			List<movieVO> list = infoService.getmovie_ol(ol, from, to);
+			json = gson.toJson(list);
+			return json;
+		}else {
+			List<movieVO> list = infoService.getmovie_ol_genre(genre,ol, from, to);
+			json = gson.toJson(list);
+			return json;
+		}
 	}
 	
 	@PostMapping(path= {"/review_rating"}, produces="application/json;charset=utf-8")
@@ -160,24 +194,7 @@ public class InfoController {
 		String json = gson.toJson(vo);
 		return json;
 	}
-	@PostMapping(path= {"/genreselect"}, produces="application/json;charset=utf-8")
-	@ResponseBody
-	public String genreselect(int genre, int count) {
-		
-		int from = count*24;
-		int to = from +24;
-		if (genre == 0) {
-			List<movieVO> list = infoService.getmovie(from, to);
-			Gson gson = new Gson();
-			String json = gson.toJson(list);
-			return json;
-		}else {
-			List<movieVO> list = infoService.getmovie_genre(genre, from, to);
-			Gson gson = new Gson();
-			String json = gson.toJson(list);
-			return json;
-		}
-	}
+	
 	@PostMapping(path= {"/addjjim"}, produces="application/json;charset=utf-8")
 	@ResponseBody
 	public String addjjim(jjimVO jjim) {

@@ -17,8 +17,6 @@ public interface infoMapper {
 
 	List<genreVO> findgenre();
 
-	List<movieVO> findmovie(@Param("from") int from,@Param("to") int to);
-
 	List<movieVO> findinfo(int movie_id);
 
 	void insertreview(reviewVO review);
@@ -28,8 +26,6 @@ public interface infoMapper {
 	int check(@Param("member_id") String member_id,@Param("movie_id") int movie_id);
 
 	void deletereview(reviewVO review);
-
-	List<movieVO> getmovie_genre(@Param("genre") int genre, @Param("from") int from,@Param("to") int to);
 
 	void insertrating(reviewVO review);
 
@@ -54,5 +50,13 @@ public interface infoMapper {
 	List<personVO> findcrew(@Param("movie_id") int movie_id);
 
 	List<genreVO> moviegenre(int movie_id);
+	
+	List<movieVO> findmovie(@Param("from") int from, @Param("to") int to);
+	
+	List<movieVO> getmovie_genre(@Param("genre") int genre, @Param("from") int from,@Param("to") int to);
+
+	List<movieVO> movie_ol(@Param("ol") String ol,@Param("from") int from,@Param("to") int to);
+
+	List<movieVO> movie_ol_genre(@Param("genre") int genre,@Param("ol") String ol,@Param("from") int from,@Param("to") int to);
 	
 }

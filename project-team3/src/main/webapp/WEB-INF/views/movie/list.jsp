@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Blank Page | Bootstrap Based Admin Template - Material Design</title>
+    <title> Our Movie | kdigital-busan.team3</title>
     
     <jsp:include page="/WEB-INF/views/module/css.jsp"></jsp:include>
     
@@ -27,7 +27,7 @@
 	    border: 0;
     }
     .container{
-    	width: 1660px
+    	width: 100%;
     }
     .sub_name{
     	margin-top: 10px;
@@ -79,7 +79,7 @@
 				<div class="col-xs-1 tt1">
 					<h2 class="sub_name">영화</h2>
 				</div>
-				<div class="col-xs-2 tt2">
+				<div class="col-xs-3 tt2">
 					<select class="form-control show-tick" id="genre">
 					    <option disabled="disabled" selected="selected" value="0">장르</option>
 					    	<option value="0">전체</option>
@@ -87,18 +87,31 @@
 						    <option value="${ i.genreid }">${ i.genrename }</option>
 					    </c:forEach>
 					</select>
+					<select class="form-control show-tick" id="original_language">
+					    <option disabled="disabled" selected="selected" value="0">원작어</option>
+						    <option value="ko">한국어</option>
+						    <option value="en">영어</option>
+						    <option value="fr">프랑스어</option>
+						    <option value="de">독일어</option>
+						    <option value="es">스페인어</option>
+						    <option value="ja">일본어</option>
+						    <option value="pt">포르투갈어</option>
+						    <option value="ru">러시아어</option>
+						    <option value="it">이탈리아어</option>
+						    <option value="zh">중국어</option>
+					</select>
 				</div>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="col-lg-12">
 				<div id="aniimated-thumbnials" class="list-unstyled row clearfix">
-					<c:forEach var="i" items="${ movie }">
-						<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12">
+					<c:forEach var="i" items="${ movie }" varStatus="status">
+						<div class="col-md-2">
 							<a href="info?movie_id=${ i.movie_id }" data-sub-html="Demo Description">
 								<img class="img-responsive thumbnail" src="https://www.themoviedb.org/t/p/w440_and_h660_face/${ i.posterpath }">
 					   		</a>
-					   		<h5> ${ i.title } </h5>
+					   		<h5>${ i.title } </h5>
 						</div>
 					</c:forEach>
 				</div>
@@ -112,7 +125,7 @@
    var mutex = false;
    
  	//Javascript
-   var count = 1;
+   var count = 0;
    //스크롤 바닥 감지
    $(window).scroll(function() {
        /* //추가되는 임시 콘텐츠
@@ -144,29 +157,30 @@
    });
    function fetchlist(){
 	   var genre = $('#genre option:selected').val();
+	   var ol = $('#original_language option:selected').val();
+	   console.log("count :"+count)
 	   $.ajax({
   			type:"get",
   			url:"./infinite",
-  			data:{ count : count, genre : genre }
+  			data:{ count : count, genre : genre, ol : ol }
   		})
   		.done(function(data){
-  			
+  			console.log("length :"+ data.length)
   			var length = data.length;
   			// 남은 데이터가 0개 이하일 경우 무한 스크롤 종료
-  			if( length<=0){
+  			if( length < -1){
   				mutex = true;
   				scrollchk = false;
   				return;
   			}
-  			
   			$.each(data, function(i, item){
   				//alert(item.movie_id)
-  				var addcontent = '<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12"><a href="info?movie_id='+item.movie_id+'" data-sub-html="Demo Description"><img class="img-responsive thumbnail" src="https://www.themoviedb.org/t/p/w440_and_h660_face/'+item.posterpath+'"></a>'+item.title+'</div>'
+  				var addcontent = '<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12"><a href="info?movie_id='+item.movie_id+'" data-sub-html="Demo Description"><img class="img-responsive thumbnail" src="https://www.themoviedb.org/t/p/w440_and_h660_face/'+item.posterpath+'"></a><h5>'+item.title+'</h5></div>'
   				//div에 추가되는 콘텐츠를 append	
   				$('#aniimated-thumbnials').append(addcontent);
   			})
   			
-  			count ++;
+  			count += 1;
   			scrollchk = true; // 데이터 로딩이 끝나면 스크롤 체크를 풀어준다.	
   			mutex = false; // 데이터 로딩이 끝나면 ajax점근 권한을 준다. (중복호출 방어)
   			//출처 https://blog.naver.com/PostView.naver?blogId=jjs9006&logNo=222167021604&parentCategoryNo=&categoryNo=3&viewDate=&isShowPopularPosts=true&from=search
@@ -179,11 +193,22 @@
    }
    
    $("#genre").on('change', function(){
+	   
+	   changedata()
+   })
+   $("#original_language").on('change', function(){
+	   
+	   changedata()
+   })
+   
+   function changedata(){
 	   var genre = $('#genre option:selected').val();
+	   var ol = $('#original_language option:selected').val();
+	   console.log(count);
 	   $.ajax({
 		   type:'post',
-		   url:'./genreselect',
-		   data: { genre : genre, count : count }
+		   url:'./select',
+		   data: { genre : genre, count : count , ol : ol}
 	   })
 	   .done(function(data){
 		   $('#aniimated-thumbnials').children().remove();
@@ -192,14 +217,14 @@
  				var addcontent = '<div class="col-lg-2 col-md-4 col-sm-6 col-xs-12"><a href="info?movie_id='+item.movie_id+'" data-sub-html="Demo Description"><img class="img-responsive thumbnail" src="https://www.themoviedb.org/t/p/w440_and_h660_face/'+item.posterpath+'"></a><h5>'+item.title+'</h5></div>'
  				//div에 추가되는 콘텐츠를 append	
  				$('#aniimated-thumbnials').append(addcontent);
+ 				count = 0;
  			})
 	   })
 	   .fail(function(data,textStatus,error){
 			alert("code:"+data.status+"\n"+"message:"+data.responseText+"\n"+"error:"+error);
 			alert('error');
 		})
-	   
-   })
+   }
    </script>
     
 </body>

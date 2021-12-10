@@ -116,5 +116,15 @@ public class infoServiceImpl implements infoService {
 		return infomapper.moviegenre(movie_id);
 	}
 
+	@Override
+	public List<movieVO> getmovie_ol(String ol, int from, int to) {
+		return infomapper.movie_ol(ol, from, to);
+	}
+
+	@Override
+	public List<movieVO> getmovie_ol_genre(int genre, String ol, int from, int to) {
+		return infomapper.movie_ol_genre(genre, ol, from, to);
+	}
+
 	
 }

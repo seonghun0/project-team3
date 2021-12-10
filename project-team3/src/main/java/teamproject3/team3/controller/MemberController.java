@@ -2,6 +2,7 @@ package teamproject3.team3.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import teamproject3.team3.Service.MemberService;
 import teamproject3.team3.vo.genreVO;
+import teamproject3.team3.vo.jjimVO;
 import teamproject3.team3.vo.memberVO;
 
 @Controller
@@ -31,10 +33,9 @@ public class MemberController {
 	}
 	
 	@PostMapping(path = {"/login"})
-	public String login(String memberId, String passwd, HttpSession session) {
+	public String login(String memberId, String passwd, HttpSession session, HttpServletRequest request) {
 		
 		memberVO member = memberService.login(memberId, passwd);
-		
 		if(member != null) {
 			session.setAttribute("loginuser", member);
 			return "redirect:/";
@@ -92,5 +93,6 @@ public class MemberController {
 	public String showprofileForm() {
 		return "member/profile";
 	}
+	
 	
 }
