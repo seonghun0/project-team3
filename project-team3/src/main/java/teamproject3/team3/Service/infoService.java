@@ -55,4 +55,6 @@ public interface infoService {
 
 	List<movieVO> getmovie_ol_genre(int genre, String ol, int from, int to);
 
+	List<movieVO> findmovieId(List<movieVO> movies);
+
 }

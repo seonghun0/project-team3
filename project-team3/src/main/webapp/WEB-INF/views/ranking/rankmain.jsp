@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>Blank Page | Bootstrap Based Admin Template - Material Design</title>
+    <title> Our Movie | kdigital-busan.team3</title>
     
     <jsp:include page="/WEB-INF/views/module/css.jsp"></jsp:include>
     <link rel="stylesheet" href="/mrp/resources/plugins/owl-carousel/assets/owl.carousel.css" />

@@ -58,5 +58,9 @@ public interface infoMapper {
 	List<movieVO> movie_ol(@Param("ol") String ol,@Param("from") int from,@Param("to") int to);
 
 	List<movieVO> movie_ol_genre(@Param("genre") int genre,@Param("ol") String ol,@Param("from") int from,@Param("to") int to);
+
+	movieVO recommendmovie(@Param("movie_id") String movie_id);
+
+	List<movieVO> findmovieId(List<movieVO> movies);
 	
 }

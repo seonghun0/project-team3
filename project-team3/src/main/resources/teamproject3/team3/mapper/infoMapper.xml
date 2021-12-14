@@ -181,4 +181,16 @@
 		where movie_id = '${ movie_id }'
 		and member_id = '${ memberId }'
 	</select>
+	
+	
+	<select id="findmovieId" parameterType="list" resultType="movieVO">
+		select *
+		from movie
+		where movie_id in 
+		<foreach collection="list" item="movie" open="(" separator="," close=")">
+		#{ movie.movie_id }
+		</foreach>
+		
+	</select>
+	
 </mapper>

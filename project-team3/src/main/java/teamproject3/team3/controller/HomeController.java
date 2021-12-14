@@ -8,6 +8,8 @@ import java.net.URLConnection;
 import java.util.Collection;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,7 @@ import com.google.gson.reflect.TypeToken;
 
 import teamproject3.team3.Service.MemberService;
 import teamproject3.team3.Service.infoService;
+import teamproject3.team3.vo.memberVO;
 import teamproject3.team3.vo.movieVO;
 import teamproject3.team3.vo.personVO;
 
@@ -107,6 +110,36 @@ public class HomeController {
 		}
 		
 		return movie;
+	}
+	
+	@PostMapping(path = { "/recommend" })
+	@ResponseBody
+	public List<movieVO> userrecommend(HttpSession session) {
+		
+		memberVO member = (memberVO)session.getAttribute("loginuser");
+	
+		URL url = null;
+		URLConnection conn = null;
+		InputStream is = null;
+		InputStreamReader isr = null;
+		List<movieVO> movies =null;
+		List<movieVO> movielist = null;
+		
+		Gson gson = new Gson();
+		try {
+			url = new URL("http://127.0.0.1:5000/team-three/recommend?id="+member.getMemberId());
+			conn = url.openConnection();
+			is = conn.getInputStream();
+			isr = new InputStreamReader(is);
+			Type collectionType = new TypeToken<Collection<movieVO>>() {}.getType();
+			movies = gson.fromJson(isr, collectionType);
+			movielist = infoService.findmovieId(movies);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return movielist;
 	}
 	
 }

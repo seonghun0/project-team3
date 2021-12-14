@@ -91,6 +91,7 @@
         <div class="container-fluid">
 
             <!-- CPU Usage -->
+            <c:if test="${ sessionScope.loginuser.memberId == null }">
             <div class="row clearfix">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="card">
@@ -127,20 +128,6 @@
                                         </div>
                                     </div>
 								</c:forEach>
-                                   <!-- <div class="item">
-                                        <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2${ prmovie[2].posterpath }" class="main-img" />
-                                        <div class="carousel-caption">
-                                            <h3>${ prmovie[2].title }</h3>
-                                            <p>${ prmovie[2].overview }</p>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2${ prmovie[3].posterpath }" class="main-img" />
-                                        <div class="carousel-caption">
-                                            <h3>${ prmovie[3].title }</h3>
-                                            <p>${ prmovie[3].overview }</p>
-                                        </div>
-                                    </div> --%>
                                 </div>
                                 <!-- Controls -->
                                 <a class="left carousel-control" href="#carousel-example-generic_2" role="button" data-slide="prev">
@@ -157,6 +144,16 @@
                 </div>
             </div>
             </div>
+            </c:if>
+         	<div class="block-header user">
+                
+            </div>
+            <!-- Widgets -->
+            <div class="row clearfix user">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			    </div>
+			</div>
+            <br>
             <!-- #END# CPU Usage -->
             <div class="block-header">
                 <h2>현재 상영중인 영화</h2>
@@ -227,6 +224,40 @@
     <script src="/mrp/resources/plugins/owl-carousel/owl.carousel.js"></script>
     <script>
         $(function () {
+        	
+        	var member = '${sessionScope.loginuser.memberId}';
+        	if(member != ''){
+        		$.ajax({
+        			type:'post',
+        			url:'/mrp/recommend',
+        			dataType: 'Json'
+        		})
+        		.done(function(data){
+        			$('.block-header.user').append('<h2>'+member+'님에게 추천하는 영화</h2>');
+        			$('.row.clearfix.user div').append('<div class="owl-carousel owl-theme"></div>');
+        			$.each(data, function(i, item){
+        				var html = '<div class="item"><div class="textoverlay"><a href="movie/info?movie_id='+item.movie_id+'"><img src="https://www.themoviedb.org/t/p/w220_and_h330_face/'+ item.posterpath +'" class="user"><span class="text user">'+ item.vote_average +'</span></a></div></div>'
+        				$('.row.clearfix.user .owl-carousel.owl-theme').append(html)
+        			});
+        			
+        			$('.row.clearfix.user .owl-carousel.owl-theme').owlCarousel({
+                        items: 6,
+                        margin: 10,
+                        loop: true,
+                        nav: true,
+                        navText: ["<i class='fa fa-chevron-right'></i>","<i class='fa fa-chevron-left'></i>"],
+                        autoplay: true,
+                        autoplayTimeout: 3000,
+                        autoplayHoverPause: true,
+                        touchDrag  : true,
+                        mouseDrag  : true
+                    });
+        		})
+        		.fail(function(xhr, status, err){
+        			console.log(err)
+        		})
+        	}
+        	
             $('.owl-carousel').owlCarousel({
                 items: 6,
                 margin: 10,
@@ -241,7 +272,11 @@
             });
         });
     </script>
-
+	<script type="text/javascript">
+	
+		
+	
+	</script>
     
 </body>
 

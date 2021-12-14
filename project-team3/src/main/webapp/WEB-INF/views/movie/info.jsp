@@ -665,6 +665,12 @@
 		});
     	
 		$('.write').click(function(){
+			var star = $('#op b').text()
+			
+			if(star == 0){
+				alert('별점을 입력해주세요')
+				return;
+			}
 			
 			if(login_user_id == ""){
 				alert('리뷰작성은 로그인 후에 가능합니다.')
@@ -675,7 +681,7 @@
 				return;
 			}
 			
-			var star = $('#op b').text()
+			
 			/* alert($('#op b').text()) */
 			var text = $('.review').val();
 			
