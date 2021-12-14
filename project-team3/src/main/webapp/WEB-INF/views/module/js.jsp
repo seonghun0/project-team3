@@ -75,38 +75,37 @@
 	   		outerBox.css('display', 'none');
 			return;
 		}
-   			$.ajax({
-       			url:'/mrp/search',
-       			data:{ search : search },
-       			dataType:'Json'
-       		})
-       		.done(function(data){
-				outerBox.empty();
-				$.each(data, function(i, item){
-					var innerBox = $('<div></div>');
-					innerBox.text(item.title);
-					innerBox.css({
-						"padding": "5px"
-					});
-					innerBox.hover(function(event) {
-						$(this).css('background-color', 'lightgray');
-					}, function(event) {
-						$(this).css('background-color', 'white');
-					});
-					innerBox.on('click', function(event) {							
-						$('#search').val($(this).text())
-						title = $(this).text()
-						outerBox.css('display', 'none');
-						findmovie();
-					});
-					outerBox.append(innerBox);
-				})
-				
-				outerBox.css("display", "block");
-       		})
-       		.fail(function(xhr, status, err){
-       			console.log(status)
-       		})
+		$.ajax({
+   			url:'/mrp/search',
+   			data:{ search : search },
+   			dataType:'Json'
+   		})
+   		.done(function(data){
+			outerBox.empty();
+			$.each(data, function(i, item){
+				var innerBox = $('<div></div>');
+				innerBox.text(item.title);
+				innerBox.css({
+					"padding": "5px"
+				});
+				innerBox.hover(function(event) {
+					$(this).css('background-color', 'lightgray');
+				}, function(event) {
+					$(this).css('background-color', 'white');
+				});
+				innerBox.on('click', function(event) {							
+					$('#search').val($(this).text())
+					title = $(this).text()
+					outerBox.css('display', 'none');
+					findmovie();
+				});
+				outerBox.append(innerBox);
+			})	
+			outerBox.css("display", "block");
+       	})
+       	.fail(function(xhr, status, err){
+       		console.log(status)
+       	})
 		if (e.keyCode == 13) {
 			title = search;
 			findmovie();    		
@@ -121,7 +120,6 @@
     		dataType:'Json'
     	})
     	.done(function(data, status, xhr){
-    		console.log(data.movie_id);
     		if(data == 0){
     			alert('해당하는 영화가 없습니다.');	
     		}else{

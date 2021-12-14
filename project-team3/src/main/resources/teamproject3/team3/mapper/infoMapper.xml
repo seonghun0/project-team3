@@ -67,9 +67,9 @@
 		from movie m
 		join movie2 m2
 		on (m.movie_id = m2.movie_id)
-		where vote_count &gt; 6
-		and posterpath not like ''
+		where posterpath not like ''
 		and m2.adult not in('True',1)
+		and m.release_date &lt;= now()
 		limit ${ from }, ${ to };
 	</select>
 	
@@ -79,9 +79,10 @@
 		join movie2 m2 on (m.movie_id = m2.movie_id)   
 		join movie_genre mg 
 		on (m.movie_id = mg.movie_id)
-		where genre_id = '${ genre }' and vote_count &gt; 6
+		where genre_id = '${ genre }'
 		and posterpath not like ''
 		and m2.adult not in('True',1)
+		and m.release_date &lt;= now()
 		order by release_date desc
 		limit ${ from }, ${ to };
 	</select>
@@ -90,10 +91,10 @@
 		select title, posterpath, m.movie_id 
 		from movie m
 		join movie2 m2 on (m.movie_id = m2.movie_id)
-		where vote_count &gt; 6
-		and original_language = '${ ol }' 
+		where original_language = '${ ol }' 
 		and posterpath not like ''
 		and m2.adult not in('True',1)
+		and m.release_date &lt;= now()
 		order by release_date desc
 		limit ${ from }, ${ to };
 	</select>
@@ -104,10 +105,11 @@
 		join movie2 m2 on (m.movie_id = m2.movie_id)
 		join movie_genre mg
 		on (m.movie_id = mg.movie_id) 
-		where genre_id = '${ genre }' and vote_count &gt; 6
+		where genre_id = '${ genre }'
 		and original_language = '${ ol }' 
 		and posterpath not like ''
 		and m2.adult not in('True',1)
+		and m.release_date &lt;= now()
 		order by release_date desc
 		limit ${ from }, ${ to };
 	</select>

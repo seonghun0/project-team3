@@ -52,6 +52,8 @@
     background-color: #fff;
     margin-right: 10px;
     height: 250px;
+    border-radius: 8px;
+
 	}
 	ol.people li>a {
     min-width: 138px;
@@ -59,6 +61,21 @@
     height: 175px;
     display: block;
 	}
+	ol.people li p a {
+    font-weight: bold;
+    color: #000;
+	}
+	div.column_wrapper div.content_wrapper p:last-child {
+    margin-bottom: 0;
+	}
+	section.panel ol.people li p {
+    padding: 0 10px;
+	}
+	ol.people li p.character {
+    font-size: 0.9em;
+	}
+	
+	
     </style>
     
     <jsp:include page="/WEB-INF/views/module/css.jsp"></jsp:include>
@@ -238,6 +255,75 @@
 	.card{
 		margin-bottom: 0;
 	}
+	h3{
+	font-weight: 600;
+    font-size: 1.4em;
+    margin-bottom: 20px;
+    margin: 0 0 4px 0;
+    padding: 0;
+    box-sizing: border-box;
+	}
+	div.scroller_wrap {
+    position: relative;
+    top: 0;
+    left: 0;
+    }
+    div.scroller {
+    overflow-y: hidden;
+    overflow-x: scroll;
+    white-space: nowrap;
+    padding-bottom: 10px;
+	}
+	div.item {
+    display: inline-block;
+    float: none;
+    }
+    div.item.mini.backdrop {
+    width: 250px;
+    margin: 0 15px 0 0;
+	}
+	div.item.mini.backdrop div.image_content {
+    width: 250px;
+    height: 141px;
+	}
+	div.item div.image_content {
+    overflow: hidden;
+	}
+	section.recommendations div.scroller div.item a {
+    font-weight: 400;
+    font-size: 1em;
+	}	
+	div.image_content a {
+    width: 100%;
+    height: 100%;
+    display: block;
+    line-height: 0;
+	}
+	div.scroller div.item p {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4px;
+	}
+	div.scroller div.item a {
+    font-weight: 400;
+    font-size: 1em;
+	}
+	div.item span.vote_average {
+    padding-top: 0;
+    margin-right: 0;
+    display: inline-flex;
+    align-items: center;
+	}
+	div.image_content img {
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 141px;
+    border-radius: 8px;
+	}
+	div.scroller div.item p a, div.item p span.rating {
+    color: #000;
+	}
     </style>
     
 </head>
@@ -378,8 +464,8 @@
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane fade in active" id="home">
-                                <h3>주요 출연진</h3>
-                                <div class="row clearfix">
+                              <h3>주요 출연진</h3>
+                              <div class="row clearfix">
                             
                             <div id="cast_scroller" class="scroller_wrap should_fade is_fading">
 				                <ol class="people scroller">
@@ -429,6 +515,9 @@
 				              </div>
                             
                             </div>
+                              
+                              <div class="row clearfix recommend">
+                              </div>
                             </div>
 	                         <div role="tabpanel" class="tab-pane fade" id="media">
 	                         <b>media</b>
@@ -569,10 +658,6 @@
     			console.log(err);
     		})
     	})
-    	
-    	$("#search").keyup(function(e){if(e.keyCode == 13)
-    		alert($(this).val()) 
-    	});
 
     	$('.star a').click(function(){ 
 			$(this).parent().children("a").removeClass("on");    
@@ -723,6 +808,40 @@
 
     	starRating();
     
+	</script>
+	<script type="text/javascript">
+		var movie_id = $('#movieid').val();
+		
+			$. ajax({
+				type: 'post',
+				url: '/mrp/genre',
+				data:{ movie_id : movie_id }
+			})
+			.done(function(data){
+
+				$('.recommend').append('<h3 dir="auto">추천</h3>');
+				$('.recommend').append('<div id="recommendation_scroller" class="scroller_wrap should_fade is_fading">');
+				$('#recommendation_scroller').append('<div class="scroller" id="recommend">')
+				$.each(data, function(i, item){
+					var html =	'<div class="item mini backdrop mini_card">'
+					    html += '<div class="image_content">'
+					    html += '<a href="/mrp/movie/info?movie_id='+item.movie_id +'" title="'+item.title+'" alt="'+ item.title +'">'
+					    html += '<img loading="lazy" class="backdrop" src="https://www.themoviedb.org//t/p/w250_and_h141_face/'+item.posterpath+'" alt="'+item.title+'">'
+					    html += '</a>'
+					   	html += '</div>'
+					    html += '<p class="movie flex">'
+					    html += '<a class="title" href="/mrp/movie/info?movie_id='+item.movie_id+'" title="'+item.title+'" alt="'+item.title+'"><bdi>'+item.title+'</bdi></a>'
+					    html += '<span class="vote_average">'+item.vote_average*10 +'%</span>'
+					    html += '</p>'
+					    html += '</div>'
+					$('#recommend').append(html)
+				});
+				
+			})
+			.fail(function(xhr, status, err){
+				console.log(err)
+			})
+		
 	</script>
 </body>
 

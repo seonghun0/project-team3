@@ -21,4 +21,5 @@ public class movieVO {
 	private String posterpath;
 	private String popularity;
 	private float vote_count;
+	private float score;
 }
