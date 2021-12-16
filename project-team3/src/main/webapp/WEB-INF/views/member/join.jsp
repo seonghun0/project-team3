@@ -252,7 +252,12 @@
 			var dayindex_len = $('#day').length
 			if(day>dayindex_len){
 				for(var i=(dayindex_len); i<=day; i++)
-					$('#day').append('<option value="' + i + '">' + i + '일</option>')
+					if (i < 10){
+						$('#day').append('<option value="' + '0'+i + '">' +'0'+ i + '일</option>')
+					}else{
+						$('#day').append('<option value="' + i + '">' + i + '일</option>')
+					}
+						
 			}
 		}
 		

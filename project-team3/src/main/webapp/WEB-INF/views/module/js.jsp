@@ -123,7 +123,7 @@
     		if(data == 0){
     			alert('해당하는 영화가 없습니다.');	
     		}else{
-    			location.href = "http://localhost:8081/mrp/movie/info?movie_id="+data.movie_id;	
+    			location.href = "/mrp/movie/info?movie_id="+data.movie_id;	
     		}
     		
     	})

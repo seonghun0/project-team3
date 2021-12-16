@@ -82,15 +82,11 @@
     
     <style type="text/css">
     
-    
-    
-    section.content{
-    	margin:87px 150px 0 150px;
-    }
     #canvas{
     	text-align: center; 
     }
     textarea{
+    	min-width :50px;
     	resize: none;
     }
     .write{

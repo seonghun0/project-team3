@@ -76,7 +76,7 @@
 		            			<td>${ memberlist.gender }</td>
 		            			<td><fmt:formatDate value="${ memberlist.birth_date }" pattern="yyyy-MM-dd" /></td>
 		            			<td><fmt:formatDate value="${ memberlist.join_date }" pattern="yyyy-MM-dd" /></td>
-		            			<td><input type="text" value="${ memberlist.usertype }" class="inputuser"></td>
+		            			<td><input type="text" value="${ memberlist.usertype }" id="${ memberlist.memberId }"></td>
 		            			<td><input type="button" class="changeusertype" data-type="${ memberlist.usertype}" data-id= "${ memberlist.memberId }" value="수정"></td>
 		            			<td><input type="button" class="memberdt" data-id="${ memberlist.memberId }" value="탈퇴"></td>
 		            		</tr>
@@ -94,9 +94,9 @@
     <script type="text/javascript">
     	
     	$('.changeusertype').click(function(){
-    		var usertype = $('.inputuser').val();
     		var memberId = $(this).attr('data-id');
-			
+    		var usertype = $('#'+memberId+'').val();
+
     		$.ajax({
     			type:'post',
     			url:'./updateusertype',
