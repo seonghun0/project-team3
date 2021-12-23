@@ -25,6 +25,10 @@ public interface BoardMapper {
 	void insertBoardAttach(BoardAttachVO attachment);
 
 	BoardAttachVO selectBoardAttachByAttachNo(int attachNo);
+
+	int countboardattach(int boardNo);
+
+	void deleteBoardattach(int boardNo);
 	
 
 	

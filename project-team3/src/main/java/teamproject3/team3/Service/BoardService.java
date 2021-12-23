@@ -21,6 +21,10 @@ public interface BoardService {
 	
 	BoardAttachVO findBoardAttachByAttachNo(int attachNo);
 
+	int countboardattach(int boardNo);
+
+	void deleteBoardattach(int boardNo);
+
 
 
 }

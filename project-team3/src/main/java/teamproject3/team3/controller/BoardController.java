@@ -126,7 +126,14 @@ public class BoardController {
 	@GetMapping(path = { "/delete" })
 	public String delete(int boardNo) {
 	
-		boardService.deleteBoard(boardNo);
+		int count = boardService.countboardattach(boardNo);
+		if(count ==1 ) {
+			boardService.deleteBoardattach(boardNo);
+			boardService.deleteBoard(boardNo);
+		}else {
+			boardService.deleteBoard(boardNo);
+		}
+		
 	
 		return "redirect:boardmain";
 	}

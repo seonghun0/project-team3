@@ -82,6 +82,10 @@
     
     <style type="text/css">
     
+    section.content{
+    	margin : 100px 15px 0 15px;
+    }
+    
     #canvas{
     	text-align: center; 
     }

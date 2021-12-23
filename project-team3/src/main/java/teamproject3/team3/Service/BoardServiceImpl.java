@@ -65,6 +65,16 @@ public class BoardServiceImpl implements BoardService{
 		return boardMapper.selectBoardAttachByAttachNo(attachNo);
 	}
 
+	@Override
+	public int countboardattach(int boardNo) {
+		return boardMapper.countboardattach(boardNo);
+	}
+
+	@Override
+	public void deleteBoardattach(int boardNo) {
+		boardMapper.deleteBoardattach(boardNo);
+	}
+
 
 
 

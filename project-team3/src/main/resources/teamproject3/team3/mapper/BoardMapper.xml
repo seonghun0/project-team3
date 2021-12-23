@@ -81,6 +81,17 @@
 	FROM BOARDATTACH
 	WHERE ATTACHNO = #{ attachNo }
 	</select>
+	
+	<select id="countboardattach" resultType="int">
+		SELECT COUNT(*)
+		FROM BOARDATTACH
+		WHERE BOARDNO = #{ BOARDNO }
+	</select>
+	
+	<delete id="deleteBoardattach">
+		DELETE FROM BOARDATTACH
+		WHERE BOARDNO = #{ BOARDNO }
+	</delete>
 
 	
 </mapper>
